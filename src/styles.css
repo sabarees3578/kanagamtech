@@ -1,0 +1,167 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Kanagam Tech - Brand Guidelines (v1.0) Design System
+ * 
+ * CORE PALETTE:
+ * - Plum: #4B1D3F (Primary background, headlines, formal communication)
+ * - Gold: #D7AB6A (Premium accent, rules, highlights, symbol details)
+ * - White: #FFFFFF (Primary clean background & reverse lettering)
+ * 
+ * SUPPORTING PALETTE:
+ * - Warm Ivory: #F7F1E8 (Main light background)
+ * - Soft Sand: #EAD7BA (Sections and quiet warmth)
+ * - Charcoal: #272128 (Premium neutral and body copy)
+ * - Dusty Rose: #B9677B (Lifestyle & campaign accent)
+ * - Terracotta: #C66B4E (Event energy & calls to action)
+ * - Deep Teal: #2F6B68 (Technology & insight content)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Specific Kanagam Brand Utilities */
+  --color-plum: #4b1d3f;
+  --color-plum-light: #5e264f;
+  --color-plum-dark: #37142e;
+  --color-gold: #d7ab6a;
+  --color-gold-light: #e3c18e;
+  --color-warm-ivory: #f7f1e8;
+  --color-soft-sand: #ead7ba;
+  --color-charcoal: #272128;
+  --color-dusty-rose: #b9677b;
+  --color-terracotta: #c66b4e;
+  --color-deep-teal: #2f6b68;
+
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* LIGHT THEME (Warm Ivory base, Plum headlines, Charcoal body, Gold accents) */
+  --background: #f7f1e8;
+  --foreground: #272128;
+  --card: #ffffff;
+  --card-foreground: #272128;
+  --popover: #ffffff;
+  --popover-foreground: #272128;
+  --primary: #4b1d3f;
+  --primary-foreground: #ffffff;
+  --secondary: #ead7ba;
+  --secondary-foreground: #4b1d3f;
+  --muted: #ead7ba;
+  --muted-foreground: #5c525e;
+  --accent: #d7ab6a;
+  --accent-foreground: #4b1d3f;
+  --destructive: #c66b4e;
+  --destructive-foreground: #ffffff;
+  --border: rgba(75, 29, 63, 0.14);
+  --input: rgba(75, 29, 63, 0.08);
+  --ring: #d7ab6a;
+
+  /* signature gradients, glow and texture */
+  --gradient-gold: linear-gradient(120deg, #d7ab6a 0%, #ead7ba 50%, #c66b4e 100%);
+  --gradient-plum: linear-gradient(135deg, #4b1d3f 0%, #37142e 100%);
+  --gradient-stage: radial-gradient(
+    120% 90% at 50% 8%,
+    rgba(234, 215, 186, 0.4) 0%,
+    rgba(247, 241, 232, 0.8) 50%,
+    #f7f1e8 100%
+  );
+  --shadow-gold: 0 14px 40px -14px rgba(215, 171, 106, 0.45);
+  --shadow-plum: 0 20px 50px -20px rgba(75, 29, 63, 0.3);
+  --shadow-glass: 0 24px 70px -30px rgba(39, 33, 40, 0.12);
+  --grain: radial-gradient(rgba(75, 29, 63, 0.06) 0.5px, transparent 0.6px);
+}
+
+.dark {
+  /* DARK / REVERSE THEME (Plum base, White headlines, Soft Sand subheadings, Gold accents) */
+  --background: #4b1d3f;
+  --foreground: #ffffff;
+  --card: #3a1631;
+  --card-foreground: #ffffff;
+  --popover: #3a1631;
+  --popover-foreground: #ffffff;
+  --primary: #d7ab6a;
+  --primary-foreground: #4b1d3f;
+  --secondary: #272128;
+  --secondary-foreground: #ead7ba;
+  --muted: #37142e;
+  --muted-foreground: #ead7ba;
+  --accent: #d7ab6a;
+  --accent-foreground: #4b1d3f;
+  --destructive: #c66b4e;
+  --destructive-foreground: #ffffff;
+  --border: rgba(215, 171, 106, 0.22);
+  --input: rgba(215, 171, 106, 0.12);
+  --ring: #d7ab6a;
+
+  --gradient-stage: radial-gradient(120% 90% at 50% 8%, #5e264f 0%, #4b1d3f 50%, #2e1026 100%);
+  --shadow-gold: 0 14px 40px -14px rgba(215, 171, 106, 0.45);
+  --shadow-glass: 0 24px 70px -30px rgba(0, 0, 0, 0.5);
+  --grain: radial-gradient(rgba(215, 171, 106, 0.08) 0.5px, transparent 0.6px);
+}
+
+@utility bg-grain {
+  background-image: var(--grain);
+  background-size: 3px 3px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  [style*="--grain"],
+  .grain {
+    background-size: 3px 3px;
+  }
+}

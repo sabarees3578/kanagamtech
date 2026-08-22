@@ -1,0 +1,471 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { QuantumIntro } from "@/components/QuantumIntro";
+import { QuantumAmbient } from "@/components/QuantumAmbient";
+import { CoreFocusSection } from "@/components/CoreFocusSection";
+import { AcademiaSection } from "@/components/AcademiaSection";
+import { InquiryFormSection } from "@/components/InquiryFormSection";
+import { BrandGuidelinesSection } from "@/components/BrandGuidelinesSection";
+import { KanagamLogo } from "@/components/KanagamLogo";
+import { PILLARS, ACADEMIC_PROGRAMS } from "@/lib/services";
+import {
+  Sparkles,
+  ShieldCheck,
+  ArrowRight,
+  Quote,
+  Globe,
+  Zap,
+  Compass,
+  Sun,
+  Moon,
+  Target,
+  Eye,
+  GraduationCap,
+} from "lucide-react";
+
+const BRAND = "Kanagam Tech";
+const FULL_BRAND = "Kanagam Technology Solutions";
+const TAGLINE = "Driving the Next Wave of Technological Evolution";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Kanagam Technology Solutions — GenQ & Deep-Tech Leader" },
+      {
+        name: "description",
+        content:
+          "Kanagam Technology Solutions is a premier GenQ enterprise pioneering Quantum Computing, AI, Edge Computing, VR, and Semiconductor solutions while empowering global academia.",
+      },
+      { property: "og:title", content: "Kanagam Technology Solutions — GenQ Leader" },
+      {
+        property: "og:description",
+        content:
+          "Pioneering deep-tech innovation and empowering academic ecosystems to lead tomorrow's digital frontier.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
+  component: Index,
+});
+
+const METRICS = [
+  { val: "Decades+", label: "Combined Veteran Tech Leadership" },
+  { val: "7 Pillars", label: "AI-IoT, GenAI, Silicon, SMT, Quantum, AR/VR & Skills Development" },
+  { val: "Global", label: "Academic & Industrial Training Ecosystem" },
+  { val: "Tech House", label: "Design, Prototyping & Assembly Solutions" },
+];
+
+const INTRO_SESSION_KEY = "kanagam_motion_intro_seen";
+
+function checkShouldShowIntro(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const navEntries = performance.getEntriesByType("navigation");
+    const isReload =
+      navEntries.length > 0
+        ? (navEntries[0] as PerformanceNavigationTiming).type === "reload"
+        : (performance as unknown as { navigation?: { type?: number } }).navigation?.type === 1;
+
+    const hasSeenInSession = window.sessionStorage.getItem(INTRO_SESSION_KEY) === "true";
+
+    // Play ONLY when user freshly onboards (first time in session) OR reloads/refreshes the page.
+    // In-app navigation will NEVER trigger the intro again.
+    return isReload || !hasSeenInSession;
+  } catch {
+    return false;
+  }
+}
+
+function Index() {
+  const [intro, setIntro] = useState(() => checkShouldShowIntro());
+  // Dark theme is the brand default; user's explicit choice persists via localStorage.
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("kanagam-theme");
+    if (stored) setIsDark(stored === "dark");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+    window.localStorage.setItem("kanagam-theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
+  const handleIntroComplete = () => {
+    try {
+      window.sessionStorage.setItem(INTRO_SESSION_KEY, "true");
+    } catch {}
+    setIntro(false);
+  };
+
+  return (
+    <>
+      {intro && (
+        <QuantumIntro
+          brand={BRAND}
+          tagline={TAGLINE}
+          onComplete={handleIntroComplete}
+        />
+      )}
+
+      <main className="relative min-h-screen overflow-hidden bg-background font-sans text-foreground transition-colors duration-500">
+        <div className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-stage)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
+
+        {/* Sticky Header Navigation */}
+        <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl transition-colors">
+          <div className="relative flex w-full items-center justify-between gap-4 px-6 py-3.5">
+            <Link to="/" className="ml-3 flex items-center gap-3">
+              <KanagamLogo size="lg" />
+            </Link>
+
+            {/* Nav centered to the screen, with hover dropdowns */}
+            <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[0.7rem] tracking-[0.2em] text-muted-foreground uppercase font-medium md:flex">
+              <Link className="transition-colors hover:text-primary" to="/about">
+                About Us
+              </Link>
+
+              {/* Core Focus dropdown */}
+              <div className="group relative">
+                <a className="transition-colors group-hover:text-primary" href="#focus">
+                  Core Focus
+                </a>
+                <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="w-72 overflow-hidden rounded-xl border border-border bg-card/95 shadow-xl backdrop-blur-xl">
+                    <div className="border-b border-border/60 px-4 py-2.5 text-[0.55rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                      7 Core Focus Pillars
+                    </div>
+                    {PILLARS.map((p) => {
+                      const PIcon = p.icon;
+                      return (
+                        <Link
+                          key={p.id}
+                          to="/service/$slug"
+                          params={{ slug: p.id }}
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-xs tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                        >
+                          <PIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                          <span>{p.title}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Academia & Talent dropdown */}
+              <div className="group relative">
+                <a className="transition-colors group-hover:text-primary" href="#academia">
+                  Academia &amp; Talent
+                </a>
+                <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="w-72 overflow-hidden rounded-xl border border-border bg-card/95 shadow-xl backdrop-blur-xl">
+                    <div className="border-b border-border/60 px-4 py-2.5 text-[0.55rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                      Academic Programs
+                    </div>
+                    {ACADEMIC_PROGRAMS.map((prog) => {
+                      const GIcon = prog.icon;
+                      return (
+                        <Link
+                          key={prog.slug}
+                          to="/service/$slug"
+                          params={{ slug: prog.slug }}
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-xs tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                        >
+                          <GIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                          <span>{prog.title}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Enquire dropdown */}
+              <div className="group relative">
+                <a className="transition-colors group-hover:text-primary" href="#inquire">
+                  Enquire
+                </a>
+                <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="w-72 overflow-hidden rounded-xl border border-border bg-card/95 shadow-xl backdrop-blur-xl">
+                    <div className="border-b border-border/60 px-4 py-2.5 text-[0.55rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                      Start an Enquiry
+                    </div>
+                    <a
+                      href="#institutional-inquire"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                    >
+                      <Sparkles className="h-3.5 w-3.5 shrink-0 text-primary" />
+                      <span>Institutional / Partnership Enquiry</span>
+                    </a>
+                    <a
+                      href="#student-inquire"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                    >
+                      <GraduationCap className="h-3.5 w-3.5 shrink-0 text-primary" />
+                      <span>Student Enquiry</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </nav>
+
+            {/* Theme toggle + CTAs pinned to the far-right end of the site */}
+            <div className="flex shrink-0 items-center gap-3">
+              <button
+                onClick={() => setIsDark(!isDark)}
+                title="Toggle Brand Light / Dark Mode"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-all hover:bg-secondary"
+              >
+                {isDark ? (
+                  <Sun className="h-4 w-4 text-[#D7AB6A]" />
+                ) : (
+                  <Moon className="h-4 w-4 text-[#4B1D3F]" />
+                )}
+              </button>
+
+              <a
+                href="#institutional-inquire"
+                className="rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-2 text-[0.65rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md transition-transform hover:scale-105"
+              >
+                Partner With Us
+              </a>
+              <a
+                href="#student-inquire"
+                className="rounded-full border border-primary/40 bg-primary/10 px-5 py-2 text-[0.65rem] tracking-[0.2em] text-primary uppercase font-bold shadow-md transition-transform hover:scale-105"
+              >
+                Student Enquire
+              </a>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 pt-12 pb-24 text-center">
+          <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,150vw)] -translate-x-1/2 opacity-75" />
+
+          <div className="relative mt-8 max-w-4xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.68rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
+              <Zap className="h-3.5 w-3.5" />
+              Premier Academic Solution Provider
+            </div>
+
+            <h1 className="font-display mt-8 text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.08] font-bold tracking-tight text-foreground">
+              {TAGLINE}
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed font-normal text-muted-foreground">
+              At <strong className="text-foreground font-semibold">{FULL_BRAND}</strong>, decades of
+              combined veteran tech leadership power our{" "}
+              <strong className="text-foreground font-semibold">seven deep-tech pillars</strong> —
+              AI-IoT, GenAI, Silicon, SMT, Quantum, AR/VR &amp; Skills. Through a global academic
+              and industrial training ecosystem and a full-scale tech house for design, prototyping
+              &amp; assembly solutions, we turn bold ideas into working technology.
+            </p>
+
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <a
+                href="#inquire"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white dark:text-[#4B1D3F] uppercase shadow-lg transition-transform hover:-translate-y-0.5"
+              >
+                <span>Institutional Inquiry</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+              <Link
+                to="/about"
+                className="rounded-full border border-border bg-card/80 px-8 py-3.5 text-xs font-semibold tracking-[0.22em] text-foreground uppercase transition-colors hover:bg-secondary"
+              >
+                Explore About Us
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Metrics Ribbon */}
+        <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-6 py-12 md:grid-cols-4">
+            {METRICS.map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="font-display text-3xl font-extrabold tracking-tight text-primary">
+                  {s.val}
+                </div>
+                <div className="mt-2 text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase font-mono font-medium">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* About Us Section */}
+        <section id="about" className="relative z-10 mx-auto max-w-6xl px-6 py-28">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                About Us | {FULL_BRAND}
+              </div>
+
+              <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
+                Driving Deep-Tech Innovation & Scaling Future Enterprises
+              </h2>
+
+              <p className="mt-6 text-base leading-relaxed text-muted-foreground font-normal">
+                At <strong className="text-foreground font-semibold">{FULL_BRAND}</strong>, we are
+                driving the next wave of technological evolution as a premier{" "}
+                <span className="text-primary font-bold">GenQ (Quantum Generation)</span> company.
+              </p>
+
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground font-normal">
+                Founded and led by a team of seasoned industry veterans with decades of proven
+                success in building and scaling tech enterprises,{" "}
+                <strong className="text-foreground font-semibold">Kanagam Tech</strong> stands at
+                the forefront of deep-tech innovation. We engineer state-of-the-art solutions while
+                empowering institutions around the world to build sustainable technological
+                capability.
+              </p>
+
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
+                    <Compass className="h-4 w-4" />
+                    Veteran Leadership
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground font-normal">
+                    Decades of experience building & scaling enterprise-grade technology companies.
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
+                    <Globe className="h-4 w-4" />
+                    Global Integration
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground font-normal">
+                    Bridging university research directly into commercial deep-tech applications.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-card via-card to-background p-8 shadow-2xl backdrop-blur-xl">
+                <div className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#D7AB6A] text-[#4B1D3F] shadow-md font-bold">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+
+                <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                  Deep-Tech Leadership
+                </span>
+
+                <h3 className="font-display mt-2 text-xl font-bold text-foreground">
+                  The GenQ Standard
+                </h3>
+
+                <ul className="mt-6 space-y-4 text-sm font-normal text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                    <span>
+                      <strong>Proven Scaling:</strong> Track record of scaling complex hardware and
+                      software systems globally.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                    <span>
+                      <strong>End-to-End Solutions:</strong> From quantum algorithms to custom
+                      silicon and edge compute.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                    <span>
+                      <strong>Educational Synergy:</strong> Building future workforce readiness
+                      through active university partnerships.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Integrated Vision & Mission Section */}
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            {/* Vision Card */}
+            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-background p-8 shadow-xl backdrop-blur-md">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Eye className="h-5 w-5" />
+                </div>
+                <span className="text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                  Our Vision
+                </span>
+              </div>
+              <h3 className="font-display mt-4 text-lg font-bold text-foreground">
+                Shaping Tomorrow's Digital Frontier
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-normal italic">
+                "To shape the Quantum Generation by building transformative technologies and
+                empowering global academic ecosystems to lead tomorrow’s digital frontier."
+              </p>
+            </div>
+
+            {/* Mission Card */}
+            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-background p-8 shadow-xl backdrop-blur-md">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <Target className="h-5 w-5" />
+                </div>
+                <span className="text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                  Our Mission
+                </span>
+              </div>
+              <h3 className="font-display mt-4 text-lg font-bold text-foreground">
+                Empowering Innovation & Skill Excellence
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-normal italic">
+                "To deliver industry-defining deep-tech solutions across AI-IoT, Semiconductors, SMT
+                Assembly, GenAI, and Quantum Infrastructure, while equipping academia and industry
+                with world-class skill development and hands-on technological capability."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 7 Core Focus Pillars Section */}
+        <CoreFocusSection />
+
+        {/* Empowering Academia & Next-Gen Talent Section */}
+        <AcademiaSection />
+
+        {/* Interactive Text Input & Partnership Request Form */}
+        <InquiryFormSection />
+
+        {/* Footer */}
+        <footer className="relative z-10 border-t border-border/70 py-12 text-center text-xs text-muted-foreground bg-card/40">
+          <div className="mx-auto max-w-6xl px-6 flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div className="flex items-center gap-3">
+              <KanagamLogo size="sm" />
+            </div>
+
+            <div className="text-[0.65rem] tracking-[0.2em] uppercase font-mono font-medium">
+              © {new Date().getFullYear()} {FULL_BRAND}. All Rights Reserved.
+            </div>
+
+            <div className="flex gap-6 text-[0.65rem] tracking-[0.2em] uppercase font-mono font-medium">
+              <Link to="/about" className="hover:text-primary transition-colors">
+                About
+              </Link>
+              <a href="#focus" className="hover:text-primary transition-colors">
+                Focus Areas
+              </a>
+              <a href="#inquire" className="hover:text-primary transition-colors">
+                Contact
+              </a>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </>
+  );
+}
