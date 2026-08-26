@@ -88,9 +88,9 @@ const MULTILINGUAL_TAGLINES = [
     fontClass: "font-lang-ta font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
   },
   {
-    lang: "Telugu",
-    text: "కనగమ్‌టెక్ — లోతైన సాంకేతికత మరియు వాస్తవ ప్రపంచ ఆవిష్కరణల సంగమం.",
-    fontClass: "font-lang-te font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
+   lang: "Malayalam",
+    text: "കനകംടെക് — ആഴത്തിലുള്ള സാങ്കേതികവിദ്യയും യഥാർത്ഥ ലോക നവീകരണവും ഒന്നിക്കുന്ന ഇടം.",
+    fontClass: "font-lang-ml font-semibold text-[clamp(0.80rem,1.75vw,1.12rem)]",
   },
   {
     lang: "Kannada",
@@ -98,9 +98,9 @@ const MULTILINGUAL_TAGLINES = [
     fontClass: "font-lang-kn font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
   },
   {
-    lang: "Malayalam",
-    text: "കനകംടെക് — ആഴത്തിലുള്ള സാങ്കേതികവിദ്യയും യഥാർത്ഥ ലോക നവീകരണവും ഒന്നിക്കുന്ന ഇടം.",
-    fontClass: "font-lang-ml font-semibold text-[clamp(0.80rem,1.75vw,1.12rem)]",
+     lang: "Telugu",
+    text: "కనగమ్‌టెక్ — లోతైన సాంకేతికత మరియు వాస్తవ ప్రపంచ ఆవిష్కరణల సంగమం.",
+    fontClass: "font-lang-te font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
   },
   {
     lang: "Hindi",
@@ -126,6 +126,7 @@ function RotatingTagline() {
   }, []);
 
   const current = MULTILINGUAL_TAGLINES[currentIndex];
+  if (!current) return null;
 
   return (
     <div className="mx-auto mt-5 flex min-h-[2.5rem] w-full max-w-4xl items-center justify-center px-2 text-center">
