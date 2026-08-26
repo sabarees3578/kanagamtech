@@ -24,7 +24,7 @@ export function AcademiaSection() {
             future-ready technological ecosystems.
           </p>
         </div>
-
+        ``
         {/* 4 Pillars Grid */}
         <div className="mt-16 grid gap-8 md:grid-cols-2">
           {ACADEMIC_PROGRAMS.map((prog, idx) => {

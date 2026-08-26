@@ -49,10 +49,10 @@ export const Route = createFileRoute("/")({
 });
 
 const METRICS = [
-  { val: "Decades+", label: "Combined Veteran Tech Leadership" },
-  { val: "7 Pillars", label: "AI-IoT, GenAI, Silicon, SMT, Quantum, AR/VR & Skills Development" },
+  { val: "2 Decades", label: "Combined Veteran Tech Leadership" },
+  { val: "6 Pillars", label: "AI-IoT & IIoT, AI-Stack Development & GenAI, Semiconductor & ESDM, PCB & SMT—Design, Prototyping, Assembly & Services, Quantum Computing & GenQ and AR/VR" },
   { val: "Global", label: "Academic & Industrial Training Ecosystem" },
-  { val: "Tech House", label: "Design, Prototyping & Assembly Solutions" },
+  { val: "In-House", label: "Design, prototyping, assembly, and engineering solutions" },
 ];
 
 const INTRO_SESSION_KEY = "kanagam_motion_intro_seen";
@@ -74,6 +74,70 @@ function checkShouldShowIntro(): boolean {
   } catch {
     return false;
   }
+}
+
+const MULTILINGUAL_TAGLINES = [
+  {
+    lang: "English",
+    text: "KanagamTech — Where Deep Technology Meets Real-World Innovation.",
+    fontClass: "font-display font-semibold tracking-tight text-[clamp(0.88rem,1.9vw,1.25rem)]",
+  },
+  {
+    lang: "Tamil",
+    text: "கனகம்டெக் — ஆழ்ந்த தொழில்நுட்பமும் நிஜ உலகப் புதுமையும் இணையும் களம்.",
+    fontClass: "font-lang-ta font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
+  },
+  {
+    lang: "Telugu",
+    text: "కనగమ్‌టెక్ — లోతైన సాంకేతికత మరియు వాస్తవ ప్రపంచ ఆవిష్కరణల సంగమం.",
+    fontClass: "font-lang-te font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
+  },
+  {
+    lang: "Kannada",
+    text: "ಕನಗಮ್‌ಟೆಕ್ — ಆಳವಾದ ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ನೈಜ ಜಗತ್ತಿನ ನಾವೀನ್ಯತೆಯ ಸಂಗಮ.",
+    fontClass: "font-lang-kn font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
+  },
+  {
+    lang: "Malayalam",
+    text: "കനകംടെക് — ആഴത്തിലുള്ള സാങ്കേതികവിദ്യയും യഥാർത്ഥ ലോക നവീകരണവും ഒന്നിക്കുന്ന ഇടം.",
+    fontClass: "font-lang-ml font-semibold text-[clamp(0.80rem,1.75vw,1.12rem)]",
+  },
+  {
+    lang: "Hindi",
+    text: "कनगमटेक — जहाँ गहन तकनीक और वास्तविक दुनिया का नवाचार मिलते हैं।",
+    fontClass: "font-lang-hi font-semibold text-[clamp(0.82rem,1.8vw,1.15rem)]",
+  },
+];
+
+function RotatingTagline() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % MULTILINGUAL_TAGLINES.length);
+        setIsVisible(true);
+      }, 300);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const current = MULTILINGUAL_TAGLINES[currentIndex];
+
+  return (
+    <div className="mx-auto mt-5 flex min-h-[2.5rem] w-full max-w-4xl items-center justify-center px-2 text-center">
+      <p
+        className={`whitespace-nowrap text-foreground transition-all duration-300 ease-in-out ${current.fontClass} ${
+          isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-1 scale-[0.98]"
+        }`}
+      >
+        {current.text}
+      </p>
+    </div>
+  );
 }
 
 function Index() {
@@ -241,55 +305,39 @@ function Index() {
         </header>
 
         {/* Hero Section */}
-        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 pt-12 pb-24 text-center">
+        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 pt-2 pb-3 text-center">
           <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,150vw)] -translate-x-1/2 opacity-75" />
 
-          <div className="relative mt-8 max-w-4xl">
+          <div className="relative mt-4 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.68rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
               <Zap className="h-3.5 w-3.5" />
-              Premier Academic Solution Provider
+              Next-Gen Academic Solution Provider
             </div>
 
-            <h1 className="font-display mt-8 text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.08] font-bold tracking-tight text-foreground">
+            <h1 className="font-display mt-6 text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.1] font-bold tracking-tight text-foreground">
               {TAGLINE}
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed font-normal text-muted-foreground">
-              At <strong className="text-foreground font-semibold">{FULL_BRAND}</strong>, decades of
-              combined veteran tech leadership power our{" "}
-              <strong className="text-foreground font-semibold">seven deep-tech pillars</strong> —
-              AI-IoT, GenAI, Silicon, SMT, Quantum, AR/VR &amp; Skills. Through a global academic
-              and industrial training ecosystem and a full-scale tech house for design, prototyping
-              &amp; assembly solutions, we turn bold ideas into working technology.
+              At <strong className="text-foreground font-semibold">{FULL_BRAND} India Pvt Ltd</strong>, decades of combined veteran technology leadership power our <strong className="text-foreground font-semibold">six deep-tech pillars: AI-IoT &amp; IIoT, AI-Stack Development &amp; GenAI, Semiconductor &amp; ESDM, PCB &amp; SMT—Design, Prototyping, Assembly &amp; Services, Quantum Computing &amp; GenQ and AR/VR</strong>
             </p>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed font-normal text-muted-foreground">
+              Through a robust <strong className="text-foreground font-semibold">global academic and industrial training ecosystem</strong>, combined with a full-scale <strong className="text-foreground font-semibold">technology house for design, prototyping, assembly, and engineering solutions</strong>, we transform bold ideas into <strong className="text-foreground font-semibold">working, scalable technology.</strong>
+            </p>
+            <RotatingTagline />
 
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#inquire"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white dark:text-[#4B1D3F] uppercase shadow-lg transition-transform hover:-translate-y-0.5"
-              >
-                <span>Institutional Inquiry</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-              <Link
-                to="/about"
-                className="rounded-full border border-border bg-card/80 px-8 py-3.5 text-xs font-semibold tracking-[0.22em] text-foreground uppercase transition-colors hover:bg-secondary"
-              >
-                Explore About Us
-              </Link>
-            </div>
           </div>
         </section>
 
         {/* Metrics Ribbon */}
         <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-6 py-12 md:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-4 px-6 py-6 md:grid-cols-4">
             {METRICS.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="font-display text-3xl font-extrabold tracking-tight text-primary">
                   {s.val}
                 </div>
-                <div className="mt-2 text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase font-mono font-medium">
+                <div className="mt-1 text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase font-mono font-medium">
                   {s.label}
                 </div>
               </div>

@@ -18,7 +18,8 @@ const FORMSPREE_PARTNERSHIP_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 const FORMSPREE_STUDENT_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 const INSTITUTIONAL_INTEREST_OPTIONS = [
-  "Curriculum Modernization",
+  "Industrial visit","Curriculum Modernization",
+  "MOU","BOS","lab setup","New product development ",
   "Center of Excellence (CoE)",
   "Incubation & Startup Hub",
   "Global Certifications & Training",
@@ -27,12 +28,10 @@ const INSTITUTIONAL_INTEREST_OPTIONS = [
 ];
 
 const STUDENT_INTEREST_OPTIONS = [
-  "Hands-on Technical Bootcamps",
-  "Global Certifications & Training",
-  "Internship / Industrial Training",
-  "Final-Year Project Guidance",
+  "Industrial vist","hacktaton support","New product development",
+  "Hands-on Technical Bootcamps","Internship / Industrial Training",
+  "Final-Year Project Guidance","AI Learning Tracks",
   "Startup Incubation Support",
-  "Quantum & AI Learning Tracks",
 ];
 
 export const DEPARTMENT_OPTIONS = [
@@ -42,6 +41,7 @@ export const DEPARTMENT_OPTIONS = [
   "Mechatronics Engineering",
   "Automobile Engineering",
   "AIDS",
+  "IT",
   "AIML",
   "Others",
 ];
@@ -331,7 +331,7 @@ function InstitutionalInquiryForm() {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                placeholder="e.g. +1 (555) 019-2834"
+                placeholder="e.g. +91 98765 43210"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
             </div>
