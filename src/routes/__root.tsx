@@ -77,6 +77,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { name: "format-detection", content: "telephone=no" },
       { title: "Kanagam Tech — Quantum & Deep-Tech Innovation" },
       {
         name: "description",
@@ -84,14 +86,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Kanagam Technology Solutions is a premier GenQ enterprise pioneering Quantum Computing, AI, Edge Computing, VR, and Semiconductor solutions.",
       },
       { name: "author", content: "Kanagam Technology Solutions" },
+      { property: "og:site_name", content: "Kanagam Technology Solutions" },
       { property: "og:title", content: "Kanagam Tech — GenQ Leader" },
       {
         property: "og:description",
         content: "Driving the Next Wave of Technological Evolution.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kanagamtech.in/" },
+      { property: "og:image", content: "/images/services/quantum-1.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@kanagamtech" },
+      { name: "twitter:title", content: "Kanagam Technology Solutions — GenQ & Deep-Tech Leader" },
+      {
+        name: "twitter:description",
+        content:
+          "Premier GenQ enterprise delivering Quantum Computing, Semiconductor, VLSI, AI, Embedded & IIoT solutions and global academic training.",
+      },
+      { name: "twitter:image", content: "/images/services/quantum-1.jpg" },
+      { name: "theme-color", content: "#2b0b30" },
     ],
     links: [
       {
@@ -121,7 +134,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

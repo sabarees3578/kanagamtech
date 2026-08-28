@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
+import { ShiningBackground } from "@/components/ShiningBackground";
 import {
   Send,
   CheckCircle2,
@@ -20,6 +22,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 const STUDENT_INTEREST_OPTIONS = [
   "Hands-on Technical Bootcamps",
+  "Workshop",
   "Global Certifications & Training",
   "Internship / Industrial Training",
   "Final-Year Project Guidance",
@@ -38,31 +41,53 @@ const DEPARTMENT_OPTIONS = [
   "Others",
 ];
 
-const YEAR_OF_STUDY_OPTIONS = [
-  "1-st year",
-  "2nd-year",
-  "3rd-year",
-  "4th-year",
-];
+const YEAR_OF_STUDY_OPTIONS = ["1-st year", "2nd-year", "3rd-year", "4th-year"];
 
 export const Route = createFileRoute("/student-enquire")({
   head: () => ({
     meta: [
-      { title: "Student Enquiry — Kanagam Technology Solutions" },
+      { title: "Student Enquiry | Bootcamps, Internships & Certifications — Kanagam Tech" },
       {
         name: "description",
         content:
-          "Students and fresh engineers — connect with Kanagam Tech for bootcamps, certifications, internships, project guidance and deep-tech learning tracks.",
+          "Students and fresh engineers — connect with Kanagam Tech for hands-on technical bootcamps, global certifications, internships, industrial training, final-year project guidance and quantum & AI learning tracks.",
       },
+      {
+        name: "keywords",
+        content:
+          "student enquiry, engineering bootcamps, technical training for students, internships, industrial training, certifications, final year projects, startup incubation, quantum AI learning tracks",
+      },
+      { property: "og:title", content: "Student Enquiry — Kanagam Technology Solutions" },
+      {
+        property: "og:description",
+        content:
+          "Hands-on bootcamps, global certifications, internships and deep-tech learning tracks for students and fresh engineers.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kanagamtech.in/student-enquire" },
     ],
+    links: [{ rel: "canonical", href: "https://kanagamtech.in/student-enquire" }],
   }),
   component: StudentEnquirePage,
 });
 
 function StudentEnquirePage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background font-sans text-foreground">
-      <div className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-stage)]" />
+    <main
+      className="relative min-h-screen overflow-hidden font-sans"
+      style={
+        {
+          background: "linear-gradient(155deg, #7a2a63 0%, #4B1D3F 32%, #2b0b30 64%, #18051e 100%)",
+          ["--background"]: "#17061f",
+          ["--foreground"]: "#F7EDE3",
+          ["--muted-foreground"]: "#D0B8A8",
+          ["--card"]: "#23102b",
+          ["--card-foreground"]: "#F7EDE3",
+          ["--border"]: "rgba(240,196,120,0.24)",
+        } as CSSProperties
+      }
+    >
+      <ShiningBackground variant="strong" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
 
       {/* Simple Header */}
@@ -89,7 +114,7 @@ function StudentEnquirePage() {
             For Students &amp; Fresh Engineers
           </div>
           <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
-            Student Enquiry
+            Student Enquire
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
             Kick-start your deep-tech career. Tell us what you're looking for — training,
@@ -342,9 +367,7 @@ function StudentEnquiryForm() {
                 type="text"
                 required
                 value={formData.customDepartment}
-                onChange={(e) =>
-                  setFormData({ ...formData, customDepartment: e.target.value })
-                }
+                onChange={(e) => setFormData({ ...formData, customDepartment: e.target.value })}
                 placeholder="e.g. Biomedical / Chemical Engineering"
                 className="mt-1 w-full rounded-xl border border-primary/40 bg-background/90 px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />

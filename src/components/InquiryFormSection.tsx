@@ -18,8 +18,12 @@ const FORMSPREE_PARTNERSHIP_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 const FORMSPREE_STUDENT_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 const INSTITUTIONAL_INTEREST_OPTIONS = [
-  "Industrial visit","Curriculum Modernization",
-  "MOU","BOS","lab setup","New product development ",
+  "Industrial visit",
+  "Curriculum Modernization",
+  "MOU",
+  "BOS",
+  "lab setup",
+  "New product development ",
   "Center of Excellence (CoE)",
   "Incubation & Startup Hub",
   "Global Certifications & Training",
@@ -28,9 +32,14 @@ const INSTITUTIONAL_INTEREST_OPTIONS = [
 ];
 
 const STUDENT_INTEREST_OPTIONS = [
-  "Industrial vist","hacktaton support","New product development",
-  "Hands-on Technical Bootcamps","Internship / Industrial Training",
-  "Final-Year Project Guidance","AI Learning Tracks",
+  "Industrial vist",
+  "hacktaton support",
+  "New product development",
+  "Hands-on Technical Bootcamps",
+  "Workshop",
+  "Internship / Industrial Training",
+  "Final-Year Project Guidance",
+  "AI Learning Tracks",
   "Startup Incubation Support",
 ];
 
@@ -46,12 +55,7 @@ export const DEPARTMENT_OPTIONS = [
   "Others",
 ];
 
-export const YEAR_OF_STUDY_OPTIONS = [
-  "1-st year",
-  "2nd-year",
-  "3rd-year",
-  "4th-year",
-];
+export const YEAR_OF_STUDY_OPTIONS = ["1-st year", "2nd-year", "3rd-year", "4th-year"];
 
 type TabType = "institutional" | "student";
 
@@ -118,7 +122,7 @@ export function InquiryFormSection() {
             }`}
           >
             <GraduationCap className="h-3.5 w-3.5 shrink-0" />
-            <span>Student Enquiry</span>
+            <span>Student Enquire</span>
           </button>
         </div>
       </div>
@@ -128,11 +132,7 @@ export function InquiryFormSection() {
         id={activeTab === "institutional" ? "institutional-inquire" : "student-inquire"}
         className="rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-6 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300"
       >
-        {activeTab === "institutional" ? (
-          <InstitutionalInquiryForm />
-        ) : (
-          <StudentInquiryForm />
-        )}
+        {activeTab === "institutional" ? <InstitutionalInquiryForm /> : <StudentInquiryForm />}
       </div>
     </section>
   );
@@ -272,7 +272,7 @@ function InstitutionalInquiryForm() {
                 required
                 value={formData.institution}
                 onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
-                placeholder="e.g. Stanford University"
+                placeholder="e.g. Anna University, Chennai"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
             </div>
@@ -292,7 +292,7 @@ function InstitutionalInquiryForm() {
                 required
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                placeholder="e.g. Dr. Aris Thorne"
+                placeholder="e.g. Dr. Priya Raghavan"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
             </div>
@@ -351,7 +351,7 @@ function InstitutionalInquiryForm() {
               type="text"
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              placeholder="e.g. California, USA / Chennai, India"
+              placeholder="e.g. Chennai, Tamil Nadu / Coimbatore, India"
               className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             />
           </div>
@@ -515,7 +515,7 @@ function StudentInquiryForm() {
       </div>
 
       <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-        Student Enquiry
+        Student Enquire
       </h3>
       <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground font-normal">
         Kick-start your deep-tech career. Tell us what you're looking for — bootcamps,
@@ -683,9 +683,7 @@ function StudentInquiryForm() {
                     type="text"
                     required
                     value={formData.customDepartment}
-                    onChange={(e) =>
-                      setFormData({ ...formData, customDepartment: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, customDepartment: e.target.value })}
                     placeholder="e.g. Biomedical / Chemical Engineering"
                     className="mt-1 w-full rounded-xl border border-primary/40 bg-background/90 px-3.5 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                   />

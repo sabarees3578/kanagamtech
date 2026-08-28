@@ -1,26 +1,57 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { QuantumOrb } from "@/components/QuantumOrb";
+import { ShiningBackground } from "@/components/ShiningBackground";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Kanagam Technology Solutions" },
+      {
+        title: "About Kanagam Technology Solutions | Deep-Tech & GenQ Enterprise",
+      },
       {
         name: "description",
         content:
-          "Kanagam Technology Solutions is a premier GenQ enterprise — veteran-led across seven deep-tech pillars, empowering global academia and industry.",
+          "Learn about Kanagam Technology Solutions — a veteran-led GenQ enterprise engineering Quantum Computing, Semiconductor & ESDM, VLSI/FPGA, Embedded & IIoT, AI/GenAI, AIBots, AR/VR, Drones and 3D fabrication, while building global academic ecosystems.",
       },
+      {
+        name: "keywords",
+        content:
+          "about Kanagam Tech, GenQ enterprise, deep tech company India, semiconductor and ESDM, quantum computing company, VLSI FPGA, embedded systems, AI engineering, AR VR, drone technology, 3D printing, centers of excellence",
+      },
+      { property: "og:title", content: "About Kanagam Technology Solutions" },
+      {
+        property: "og:description",
+        content:
+          "A veteran-led GenQ enterprise spanning ten deep-tech pillars, empowering industry and global academia with engineering, prototyping, manufacturing and training.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kanagamtech.in/about" },
     ],
+    links: [{ rel: "canonical", href: "https://kanagamtech.in/about" }],
   }),
   component: AboutPage,
 });
 
 function AboutPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background font-sans text-foreground">
-      <div className="pointer-events-none absolute inset-0 bg-[image:var(--gradient-stage)]" />
+    <main
+      className="relative min-h-screen overflow-hidden font-sans"
+      style={
+        {
+          background: "linear-gradient(155deg, #7a2a63 0%, #4B1D3F 32%, #2b0b30 64%, #18051e 100%)",
+          ["--background"]: "#17061f",
+          ["--foreground"]: "#F7EDE3",
+          ["--muted-foreground"]: "#D0B8A8",
+          ["--card"]: "#23102b",
+          ["--card-foreground"]: "#F7EDE3",
+          ["--border"]: "rgba(240,196,120,0.24)",
+        } as CSSProperties
+      }
+    >
+      <ShiningBackground variant="strong" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
 
       {/* Simple Header */}
@@ -71,10 +102,12 @@ function AboutPage() {
             deployment.
           </p>
           <p>
-            Our expertise spans seven deep-tech pillars —{" "}
-            <strong className="text-foreground">Quantum Computing &amp; GenQ</strong>, AI-IoT &amp;
-            IIoT, AI-Stack &amp; GenAI, Semiconductors &amp; ESDM, PCB &amp; SMT design and
-            assembly, AR/VR immersive technology, and workforce Skill Development.
+            Our expertise spans ten deep-tech pillars —{" "}
+            <strong className="text-foreground">Quantum Computing &amp; GenQ</strong>, Semiconductor
+            &amp; ESDM (PCB Design, Prototype &amp; SMT Assembly), VLSI/FPGA Engineering, Embedded
+            Systems &amp; IIoT/AI-oT (Enterprise Deployed), AI Engineering &amp; GenAI, AIBots,
+            AR/VR, Drones, 3D Scanner &amp; 3D Printer, and Skill Development &amp; Technical
+            Training.
           </p>
           <p>
             As a full-scale tech house, we deliver end-to-end design, rapid prototyping, automated
@@ -87,8 +120,9 @@ function AboutPage() {
             globally recognized certifications that prepare the next generation of innovators.
           </p>
           <p className="italic text-foreground/90">
-            Our vision is to shape the Quantum Generation — building transformative technologies
-            while empowering academic ecosystems worldwide to lead tomorrow's digital frontier.
+            Our vision is to engineer transformative deep-tech solutions across quantum computing,
+            semiconductors, embedded systems, AI, AIoT, AR/VR, drones, and 3D fabrication —
+            empowering global academic ecosystems to lead and shape tomorrow's digital frontier.
           </p>
         </div>
 

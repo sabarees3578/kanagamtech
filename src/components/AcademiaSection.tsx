@@ -13,7 +13,7 @@ export function AcademiaSection() {
             <GraduationCap className="h-3.5 w-3.5" />
             Global Academic Ecosystem
           </div>
-          <h2 className="font-display mt-4 text-[clamp(1.8rem,4vw,2.8rem)] font-extralight tracking-[0.06em] text-foreground">
+          <h2 className="font-display mt-4 text-[clamp(1.8rem,4vw,2.8rem)] font-bold tracking-[0.06em] text-foreground">
             Empowering Academia & Next-Gen Talent
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground font-light">
@@ -24,7 +24,7 @@ export function AcademiaSection() {
             future-ready technological ecosystems.
           </p>
         </div>
-        ``
+
         {/* 4 Pillars Grid */}
         <div className="mt-16 grid gap-8 md:grid-cols-2">
           {ACADEMIC_PROGRAMS.map((prog, idx) => {
