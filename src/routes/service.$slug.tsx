@@ -3,7 +3,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
 import { ALL_SERVICES, getServiceBySlug } from "@/lib/services";
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
 
 const IMG_ALT_SUFFIX = [
   "core capabilities and infrastructure",
@@ -262,24 +262,6 @@ function ServiceDetailPage() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* CTA Row */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Link
-            to="/"
-            hash="institutional-inquire"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white dark:text-[#4B1D3F] uppercase shadow-lg transition-transform hover:-translate-y-0.5"
-          >
-            <span>Partner With Us</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <Link
-            to="/student-enquire"
-            className="rounded-full border border-primary/40 bg-primary/10 px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-primary uppercase transition-colors hover:bg-primary/20"
-          >
-            Student Enquire
-          </Link>
         </div>
       </section>
     </main>
