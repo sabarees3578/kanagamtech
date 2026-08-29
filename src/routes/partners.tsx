@@ -61,7 +61,7 @@ const ORBIT_KEYS = `
   .kbs-nucleus { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 9999px; background: radial-gradient(circle, #FBE7C8 0%, #D7AB6A 55%, rgba(215,171,106,0.25) 100%); box-shadow: 0 0 26px 8px rgba(240,196,120,0.55); animation: kbsNucleus 2.6s ease-in-out infinite; }
   .kbs-dust { position: absolute; border-radius: 9999px; background: radial-gradient(circle, rgba(240,196,120,0.9) 0%, rgba(215,171,106,0.15) 70%); animation: kbsRise ease-in-out infinite; will-change: transform, opacity; }
   .kbs-shine { position: absolute; inset: 0; border-radius: inherit; background-image: linear-gradient(115deg, transparent 30%, rgba(240,196,120,0.2) 44%, rgba(255,255,255,0.32) 50%, rgba(240,196,120,0.2) 56%, transparent 70%); background-size: 250% 100%; background-repeat: no-repeat; pointer-events: none; mix-blend-mode: screen; animation: kbsShimmer 3.2s linear infinite; }
-  .kbs-pill { transform-style: preserve-3d; }
+  .kbs-hex { clip-path: polygon(0% 14%, 5% 5%, 14% 0%, 86% 0%, 95% 5%, 100% 14%, 100% 86%, 95% 95%, 86% 100%, 14% 100%, 5% 95%, 0% 86%); }
   @media (prefers-reduced-motion: reduce) {
     .kbs-ring, .kbs-halo, .kbs-halo2, .kbs-beam, .kbs-bob, .kbs-comet, .kbs-comets, .kbs-core-ring, .kbs-core-ring2, .kbs-nucleus, .kbs-dust, .kbs-shine { animation: none !important; }
     .kbs-stage { display: none; }
@@ -280,55 +280,18 @@ function OrbitCard({
         className="kbs-bob flex w-44 flex-col items-center gap-3 sm:w-56"
         style={staticCard ? undefined : { animationDelay: bobDelay }}
       >
-        <Pill3D src={src} name={name} />
+        <div className="kbs-hex relative flex h-32 w-32 items-center justify-center bg-gradient-to-b from-[#E9CD97] via-[#D7AB6A] to-[#B98A3E] drop-shadow-[0_0_22px_rgba(240,196,120,0.35)] sm:h-36 sm:w-36">
+          <div className="kbs-hex relative m-[3px] flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-b from-[#2f1138] to-[#1c0826] p-4">
+            <div className="kbs-shine" />
+            <img
+              src={src}
+              alt={`${name} — Kanagam Tech partner`}
+              loading="lazy"
+              className="relative max-h-full max-w-full object-contain drop-shadow-[0_0_10px_rgba(240,196,120,0.35)]"
+            />
+          </div>
+        </div>
         <span className="text-[0.58rem] tracking-[0.22em] text-[#E9CD97] uppercase">{name}</span>
-      </div>
-    </div>
-  );
-}
-
-const PILL_LAYERS = 10;
-
-function Pill3D({ src, name }: { src: string; name: string }) {
-  return (
-    <div
-      className="kbs-pill relative h-24 w-40 sm:h-28 sm:w-44"
-      role="img"
-      aria-label={`${name} — Kanagam Tech partner`}
-    >
-      {Array.from({ length: PILL_LAYERS }).map((_, i) => {
-        const angle = (i / PILL_LAYERS) * 360;
-        const shade = (0.78 + 0.22 * Math.cos((angle * Math.PI) / 180)).toFixed(2);
-        return (
-          <div
-            key={i}
-            className="absolute inset-0 rounded-full border border-[#D7AB6A]/30 bg-[#2f1138] shadow-[inset_0_0_14px_rgba(240,196,120,0.1)]"
-            style={{
-              backgroundImage: "linear-gradient(180deg, #3a1744 0%, #2f1138 45%, #200a2b 100%)",
-              filter: `brightness(${shade})`,
-              transform: `rotateX(${angle}deg) translateZ(18px)`,
-            }}
-          />
-        );
-      })}
-
-      {/* Shiny front face */}
-      <div
-        className="kbs-shine absolute inset-0 rounded-full"
-        style={{ transform: "translateZ(19px)" }}
-      />
-
-      {/* Logo on the front face */}
-      <div
-        className="absolute inset-0 flex items-center justify-center rounded-full p-4"
-        style={{ transform: "translateZ(20px)" }}
-      >
-        <img
-          src={src}
-          alt={`${name} — Kanagam Tech partner`}
-          loading="lazy"
-          className="max-h-full max-w-full object-contain drop-shadow-[0_0_10px_rgba(240,196,120,0.35)]"
-        />
       </div>
     </div>
   );
