@@ -17,10 +17,10 @@ const PARTNERS = [
 const ORBIT_KEYS = `
   @keyframes kbsSpin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
   @keyframes kbsPulseGlow { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
-  .kbs-stage { --kbsR: 260px; perspective: 1400px; }
-  @media (min-width: 640px) { .kbs-stage { --kbsR: 330px; } }
+  .kbs-stage { --kbsR: 320px; perspective: 1500px; }
+  @media (min-width: 640px) { .kbs-stage { --kbsR: 430px; } }
+  @media (min-width: 1024px) { .kbs-stage { --kbsR: 540px; } }
   .kbs-ring { transform-style: preserve-3d; animation: kbsSpin 40s linear infinite; }
-  .kbs-stage:hover .kbs-ring { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
     .kbs-ring { animation: none !important; }
     .kbs-stage { display: none; }
@@ -102,31 +102,14 @@ function PartnersPage() {
           <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
             Partners in Deep-Tech
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Kanagam Technology Solutions joins forces with leading deep-tech companies across
-            quantum, semiconductor, AI and embedded systems — together, we build tomorrow's digital
-            frontier.
-          </p>
         </div>
 
-        {/* Our Company — centre of the ecosystem */}
-        <div className="mx-auto mt-12 flex max-w-md flex-col items-center gap-4 rounded-2xl border border-border/60 bg-card/60 p-8 text-center shadow-xl backdrop-blur-md">
-          <span className="text-[0.6rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-            Our Company
-          </span>
-          <KanagamLogo mode="reverse" size="lg" />
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            Kanagam Technology Solutions — your deep-tech partner in quantum, VLSI, embedded
-            systems, AI and beyond.
-          </p>
-        </div>
-
-        {/* 3D orbiting partner logos — motion theme animation */}
-        <div className="mt-8">
+        {/* 3D orbiting partner logos — full-width motion theme animation */}
+        <div className="relative left-1/2 -translate-x-1/2 mt-2 w-screen overflow-hidden">
           <OrbitStage />
         </div>
 
-        <p className="mt-10 text-center text-[0.6rem] tracking-[0.25em] text-muted-foreground uppercase">
+        <p className="mt-6 text-center text-[0.6rem] tracking-[0.25em] text-muted-foreground uppercase">
           Trusted by world-class companies across the deep-tech spectrum
         </p>
       </section>
@@ -138,7 +121,7 @@ function OrbitStage() {
   const doubled = [...PARTNERS, ...PARTNERS];
   const step = 360 / doubled.length;
   return (
-    <div className="kbs-stage relative mx-auto h-[560px] max-w-4xl sm:h-[660px]">
+    <div className="kbs-stage relative mx-auto h-[620px] w-full sm:h-[780px] lg:h-[920px]">
       <div className="kbs-ring absolute inset-0">
         {doubled.map((partner, i) => (
           <OrbitCard
@@ -152,16 +135,16 @@ function OrbitStage() {
 
       {/* Our company — glowing centre of the orbit */}
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex items-center justify-center">
           <div
-            className="h-44 w-44 rounded-full sm:h-52 sm:w-52"
+            className="h-56 w-56 rounded-full sm:h-64 sm:w-64"
             style={{
               backgroundImage:
                 "radial-gradient(circle, rgba(240,196,120,0.5) 0%, rgba(215,171,106,0.15) 55%, transparent 75%)",
               animation: "kbsPulseGlow 5s ease-in-out infinite",
             }}
           />
-          <KanagamLogo mode="reverse" size="lg" className="absolute -mt-2" />
+          <KanagamLogo mode="reverse" size="xl" className="absolute" />
         </div>
       </div>
 
@@ -199,10 +182,10 @@ function OrbitCard({
     <div
       className={`${
         staticCard ? "relative" : "absolute left-1/2 top-1/2"
-      } flex w-36 flex-col items-center gap-2.5 sm:w-44`}
+      } flex w-44 flex-col items-center gap-3 sm:w-56`}
       style={staticCard ? undefined : { transform, backfaceVisibility: "hidden" as const }}
     >
-      <div className="flex h-20 w-full items-center justify-center rounded-2xl bg-white p-3 shadow-2xl sm:h-24">
+      <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white p-4 shadow-2xl sm:h-28">
         <img
           src={src}
           alt={`${name} — Kanagam Tech partner`}
