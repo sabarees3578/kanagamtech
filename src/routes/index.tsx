@@ -376,11 +376,18 @@ function Index() {
                 )}
               </button>
 
-              <a
-                href="#institutional-inquire"
+              <Link
+                to="/partners"
                 className="rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-2 text-[0.65rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md transition-transform hover:scale-105"
               >
                 Partner With Us
+              </Link>
+
+              <a
+                href="#focus"
+                className="rounded-full border border-primary/30 bg-card/60 px-5 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-bold shadow-md transition-all hover:bg-secondary hover:scale-105"
+              >
+                All Products
               </a>
             </div>
           </div>
