@@ -6,13 +6,13 @@ import { ShiningBackground } from "@/components/ShiningBackground";
 import { ArrowLeft, Handshake } from "lucide-react";
 
 const PARTNERS = [
-  { name: "ACCURA TECQ", src: "/partners img/ACCURA TECQ.jpeg" },
-  { name: "AMSEMS", src: "/partners img/AMSEMS.jpeg" },
-  { name: "ARK", src: "/partners img/ARK.jpeg" },
-  { name: "QUANTUMMATE", src: "/partners img/QUANTUMMATE.jpeg" },
-  { name: "RPBD", src: "/partners img/RPBD.jpeg" },
-  { name: "SILICON SYSTEM", src: "/partners img/SILICON SYSTEM.jpeg" },
-  { name: "ZORA TECH", src: "/partners img/ZORA TECH.jpeg" },
+  { name: "Accura Tequipment", src: "/partners img/Accura Tequipment.png" },
+  { name: "AMS EMS", src: "/partners img/AMS EMS.jpeg" },
+  { name: "ARK Infosolutions", src: "/partners img/ARK Infosolutions.svg" },
+  { name: "QuantumMate", src: "/partners img/QUANTUMMATE.jpeg" },
+  { name: "RP3D Products", src: "/partners img/RP3D Products.jpg" },
+  { name: "Silicon Systems", src: "/partners img/SILICON SYSTEM.jpeg" },
+  { name: "Zorah Tech", src: "/partners img/Zora Technologies.png" },
 ];
 
 const ORBIT_KEYS = `
@@ -70,8 +70,22 @@ function PartnersPage() {
       }
     >
       <style>{ORBIT_KEYS}</style>
-      <ShiningBackground variant="strong" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
+      {/* — Motion theme: full-screen, fixed, centred hologram — */}
+      <div className="fixed inset-0 z-0">
+        <ShiningBackground variant="strong" />
+        <PartnerOrbit3D className="kbs-canvas absolute inset-0" />
+
+        {/* Static fallback for reduced-motion users */}
+        <div className="kbs-static absolute inset-0 hidden flex-wrap content-center items-center justify-center gap-6 overflow-y-auto px-6 py-10">
+          {PARTNERS.map((partner) => (
+            <CapsuleCard key={partner.name} name={partner.name} src={partner.src} />
+          ))}
+        </div>
+
+        {/* Cinematic vignette so the headline stays readable over the hologram */}
+        <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_50%_40%,rgba(18,3,23,0.1)_0%,rgba(18,3,23,0.35)_46%,rgba(18,3,23,0.7)_78%,rgba(18,3,23,0.92)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
+      </div>
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
@@ -89,49 +103,33 @@ function PartnersPage() {
         </div>
       </header>
 
-      {/* Page Content */}
-      <section className="relative z-10 mx-auto max-w-6xl px-6 pt-6 pb-24">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
-            <Handshake className="h-3.5 w-3.5" />
-            Our Ecosystem
-          </div>
-          <h1 className="font-display mt-3 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
-            Partners in Deep-Tech
-          </h1>
+      {/* Page Content — centred over the motion theme */}
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4.5rem)] max-w-6xl flex-col items-center justify-center gap-5 px-6 py-16 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase backdrop-blur-sm">
+          <Handshake className="h-3.5 w-3.5" />
+          Our Ecosystem
         </div>
-
-        {/* Royal 3D hologram — full-width motion theme animation */}
-        <div className="relative left-1/2 -translate-x-1/2 mt-0 w-screen overflow-hidden">
-          <OrbitStage />
-        </div>
+        <h1 className="font-display text-[clamp(2.25rem,6vw,3.75rem)] leading-tight font-bold tracking-tight text-foreground drop-shadow-[0_2px_18px_rgba(18,3,23,0.8)]">
+          Partners in Deep-Tech
+        </h1>
+        <p className="max-w-2xl text-sm text-[#E8D5C3]/85 drop-shadow-[0_1px_10px_rgba(18,3,23,0.9)] sm:text-base">
+          A royal orbit of world-class companies — quantum, silicon, AI, embedded and beyond —
+          animating Kanagam's deep-tech future.
+        </p>
 
         {/* Partner name legend */}
-        <div className="mt-4 text-center text-[0.55rem] tracking-[0.3em] text-[#E9CD97]/70 uppercase">
-          {PARTNERS.map((p) => p.name).join("  ·  ")}
+        <div className="flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1.5 rounded-3xl border border-[#D7AB6A]/25 bg-[#1d0824]/60 px-5 py-3 backdrop-blur-md">
+          {PARTNERS.map((p) => (
+            <span
+              key={p.name}
+              className="whitespace-nowrap text-[0.6rem] tracking-[0.22em] text-[#E9CD97]/90 uppercase"
+            >
+              {p.name}
+            </span>
+          ))}
         </div>
-
-        <p className="mt-4 text-center text-[0.6rem] tracking-[0.25em] text-muted-foreground uppercase">
-          Trusted by world-class companies across the deep-tech spectrum
-        </p>
       </section>
     </main>
-  );
-}
-
-function OrbitStage() {
-  return (
-    <div className="relative mx-auto h-[620px] w-full sm:h-[780px] lg:h-[920px]">
-      {/* Three.js hologram */}
-      <PartnerOrbit3D className="kbs-canvas absolute inset-0" />
-
-      {/* Static fallback for reduced-motion users */}
-      <div className="kbs-static absolute inset-0 hidden flex-wrap items-center justify-center gap-6 overflow-y-auto px-6 py-10">
-        {PARTNERS.map((partner) => (
-          <CapsuleCard key={partner.name} name={partner.name} src={partner.src} />
-        ))}
-      </div>
-    </div>
   );
 }
 

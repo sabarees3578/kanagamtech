@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const LOGOS = [
-  { name: "ACCURA TECQ", src: "/partners img/ACCURA TECQ.jpeg" },
-  { name: "AMSEMS", src: "/partners img/AMSEMS.jpeg" },
-  { name: "ARK", src: "/partners img/ARK.jpeg" },
-  { name: "QUANTUMMATE", src: "/partners img/QUANTUMMATE.jpeg" },
-  { name: "RPBD", src: "/partners img/RPBD.jpeg" },
-  { name: "SILICON SYSTEM", src: "/partners img/SILICON SYSTEM.jpeg" },
-  { name: "ZORA TECH", src: "/partners img/ZORA TECH.jpeg" },
+  { name: "Accura Tequipment", src: "/partners img/Accura Tequipment.png" },
+  { name: "AMS EMS", src: "/partners img/AMS EMS.jpeg" },
+  { name: "ARK Infosolutions", src: "/partners img/ARK Infosolutions.svg" },
+  { name: "QuantumMate", src: "/partners img/QUANTUMMATE.jpeg" },
+  { name: "RP3D Products", src: "/partners img/RP3D Products.jpg" },
+  { name: "Silicon Systems", src: "/partners img/SILICON SYSTEM.jpeg" },
+  { name: "Zorah Tech", src: "/partners img/Zora Technologies.png" },
 ];
 
 function roundRectPath(
@@ -156,8 +156,9 @@ function glowTexture(inner: string, outer: string): THREE.Texture {
 }
 
 /**
- * PartnerOrbit3D — a royal, futuristic hologram of the partner logo cards
- * orbiting a golden quantum core, used as the /partners hero motion.
+ * PartnerOrbit3D — a royal, futuristic full-screen hologram of the partner
+ * logo cards orbiting a golden quantum core. Used as the /partners page
+ * motion theme (fills the whole viewport, centred).
  */
 export function PartnerOrbit3D({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,12 +169,13 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x120317, 0.006);
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
-    camera.position.set(0, 2, 58);
+    scene.fog = new THREE.FogExp2(0x120317, 0.0055);
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 300);
+    camera.position.set(0, 9, 30);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     container.appendChild(renderer.domElement);
 
@@ -181,15 +183,17 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const DEEP = new THREE.Color("#4B1D3F");
 
     const root = new THREE.Group();
+    // Gentle card-table tilt so the orbit reads as a grand ellipse.
+    root.rotation.x = 0.32;
     scene.add(root);
 
     // --- Golden quantum core ---
-    const sphereCount = 900;
+    const sphereCount = 1100;
     const sphPos = new Float32Array(sphereCount * 3);
     for (let i = 0; i < sphereCount; i++) {
       const phi = Math.acos(1 - (2 * (i + 0.5)) / sphereCount);
       const theta = Math.PI * (1 + Math.sqrt(5)) * i;
-      const r = 3 + (Math.random() - 0.5) * 0.2;
+      const r = 3.6 + (Math.random() - 0.5) * 0.25;
       sphPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       sphPos[i * 3 + 1] = r * Math.cos(phi);
       sphPos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
@@ -207,17 +211,27 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const corePoints = new THREE.Points(sphGeo, sphMat);
     root.add(corePoints);
 
-    const wireGeo = new THREE.IcosahedronGeometry(1.8, 1);
+    const wireGeo = new THREE.IcosahedronGeometry(1.9, 1);
     const wireMat = new THREE.MeshBasicMaterial({
       color: DEEP,
       wireframe: true,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.5,
     });
     const wireCore = new THREE.Mesh(wireGeo, wireMat);
     root.add(wireCore);
 
-    const nucleusGeo = new THREE.SphereGeometry(0.7, 32, 32);
+    const wire2Geo = new THREE.IcosahedronGeometry(2.6, 1);
+    const wire2Mat = new THREE.MeshBasicMaterial({
+      color: GOLD,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.18,
+    });
+    const wireCore2 = new THREE.Mesh(wire2Geo, wire2Mat);
+    root.add(wireCore2);
+
+    const nucleusGeo = new THREE.SphereGeometry(0.75, 32, 32);
     const nucleusMat = new THREE.MeshBasicMaterial({ color: GOLD, transparent: true });
     const nucleus = new THREE.Mesh(nucleusGeo, nucleusMat);
     root.add(nucleus);
@@ -236,14 +250,14 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       root.add(s);
       return s;
     };
-    addSprite(glowTexture("rgba(240,196,120,0.85)", "rgba(215,171,106,0.18)"), 34, 0.9);
-    addSprite(glowTexture("rgba(123,42,99,0.7)", "rgba(75,29,63,0.14)"), 44, 0.65);
+    addSprite(glowTexture("rgba(240,196,120,0.85)", "rgba(215,171,106,0.18)"), 36, 0.9);
+    addSprite(glowTexture("rgba(123,42,99,0.7)", "rgba(75,29,63,0.14)"), 46, 0.6);
 
     // --- Orbital logo cards ---
-    const RING_RADIUS = 18;
+    const RING_RADIUS = 15;
     const textureMap = new Map<string, THREE.CanvasTexture>();
     const cards: { mesh: THREE.Mesh; phase: number }[] = [];
-    const planeGeo = new THREE.PlaneGeometry(6.4, 4);
+    const planeGeo = new THREE.PlaneGeometry(6.6, 4.12);
 
     const buildCards = async () => {
       await Promise.all(
@@ -272,43 +286,75 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       else raf = requestAnimationFrame(loop);
     };
 
-    // --- Orbit rings ---
-    const torusGeo = new THREE.TorusGeometry(RING_RADIUS, 0.05, 8, 160);
-    const torusMat = new THREE.MeshBasicMaterial({
+    // --- Celestial halo rings ---
+    const halo1Geo = new THREE.TorusGeometry(22, 0.05, 8, 180);
+    const halo1Mat = new THREE.MeshBasicMaterial({
       color: GOLD,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.28,
     });
-    const ringTorus = new THREE.Mesh(torusGeo, torusMat);
-    ringTorus.rotation.x = Math.PI / 2;
-    scene.add(ringTorus);
+    const halo1 = new THREE.Mesh(halo1Geo, halo1Mat);
+    halo1.rotation.x = Math.PI / 2 + 0.18;
+    root.add(halo1);
 
-    const torusGeo2 = new THREE.TorusGeometry(RING_RADIUS * 1.3, 0.035, 8, 160);
-    const torusMat2 = new THREE.MeshBasicMaterial({
+    const halo2Geo = new THREE.TorusGeometry(17.5, 0.035, 8, 160);
+    const halo2Mat = new THREE.MeshBasicMaterial({
       color: DEEP,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.55,
     });
-    const ringTorus2 = new THREE.Mesh(torusGeo2, torusMat2);
-    ringTorus2.rotation.x = Math.PI / 2 + 0.32;
-    scene.add(ringTorus2);
+    const halo2 = new THREE.Mesh(halo2Geo, halo2Mat);
+    halo2.rotation.x = Math.PI / 2 - 0.3;
+    root.add(halo2);
+
+    // --- Inner data ring (tiny gold points, counter-rotating) ---
+    const dataCount = 90;
+    const dataPos = new Float32Array(dataCount * 3);
+    for (let i = 0; i < dataCount; i++) {
+      const a = (i / dataCount) * Math.PI * 2;
+      dataPos[i * 3] = Math.cos(a) * 8.5;
+      dataPos[i * 3 + 1] = (Math.random() - 0.5) * 0.4;
+      dataPos[i * 3 + 2] = Math.sin(a) * 8.5;
+    }
+    const dataGeo = new THREE.BufferGeometry();
+    dataGeo.setAttribute("position", new THREE.BufferAttribute(dataPos, 3));
+    const dataMat = new THREE.PointsMaterial({
+      color: GOLD,
+      size: 0.09,
+      transparent: true,
+      opacity: 0.75,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const dataRing = new THREE.Points(dataGeo, dataMat);
+    root.add(dataRing);
 
     // --- Gold satellites ---
-    const satGeo = new THREE.SphereGeometry(0.22, 16, 16);
+    const satGeo = new THREE.SphereGeometry(0.24, 16, 16);
     const satMat = new THREE.MeshBasicMaterial({ color: GOLD });
+    const satGlowMat = new THREE.SpriteMaterial({
+      map: glowTexture("rgba(240,196,120,0.9)", "rgba(215,171,106,0.2)"),
+      transparent: true,
+      opacity: 0.8,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
     const satellites = [0, 1, 2].map((i) => {
       const s = new THREE.Mesh(satGeo, satMat);
-      scene.add(s);
+      const glow = new THREE.Sprite(satGlowMat);
+      glow.scale.set(2.4, 2.4, 1);
+      s.add(glow);
+      root.add(s);
       return { mesh: s, offset: i * ((Math.PI * 2) / 3) };
     });
 
     // --- Ambient dust particles ---
-    const dustCount = 220;
+    const dustCount = 260;
     const dustPos = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount; i++) {
-      dustPos[i * 3] = (Math.random() - 0.5) * 60;
-      dustPos[i * 3 + 1] = (Math.random() - 0.5) * 40;
-      dustPos[i * 3 + 2] = (Math.random() - 0.5) * 30 - 4;
+      dustPos[i * 3] = (Math.random() - 0.5) * 70;
+      dustPos[i * 3 + 1] = (Math.random() - 0.5) * 50;
+      dustPos[i * 3 + 2] = (Math.random() - 0.5) * 40 - 6;
     }
     const dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
@@ -322,12 +368,15 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const dust = new THREE.Points(dustGeo, dustMat);
     scene.add(dust);
 
-    // --- Resize ---
+    // --- Resize (frame the scene to the viewport, keep it centred) ---
     const resize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
       renderer.setSize(w, h, false);
-      camera.aspect = w / h;
+      const aspect = w / h;
+      camera.aspect = aspect;
+      camera.fov = aspect < 0.9 ? 58 : aspect < 1.35 ? 50 : 44;
+      camera.position.set(0, 9, aspect < 1.2 ? 34 : 30);
       camera.updateProjectionMatrix();
     };
     resize();
@@ -340,32 +389,35 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       const t = clock.getElapsedTime();
       const speed = reduced ? 0 : 1;
 
-      root.rotation.y = t * 0.15 * speed;
-      ringTorus.rotation.z = -t * 0.08 * speed;
-      ringTorus2.rotation.z = t * 0.06 * speed;
+      root.rotation.y = t * 0.16 * speed;
+      halo1.rotation.z = -t * 0.07 * speed;
+      halo2.rotation.z = t * 0.05 * speed;
+      dataRing.rotation.y = -t * 0.4 * speed;
       dust.rotation.y = -t * 0.01 * speed;
 
       corePoints.rotation.y -= t * 0.02 * speed;
       wireCore.rotation.x += 0.004 * speed;
       wireCore.rotation.y += 0.006 * speed;
+      wireCore2.rotation.x -= 0.003 * speed;
+      wireCore2.rotation.y += 0.005 * speed;
 
       const pulse = 1 + Math.sin(t * 1.3) * 0.08;
       nucleus.scale.setScalar(pulse);
       nucleusMat.opacity = 0.7 + Math.sin(t * 1.3) * 0.2;
 
       cards.forEach((c) => {
-        c.mesh.position.y = Math.sin(t * 0.6 + c.phase) * 0.8;
+        c.mesh.position.y = Math.sin(t * 0.6 + c.phase) * 0.9;
       });
 
       satellites.forEach((s, i) => {
         const a = t * 0.85 + s.offset;
-        const r = RING_RADIUS * 1.6;
-        s.mesh.position.set(Math.cos(a) * r, Math.sin(t * 0.9 + i) * 0.6, Math.sin(a) * r);
+        const r = RING_RADIUS * 1.7;
+        s.mesh.position.set(Math.cos(a) * r, Math.sin(t * 0.9 + i) * 0.7, Math.sin(a) * r);
       });
 
-      camera.position.x = Math.sin(t * 0.12) * 3;
-      camera.position.y = 2 + Math.sin(t * 0.09) * 1.5;
-      camera.lookAt(0, 0, 0);
+      camera.position.x = Math.sin(t * 0.1) * 1.4;
+      camera.position.y = 9 + Math.sin(t * 0.08) * 1;
+      camera.lookAt(0, 0.2, 0);
 
       renderer.render(scene, camera);
       raf = requestAnimationFrame(loop);
@@ -381,15 +433,20 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       sphMat.dispose();
       wireGeo.dispose();
       wireMat.dispose();
+      wire2Geo.dispose();
+      wire2Mat.dispose();
       nucleusGeo.dispose();
       nucleusMat.dispose();
       planeGeo.dispose();
-      torusGeo.dispose();
-      torusMat.dispose();
-      torusGeo2.dispose();
-      torusMat2.dispose();
+      halo1Geo.dispose();
+      halo1Mat.dispose();
+      halo2Geo.dispose();
+      halo2Mat.dispose();
+      dataGeo.dispose();
+      dataMat.dispose();
       satGeo.dispose();
       satMat.dispose();
+      satGlowMat.dispose();
       dustGeo.dispose();
       dustMat.dispose();
       textureMap.forEach((tex) => tex.dispose());
