@@ -109,15 +109,6 @@ function capsuleTexture(src: string): Promise<THREE.CanvasTexture> {
       }
       ctx.drawImage(t, 0, 0);
 
-      // Soft "paper" inner sheet so the dark capsules read elegantly on
-      // the light page and the logo never gets lost.
-      roundRectPath(ctx, 8, 8, W - 16, H - 16, 40);
-      ctx.fillStyle = "rgba(255,252,247,0.55)";
-      ctx.fill();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "rgba(75,29,63,0.35)";
-      ctx.stroke();
-
       const tex = new THREE.CanvasTexture(c);
       tex.colorSpace = THREE.SRGBColorSpace;
       resolve(tex);
@@ -178,7 +169,7 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0xf6ede0, 0.0024);
+    scene.fog = new THREE.FogExp2(0x120317, 0.0055);
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 300);
     camera.position.set(0, 9, 30);
     camera.lookAt(0, 0, 0);
@@ -188,8 +179,7 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     container.appendChild(renderer.domElement);
 
-    const GOLD = new THREE.Color("#C08A3C");
-    const BRONZE = new THREE.Color("#B98A3E");
+    const GOLD = new THREE.Color("#D7AB6A");
     const DEEP = new THREE.Color("#4B1D3F");
 
     const root = new THREE.Group();
@@ -211,11 +201,12 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const sphGeo = new THREE.BufferGeometry();
     sphGeo.setAttribute("position", new THREE.BufferAttribute(sphPos, 3));
     const sphMat = new THREE.PointsMaterial({
-      color: DEEP,
-      size: 0.09,
+      color: GOLD,
+      size: 0.07,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
       depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
     const corePoints = new THREE.Points(sphGeo, sphMat);
     root.add(corePoints);
@@ -232,34 +223,35 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
 
     const wire2Geo = new THREE.IcosahedronGeometry(2.6, 1);
     const wire2Mat = new THREE.MeshBasicMaterial({
-      color: BRONZE,
+      color: GOLD,
       wireframe: true,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.18,
     });
     const wireCore2 = new THREE.Mesh(wire2Geo, wire2Mat);
     root.add(wireCore2);
 
     const nucleusGeo = new THREE.SphereGeometry(0.75, 32, 32);
-    const nucleusMat = new THREE.MeshBasicMaterial({ color: BRONZE, transparent: true });
+    const nucleusMat = new THREE.MeshBasicMaterial({ color: GOLD, transparent: true });
     const nucleus = new THREE.Mesh(nucleusGeo, nucleusMat);
     root.add(nucleus);
 
-    // --- Royal auras (soft pastel glows that read on light) ---
+    // --- Royal auras ---
     const addSprite = (tex: THREE.Texture, scale: number, opacity: number) => {
       const mat = new THREE.SpriteMaterial({
         map: tex,
         transparent: true,
         opacity,
         depthWrite: false,
+        blending: THREE.AdditiveBlending,
       });
       const s = new THREE.Sprite(mat);
       s.scale.set(scale, scale, 1);
       root.add(s);
       return s;
     };
-    addSprite(glowTexture("rgba(215,171,106,0.55)", "rgba(214,171,106,0.14)"), 36, 0.7);
-    addSprite(glowTexture("rgba(150,70,110,0.35)", "rgba(75,29,63,0.1)"), 46, 0.5);
+    addSprite(glowTexture("rgba(240,196,120,0.85)", "rgba(215,171,106,0.18)"), 36, 0.9);
+    addSprite(glowTexture("rgba(123,42,99,0.7)", "rgba(75,29,63,0.14)"), 46, 0.6);
 
     // --- Orbital logo cards ---
     const RING_RADIUS = 15;
@@ -297,9 +289,9 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     // --- Celestial halo rings ---
     const halo1Geo = new THREE.TorusGeometry(22, 0.05, 8, 180);
     const halo1Mat = new THREE.MeshBasicMaterial({
-      color: BRONZE,
+      color: GOLD,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.28,
     });
     const halo1 = new THREE.Mesh(halo1Geo, halo1Mat);
     halo1.rotation.x = Math.PI / 2 + 0.18;
@@ -309,7 +301,7 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const halo2Mat = new THREE.MeshBasicMaterial({
       color: DEEP,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.55,
     });
     const halo2 = new THREE.Mesh(halo2Geo, halo2Mat);
     halo2.rotation.x = Math.PI / 2 - 0.3;
@@ -327,23 +319,25 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const dataGeo = new THREE.BufferGeometry();
     dataGeo.setAttribute("position", new THREE.BufferAttribute(dataPos, 3));
     const dataMat = new THREE.PointsMaterial({
-      color: BRONZE,
-      size: 0.11,
+      color: GOLD,
+      size: 0.09,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.75,
       depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
     const dataRing = new THREE.Points(dataGeo, dataMat);
     root.add(dataRing);
 
     // --- Gold satellites ---
     const satGeo = new THREE.SphereGeometry(0.24, 16, 16);
-    const satMat = new THREE.MeshBasicMaterial({ color: BRONZE });
+    const satMat = new THREE.MeshBasicMaterial({ color: GOLD });
     const satGlowMat = new THREE.SpriteMaterial({
-      map: glowTexture("rgba(215,171,106,0.5)", "rgba(215,171,106,0.12)"),
+      map: glowTexture("rgba(240,196,120,0.9)", "rgba(215,171,106,0.2)"),
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.8,
       depthWrite: false,
+      blending: THREE.AdditiveBlending,
     });
     const satellites = [0, 1, 2].map((i) => {
       const s = new THREE.Mesh(satGeo, satMat);
@@ -365,34 +359,14 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
     const dustGeo = new THREE.BufferGeometry();
     dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
     const dustMat = new THREE.PointsMaterial({
-      color: BRONZE,
-      size: 0.07,
+      color: GOLD,
+      size: 0.05,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.35,
       depthWrite: false,
     });
     const dust = new THREE.Points(dustGeo, dustMat);
     scene.add(dust);
-
-    // --- Floating ivory motes (very faint static sparkle) ---
-    const moteCount = 140;
-    const motePos = new Float32Array(moteCount * 3);
-    for (let i = 0; i < moteCount; i++) {
-      motePos[i * 3] = (Math.random() - 0.5) * 80;
-      motePos[i * 3 + 1] = (Math.random() - 0.5) * 60;
-      motePos[i * 3 + 2] = (Math.random() - 0.5) * 50;
-    }
-    const moteGeo = new THREE.BufferGeometry();
-    moteGeo.setAttribute("position", new THREE.BufferAttribute(motePos, 3));
-    const moteMat = new THREE.PointsMaterial({
-      color: "#ffffff",
-      size: 0.11,
-      transparent: true,
-      opacity: 0.4,
-      depthWrite: false,
-    });
-    const motes = new THREE.Points(moteGeo, moteMat);
-    scene.add(motes);
 
     // --- Resize (frame the scene to the viewport, keep it centred) ---
     const resize = () => {
@@ -420,7 +394,6 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       halo2.rotation.z = t * 0.05 * speed;
       dataRing.rotation.y = -t * 0.4 * speed;
       dust.rotation.y = -t * 0.01 * speed;
-      motes.rotation.y = t * 0.02 * speed;
 
       corePoints.rotation.y -= t * 0.02 * speed;
       wireCore.rotation.x += 0.004 * speed;
@@ -476,8 +449,6 @@ export function PartnerOrbit3D({ className }: { className?: string }) {
       satGlowMat.dispose();
       dustGeo.dispose();
       dustMat.dispose();
-      moteGeo.dispose();
-      moteMat.dispose();
       textureMap.forEach((tex) => tex.dispose());
       if (renderer.domElement.parentNode === container) {
         container.removeChild(renderer.domElement);

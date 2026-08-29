@@ -408,13 +408,13 @@ function Index() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
-              {FULL_BRAND} is an Education and Technology solutions enterprise focused on
-              establishing advanced technology laboratories and delivering industry-oriented skill
-              development and employability training programs. The business provides end-to-end
-              laboratory establishment solutions for Colleges, Universities, Educational
-              Institutions, and other organizations, including consultation, planning, design,
-              technology selection, supply, installation, integration, commissioning, training, and
-              ongoing technical support.
+              <strong className="font-bold text-white">{FULL_BRAND}</strong> is an Education and
+              Technology solutions enterprise focused on establishing advanced technology
+              laboratories and delivering industry-oriented skill development and employability
+              training programs. The business provides end-to-end laboratory establishment solutions
+              for Colleges, Universities, Educational Institutions, and other organizations,
+              including consultation, planning, design, technology selection, supply, installation,
+              integration, commissioning, training, and ongoing technical support.
             </p>
             <p className="mx-auto mt-4 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
               Through a robust{" "}
