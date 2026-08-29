@@ -15,11 +15,11 @@ const PARTNERS = [
 ];
 
 const ORBIT_KEYS = `
-  @keyframes kbsSpin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+  @keyframes kbsSpin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
   @keyframes kbsPulseGlow { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
   .kbs-stage { --kbsR: 260px; perspective: 1400px; }
   @media (min-width: 640px) { .kbs-stage { --kbsR: 330px; } }
-  .kbs-ring { transform-style: preserve-3d; animation: kbsSpin 46s linear infinite; }
+  .kbs-ring { transform-style: preserve-3d; animation: kbsSpin 40s linear infinite; }
   .kbs-stage:hover .kbs-ring { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
     .kbs-ring { animation: none !important; }
