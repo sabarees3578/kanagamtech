@@ -287,7 +287,7 @@ function OrbitCard({
               src={src}
               alt={`${name} — Kanagam Tech partner`}
               loading="lazy"
-              className="relative max-h-full max-w-full object-contain drop-shadow-[0_0_10px_rgba(240,196,120,0.35)]"
+              className="kbs-hex relative max-h-full max-w-full object-contain drop-shadow-[0_0_10px_rgba(240,196,120,0.35)]"
             />
           </div>
         </div>
