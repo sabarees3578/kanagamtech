@@ -93,19 +93,19 @@ function PartnersPage() {
       </header>
 
       {/* Page Content */}
-      <section className="relative z-10 mx-auto max-w-6xl px-6 pt-16 pb-24">
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pt-6 pb-24">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
             <Handshake className="h-3.5 w-3.5" />
             Our Ecosystem
           </div>
-          <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
+          <h1 className="font-display mt-3 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
             Partners in Deep-Tech
           </h1>
         </div>
 
         {/* 3D orbiting partner logos — full-width motion theme animation */}
-        <div className="relative left-1/2 -translate-x-1/2 mt-2 w-screen overflow-hidden">
+        <div className="relative left-1/2 -translate-x-1/2 mt-0 w-screen overflow-hidden">
           <OrbitStage />
         </div>
 
@@ -133,19 +133,16 @@ function OrbitStage() {
         ))}
       </div>
 
-      {/* Our company — glowing centre of the orbit */}
+      {/* Ambient centre glow */}
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-        <div className="flex items-center justify-center">
-          <div
-            className="h-56 w-56 rounded-full sm:h-64 sm:w-64"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle, rgba(240,196,120,0.5) 0%, rgba(215,171,106,0.15) 55%, transparent 75%)",
-              animation: "kbsPulseGlow 5s ease-in-out infinite",
-            }}
-          />
-          <KanagamLogo mode="reverse" size="xl" className="absolute" />
-        </div>
+        <div
+          className="h-64 w-64 rounded-full sm:h-80 sm:w-80"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(240,196,120,0.22) 0%, rgba(215,171,106,0.06) 55%, transparent 75%)",
+            animation: "kbsPulseGlow 6s ease-in-out infinite",
+          }}
+        />
       </div>
 
       {/* Static fallback for reduced-motion users */}
