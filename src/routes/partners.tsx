@@ -42,6 +42,7 @@ const ORBIT_KEYS = `
   @keyframes kbsNucleus { 0%,100% { opacity: 0.55; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.2); } }
   @keyframes kbsPulseGlow { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
   @keyframes kbsFloatDot { 0%,100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+  @keyframes kbsShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   .kbs-stage { --kbsR: 320px; perspective: 1500px; }
   @media (min-width: 640px) { .kbs-stage { --kbsR: 430px; } }
   @media (min-width: 1024px) { .kbs-stage { --kbsR: 540px; } }
@@ -59,8 +60,9 @@ const ORBIT_KEYS = `
   .kbs-core-ring2 { inset: 22%; border: 1px dashed rgba(240,196,120,0.45); transform: rotateX(70deg) rotateZ(0deg); animation: kbsCoreRev 12s linear infinite; }
   .kbs-nucleus { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 9999px; background: radial-gradient(circle, #FBE7C8 0%, #D7AB6A 55%, rgba(215,171,106,0.25) 100%); box-shadow: 0 0 26px 8px rgba(240,196,120,0.55); animation: kbsNucleus 2.6s ease-in-out infinite; }
   .kbs-dust { position: absolute; border-radius: 9999px; background: radial-gradient(circle, rgba(240,196,120,0.9) 0%, rgba(215,171,106,0.15) 70%); animation: kbsRise ease-in-out infinite; will-change: transform, opacity; }
+  .kbs-shine { position: absolute; inset: 0; border-radius: inherit; background-image: linear-gradient(115deg, transparent 30%, rgba(240,196,120,0.2) 44%, rgba(255,255,255,0.32) 50%, rgba(240,196,120,0.2) 56%, transparent 70%); background-size: 250% 100%; background-repeat: no-repeat; pointer-events: none; mix-blend-mode: screen; animation: kbsShimmer 3.2s linear infinite; }
   @media (prefers-reduced-motion: reduce) {
-    .kbs-ring, .kbs-halo, .kbs-halo2, .kbs-beam, .kbs-bob, .kbs-comet, .kbs-comets, .kbs-core-ring, .kbs-core-ring2, .kbs-nucleus, .kbs-dust { animation: none !important; }
+    .kbs-ring, .kbs-halo, .kbs-halo2, .kbs-beam, .kbs-bob, .kbs-comet, .kbs-comets, .kbs-core-ring, .kbs-core-ring2, .kbs-nucleus, .kbs-dust, .kbs-shine { animation: none !important; }
     .kbs-stage { display: none; }
     .kbs-static { display: flex; }
   }
@@ -277,17 +279,16 @@ function OrbitCard({
         className="kbs-bob flex w-44 flex-col items-center gap-3 sm:w-56"
         style={staticCard ? undefined : { animationDelay: bobDelay }}
       >
-        <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.45),0_0_28px_rgba(240,196,120,0.18)] sm:h-28">
+        <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-[#2f1138] to-[#1c0826] p-5 shadow-[0_14px_44px_rgba(0,0,0,0.5),0_0_30px_rgba(240,196,120,0.28),inset_0_0_20px_rgba(240,196,120,0.14)] ring-1 ring-[#D7AB6A]/60 sm:h-32 sm:w-32">
+          <div className="kbs-shine" />
           <img
             src={src}
             alt={`${name} — Kanagam Tech partner`}
             loading="lazy"
-            className="max-h-full max-w-full object-contain"
+            className="relative max-h-full max-w-full object-contain drop-shadow-[0_0_10px_rgba(240,196,120,0.35)]"
           />
         </div>
-        <span className="text-[0.58rem] tracking-[0.22em] text-muted-foreground uppercase">
-          {name}
-        </span>
+        <span className="text-[0.58rem] tracking-[0.22em] text-[#E9CD97] uppercase">{name}</span>
       </div>
     </div>
   );
