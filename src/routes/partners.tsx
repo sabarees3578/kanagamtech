@@ -100,11 +100,11 @@ function PartnersPage() {
       className="relative min-h-screen overflow-hidden font-sans"
       style={
         {
-          background: "linear-gradient(155deg, #7a2a63 0%, #4B1D3F 32%, #2b0b30 64%, #18051e 100%)",
-          ["--background"]: "#17061f",
+          background: "linear-gradient(155deg, #5f1f4d 0%, #3a1631 32%, #230824 64%, #120317 100%)",
+          ["--background"]: "#130417",
           ["--foreground"]: "#F7EDE3",
           ["--muted-foreground"]: "#D0B8A8",
-          ["--card"]: "#23102b",
+          ["--card"]: "#1d0824",
           ["--card-foreground"]: "#F7EDE3",
           ["--border"]: "rgba(240,196,120,0.24)",
         } as CSSProperties
