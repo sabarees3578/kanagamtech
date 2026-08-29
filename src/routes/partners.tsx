@@ -16,7 +16,6 @@ const PARTNERS = [
 
 const MARQUEE_KEYS = `
   @keyframes kbsMarqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @keyframes kbsMarqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
   .kbs-marquee:hover .kbs-track { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
     .kbs-track { animation: none !important; }
@@ -118,9 +117,8 @@ function PartnersPage() {
         </div>
 
         {/* Looping partner marquee — motion theme animation */}
-        <div className="mt-14 space-y-8">
-          <MarqueeRow reversed={false} />
-          <MarqueeRow reversed />
+        <div className="mt-14">
+          <MarqueeRow />
         </div>
 
         <p className="mt-10 text-center text-[0.6rem] tracking-[0.25em] text-muted-foreground uppercase">
@@ -131,14 +129,14 @@ function PartnersPage() {
   );
 }
 
-function MarqueeRow({ reversed }: { reversed: boolean }) {
+function MarqueeRow() {
   const doubled = [...PARTNERS, ...PARTNERS];
   return (
     <div className="kbs-marquee group relative overflow-hidden rounded-2xl border border-border/60 bg-card/40 py-8 backdrop-blur-md">
       <div
         className="kbs-track flex w-max items-center gap-6 px-6"
         style={{
-          animation: `${reversed ? "kbsMarqueeR" : "kbsMarqueeL"} 42s linear infinite`,
+          animation: "kbsMarqueeL 42s linear infinite",
         }}
       >
         {doubled.map((partner, i) => (
