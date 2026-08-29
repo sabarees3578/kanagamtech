@@ -60,7 +60,7 @@ const ORBIT_KEYS = `
   .kbs-core-ring2 { inset: 22%; border: 1px dashed rgba(240,196,120,0.45); transform: rotateX(70deg) rotateZ(0deg); animation: kbsCoreRev 12s linear infinite; }
   .kbs-nucleus { position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 9999px; background: radial-gradient(circle, #FBE7C8 0%, #D7AB6A 55%, rgba(215,171,106,0.25) 100%); box-shadow: 0 0 26px 8px rgba(240,196,120,0.55); animation: kbsNucleus 2.6s ease-in-out infinite; }
   .kbs-dust { position: absolute; border-radius: 9999px; background: radial-gradient(circle, rgba(240,196,120,0.9) 0%, rgba(215,171,106,0.15) 70%); animation: kbsRise ease-in-out infinite; will-change: transform, opacity; }
-  .kbs-hex { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+  .kbs-hex { clip-path: polygon(50% 0%, 79% 21%, 100% 50%, 79% 79%, 50% 100%, 21% 79%, 0% 50%, 21% 21%); }
   .kbs-shine { position: absolute; inset: 0; border-radius: inherit; background-image: linear-gradient(115deg, transparent 30%, rgba(240,196,120,0.2) 44%, rgba(255,255,255,0.32) 50%, rgba(240,196,120,0.2) 56%, transparent 70%); background-size: 250% 100%; background-repeat: no-repeat; pointer-events: none; mix-blend-mode: screen; animation: kbsShimmer 3.2s linear infinite; }
   @media (prefers-reduced-motion: reduce) {
     .kbs-ring, .kbs-halo, .kbs-halo2, .kbs-beam, .kbs-bob, .kbs-comet, .kbs-comets, .kbs-core-ring, .kbs-core-ring2, .kbs-nucleus, .kbs-dust, .kbs-shine { animation: none !important; }
