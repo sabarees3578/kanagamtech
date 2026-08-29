@@ -14,12 +14,17 @@ const PARTNERS = [
   { name: "ZORA TECH", src: "/partners img/ZORA TECH.jpeg" },
 ];
 
-const MARQUEE_KEYS = `
-  @keyframes kbsMarqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .kbs-marquee:hover .kbs-track { animation-play-state: paused; }
+const ORBIT_KEYS = `
+  @keyframes kbsSpin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+  @keyframes kbsPulseGlow { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
+  .kbs-stage { --kbsR: 260px; perspective: 1400px; }
+  @media (min-width: 640px) { .kbs-stage { --kbsR: 330px; } }
+  .kbs-ring { transform-style: preserve-3d; animation: kbsSpin 46s linear infinite; }
+  .kbs-stage:hover .kbs-ring { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
-    .kbs-track { animation: none !important; }
-    .kbs-marquee { overflow-x: auto; }
+    .kbs-ring { animation: none !important; }
+    .kbs-stage { display: none; }
+    .kbs-static { display: flex; }
   }
 `;
 
@@ -67,7 +72,7 @@ function PartnersPage() {
         } as CSSProperties
       }
     >
-      <style>{MARQUEE_KEYS}</style>
+      <style>{ORBIT_KEYS}</style>
       <ShiningBackground variant="strong" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
 
@@ -116,9 +121,9 @@ function PartnersPage() {
           </p>
         </div>
 
-        {/* Looping partner marquee — motion theme animation */}
-        <div className="mt-14">
-          <MarqueeRow />
+        {/* 3D orbiting partner logos — motion theme animation */}
+        <div className="mt-8">
+          <OrbitStage />
         </div>
 
         <p className="mt-10 text-center text-[0.6rem] tracking-[0.25em] text-muted-foreground uppercase">
@@ -129,32 +134,75 @@ function PartnersPage() {
   );
 }
 
-function MarqueeRow() {
+function OrbitStage() {
   const doubled = [...PARTNERS, ...PARTNERS];
+  const step = 360 / doubled.length;
   return (
-    <div className="kbs-marquee group relative overflow-hidden rounded-2xl border border-border/60 bg-card/40 py-8 backdrop-blur-md">
-      <div
-        className="kbs-track flex w-max items-center gap-6 px-6"
-        style={{
-          animation: "kbsMarqueeL 42s linear infinite",
-        }}
-      >
+    <div className="kbs-stage relative mx-auto h-[560px] max-w-4xl sm:h-[660px]">
+      <div className="kbs-ring absolute inset-0">
         {doubled.map((partner, i) => (
-          <LogoCard key={`${partner.name}-${i}`} name={partner.name} src={partner.src} />
+          <OrbitCard
+            key={`${partner.name}-${i}`}
+            name={partner.name}
+            src={partner.src}
+            angle={i * step}
+          />
         ))}
       </div>
 
-      {/* Edge fades */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#18051e] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#18051e] to-transparent" />
+      {/* Our company — glowing centre of the orbit */}
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div
+            className="h-44 w-44 rounded-full sm:h-52 sm:w-52"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgba(240,196,120,0.5) 0%, rgba(215,171,106,0.15) 55%, transparent 75%)",
+              animation: "kbsPulseGlow 5s ease-in-out infinite",
+            }}
+          />
+          <KanagamLogo mode="reverse" size="lg" className="absolute -mt-2" />
+        </div>
+      </div>
+
+      {/* Static fallback for reduced-motion users */}
+      <div className="kbs-static absolute inset-0 hidden flex-wrap items-center justify-center gap-6 px-6">
+        {PARTNERS.map((partner) => (
+          <OrbitCard
+            key={partner.name}
+            name={partner.name}
+            src={partner.src}
+            angle={0}
+            staticCard
+          />
+        ))}
+      </div>
     </div>
   );
 }
 
-function LogoCard({ name, src }: { name: string; src: string }) {
+function OrbitCard({
+  name,
+  src,
+  angle,
+  staticCard = false,
+}: {
+  name: string;
+  src: string;
+  angle: number;
+  staticCard?: boolean;
+}) {
+  const transform = staticCard
+    ? undefined
+    : `translate(-50%, -50%) rotateY(${angle}deg) translateZ(var(--kbsR))`;
   return (
-    <div className="flex w-52 shrink-0 flex-col items-center gap-3">
-      <div className="flex h-20 w-full items-center justify-center rounded-xl bg-white p-4 shadow-lg">
+    <div
+      className={`${
+        staticCard ? "relative" : "absolute left-1/2 top-1/2"
+      } flex w-36 flex-col items-center gap-2.5 sm:w-44`}
+      style={staticCard ? undefined : { transform, backfaceVisibility: "hidden" as const }}
+    >
+      <div className="flex h-20 w-full items-center justify-center rounded-2xl bg-white p-3 shadow-2xl sm:h-24">
         <img
           src={src}
           alt={`${name} — Kanagam Tech partner`}
@@ -162,7 +210,7 @@ function LogoCard({ name, src }: { name: string; src: string }) {
           className="max-h-full max-w-full object-contain"
         />
       </div>
-      <span className="text-[0.6rem] tracking-[0.22em] text-muted-foreground uppercase">
+      <span className="text-[0.58rem] tracking-[0.22em] text-muted-foreground uppercase">
         {name}
       </span>
     </div>
