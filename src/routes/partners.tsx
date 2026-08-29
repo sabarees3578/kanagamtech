@@ -16,13 +16,25 @@ const PARTNERS = [
 
 const ORBIT_KEYS = `
   @keyframes kbsSpin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+  @keyframes kbsSpinRev { 0% { transform: rotateY(360deg); } 100% { transform: rotateY(0deg); } }
+  @keyframes kbsSweep { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  @keyframes kbsHaloSpin { 0% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(0deg); } 100% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(360deg); } }
+  @keyframes kbsHaloSpinRev { 0% { transform: translate(-50%,-50%) rotateX(76deg) rotateZ(360deg); } 100% { transform: translate(-50%,-50%) rotateX(76deg) rotateZ(0deg); } }
   @keyframes kbsPulseGlow { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.08); } }
+  @keyframes kbsFloatDot { 0%,100% { opacity: 0.2; } 50% { opacity: 0.9; } }
   .kbs-stage { --kbsR: 320px; perspective: 1500px; }
   @media (min-width: 640px) { .kbs-stage { --kbsR: 430px; } }
   @media (min-width: 1024px) { .kbs-stage { --kbsR: 540px; } }
-  .kbs-ring { transform-style: preserve-3d; animation: kbsSpin 40s linear infinite; }
+  .kbs-tilt { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(12deg); }
+  .kbs-ring { position: absolute; inset: 0; transform-style: preserve-3d; animation: kbsSpin 40s linear infinite; }
+  .kbs-beam { background-image: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(240,196,120,0.12) 14deg, transparent 32deg, transparent 118deg, rgba(255,255,255,0.07) 142deg, transparent 172deg, transparent 248deg, rgba(215,171,106,0.09) 270deg, transparent 302deg); mix-blend-mode: screen; display: none; }
+  @media (min-width: 640px) { .kbs-beam { display: block; } }
+  .kbs-halo, .kbs-halo2 { position: absolute; left: 50%; top: 50%; border-radius: 9999px; will-change: transform; }
+  .kbs-halo { width: calc(var(--kbsR) * 2.2); height: calc(var(--kbsR) * 2.2); border: 1.5px solid rgba(240,196,120,0.5); box-shadow: 0 0 40px rgba(240,196,120,0.18), inset 0 0 60px rgba(240,196,120,0.08); transform: translate(-50%,-50%) rotateX(74deg) rotateZ(0deg); animation: kbsHaloSpin 26s linear infinite; }
+  .kbs-halo2 { width: calc(var(--kbsR) * 1.6); height: calc(var(--kbsR) * 1.6); border: 1px dashed rgba(240,196,120,0.35); transform: translate(-50%,-50%) rotateX(76deg) rotateZ(0deg); animation: kbsHaloSpinRev 34s linear infinite; }
+  .kbs-comet { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; border-radius: 9999px; background: #D7AB6A; box-shadow: 0 0 14px 3px rgba(240,196,120,0.7); animation: kbsFloatDot 3s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) {
-    .kbs-ring { animation: none !important; }
+    .kbs-ring, .kbs-halo, .kbs-halo2, .kbs-beam, .kbs-comet, .kbs-comets { animation: none !important; }
     .kbs-stage { display: none; }
     .kbs-static { display: flex; }
   }
@@ -120,18 +132,48 @@ function PartnersPage() {
 function OrbitStage() {
   const doubled = [...PARTNERS, ...PARTNERS];
   const step = 360 / doubled.length;
+  const cometAngles = [30, 110, 190, 270];
   return (
     <div className="kbs-stage relative mx-auto h-[620px] w-full sm:h-[780px] lg:h-[920px]">
-      <div className="kbs-ring absolute inset-0">
-        {doubled.map((partner, i) => (
-          <OrbitCard
-            key={`${partner.name}-${i}`}
-            name={partner.name}
-            src={partner.src}
-            angle={i * step}
+      {/* Tilted 3D canvas — logos + planetary halos spin together */}
+      <div className="kbs-tilt">
+        <div className="kbs-ring">
+          {doubled.map((partner, i) => (
+            <OrbitCard
+              key={`${partner.name}-${i}`}
+              name={partner.name}
+              src={partner.src}
+              angle={i * step}
+            />
+          ))}
+        </div>
+
+        {/* Planetary halo rings */}
+        <div className="kbs-halo" />
+        <div className="kbs-halo2" />
+      </div>
+
+      {/* Fast counter-rotating light dots */}
+      <div
+        className="kbs-comets absolute inset-0"
+        style={{ transformStyle: "preserve-3d", animation: "kbsSpinRev 24s linear infinite" }}
+      >
+        {cometAngles.map((a) => (
+          <div
+            key={a}
+            className="kbs-comet"
+            style={{
+              transform: `translate(-50%, -50%) rotateY(${a}deg) translateZ(calc(var(--kbsR) * 0.86))`,
+            }}
           />
         ))}
       </div>
+
+      {/* Sweeping golden light — cinematic motion across the logos */}
+      <div
+        className="kbs-beam pointer-events-none absolute inset-0 z-[5]"
+        style={{ animation: "kbsSweep 16s linear infinite" }}
+      />
 
       {/* Ambient centre glow */}
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
@@ -182,7 +224,7 @@ function OrbitCard({
       } flex w-44 flex-col items-center gap-3 sm:w-56`}
       style={staticCard ? undefined : { transform, backfaceVisibility: "hidden" as const }}
     >
-      <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white p-4 shadow-2xl sm:h-28">
+      <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.45),0_0_28px_rgba(240,196,120,0.18)] sm:h-28">
         <img
           src={src}
           alt={`${name} — Kanagam Tech partner`}
