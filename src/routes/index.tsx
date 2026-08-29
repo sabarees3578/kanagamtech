@@ -31,18 +31,17 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "Kanagam Technology Solutions | Quantum Computing, AI, VLSI, Embedded & Deep-Tech Services",
+        title: "Kanagam Technology Solutions | Quantum, AI & Deep-Tech India",
       },
       {
         name: "description",
         content:
-          "Kanagam Technology Solutions is a premier GenQ enterprise in India delivering Quantum Computing & GenQ, Semiconductor & ESDM, VLSI/FPGA, Embedded Systems, IIoT & AIoT, AI Engineering & GenAI, AIBots, AR/VR, Drones and 3D printing solutions — plus academic curricula, Centers of Excellence and global certifications.",
+          "India's GenQ enterprise — Quantum Computing, Semiconductor & ESDM, VLSI/FPGA, Embedded & AIoT, AI/GenAI, AR/VR, Drones, 3D printing and deep-tech training.",
       },
       {
         name: "keywords",
         content:
-          "quantum computing company India, GenQ, semiconductor design, ESDM, VLSI FPGA engineering, embedded systems, industrial IoT, AI engineering, generative AI, AI agents, AR VR solutions, drone services, 3D printing, deep tech company, technology training, Centers of Excellence",
+          "quantum computing company India, GenQ, semiconductor design, ESDM, VLSI FPGA engineering, embedded systems, industrial IoT, AIoT, edge AI, AI engineering, generative AI, AI agents, AR VR solutions, drone services, 3D printing, deep tech company, technology training, Centers of Excellence",
       },
       { property: "og:title", content: "Kanagam Technology Solutions — GenQ & Deep-Tech Leader" },
       {

@@ -3,18 +3,18 @@ import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { QuantumOrb } from "@/components/QuantumOrb";
 import { ShiningBackground } from "@/components/ShiningBackground";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Eye, Sparkles, Target } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       {
-        title: "About Kanagam Technology Solutions | Deep-Tech & GenQ Enterprise",
+        title: "About Kanagam Technology Solutions | GenQ Enterprise, India",
       },
       {
         name: "description",
         content:
-          "Learn about Kanagam Technology Solutions — a veteran-led GenQ enterprise engineering Quantum Computing, Semiconductor & ESDM, VLSI/FPGA, Embedded & IIoT, AI/GenAI, AIBots, AR/VR, Drones and 3D fabrication, while building global academic ecosystems.",
+          "A veteran-led GenQ enterprise spanning ten deep-tech pillars, empowering industry and global academia with engineering, manufacturing and skill training.",
       },
       {
         name: "keywords",
@@ -105,7 +105,7 @@ function AboutPage() {
             Our expertise spans ten deep-tech pillars —{" "}
             <strong className="text-foreground">Quantum Computing &amp; GenQ</strong>, Semiconductor
             &amp; ESDM (PCB Design, Prototype &amp; SMT Assembly), VLSI/FPGA Engineering, Embedded
-            Systems &amp; IIoT/AI-oT (Enterprise Deployed), AI Engineering &amp; GenAI, AIBots,
+            Systems &amp; IIoT/AIoT (Enterprise Deployed), AI Engineering &amp; GenAI, AIBots,
             AR/VR, Drones, 3D Scanner &amp; 3D Printer, and Skill Development &amp; Technical
             Training.
           </p>
@@ -119,27 +119,41 @@ function AboutPage() {
             establishing Centers of Excellence, nurturing startup incubation hubs, and delivering
             globally recognized certifications that prepare the next generation of innovators.
           </p>
-          <p className="italic text-foreground/90">
-            Our vision is to engineer transformative deep-tech solutions across quantum computing,
-            semiconductors, embedded systems, AI, AIoT, AR/VR, drones, and 3D fabrication —
-            empowering global academic ecosystems to lead and shape tomorrow's digital frontier.
-          </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Link
-            to="/"
-            hash="institutional-inquire"
-            className="rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white dark:text-[#4B1D3F] uppercase shadow-lg transition-transform hover:-translate-y-0.5"
-          >
-            Partner With Us
-          </Link>
-          <Link
-            to="/student-enquire"
-            className="rounded-full border border-primary/40 bg-primary/10 px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-primary uppercase transition-colors hover:bg-primary/20"
-          >
-            Student Enquire
-          </Link>
+        {/* Mission & Vision */}
+        <div className="mt-12 grid w-full max-w-4xl gap-5 sm:grid-cols-2">
+          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
+                <Target className="h-5 w-5 text-[#E9CD97]" />
+              </div>
+              <div className="text-[0.7rem] font-bold tracking-[0.3em] text-primary uppercase">
+                Our Mission
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              To establish advanced technology laboratories and deliver industry-oriented skill
+              development and employability training programs — providing end-to-end solutions from
+              consultation, planning and design to supply, installation, commissioning, training and
+              ongoing technical support.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
+                <Eye className="h-5 w-5 text-[#E9CD97]" />
+              </div>
+              <div className="text-[0.7rem] font-bold tracking-[0.3em] text-primary uppercase">
+                Our Vision
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              To engineer transformative deep-tech solutions across quantum computing,
+              semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D fabrication —
+              empowering global academic ecosystems to lead and shape tomorrow's digital frontier.
+            </p>
+          </div>
         </div>
       </section>
     </main>

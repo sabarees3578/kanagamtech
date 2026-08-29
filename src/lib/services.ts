@@ -117,13 +117,13 @@ export const PILLARS: Pillar[] = [
   },
   {
     id: "embedded-aiot",
-    title: "Embedded Systems, IIoT & AI-oT",
+    title: "Embedded Systems, IIoT & AIoT",
     category: "Connected Devices & Industrial Intelligence",
     icon: Cpu,
     description:
       "Engineering embedded systems, industrial IoT networks, and AI-at-the-edge nodes — from microcontroller firmware to complete smart-factory telemetry and automation stacks.",
     longDescription: [
-      "Our Embedded Systems, IIoT & AI-oT practice delivers connected intelligence across the complete signal path — from the sensor on a factory floor to the decision dashboard in the boardroom. We engineer systems where data is captured at the edge, understood by on-device AI, and acted upon in milliseconds rather than meetings.",
+      "Our Embedded Systems, IIoT & AIoT practice delivers connected intelligence across the complete signal path — from the sensor on a factory floor to the decision dashboard in the boardroom. We engineer systems where data is captured at the edge, understood by on-device AI, and acted upon in milliseconds rather than meetings.",
       "At the embedded layer we develop production firmware and board-support packages for microcontrollers (ARM Cortex-M, RISC-V, ESP32, STM32) and application processors — real-time control, communication stacks, bootloaders, OTA update frameworks, and tightly optimised drivers that extract full performance from the hardware.",
       "On the connectivity layer, we deploy rugged industrial sensing networks using vibration, thermal, current, acoustic, and vision sensors, integrated through field-proven protocols such as Modbus, OPC-UA, and MQTT, with wireless backhaul options including LoRaWAN and NB-IoT for hard-to-cable environments. Retrofit-friendly gateway designs let legacy machinery join modern fleets without expensive replacement.",
       "Edge AI is where our stacks differentiate. We build TinyML and embedded inference pipelines that run anomaly detection, acoustic signature classification, and predictive-maintenance scoring directly on gateways and microcontrollers — keeping critical decisions online even when the network isn't, and slashing cloud egress costs for high-frequency sensor streams.",

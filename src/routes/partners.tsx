@@ -7,6 +7,7 @@ import { ArrowLeft, ExternalLink, Handshake } from "lucide-react";
 type Partner = {
   name: string;
   src: string;
+  tagline: string;
   overview: string;
   tags: string[];
   site: string | null;
@@ -16,57 +17,64 @@ const PARTNERS: Partner[] = [
   {
     name: "Accura Tequipment",
     src: "/partners img/Accura Tequipment.png",
+    tagline: "Where Innovation Meets Excellence!",
     overview:
-      "Designs, manufactures and supplies lab & experimental equipment plus turnkey industrial solutions for technical education — Centre of Excellence labs, IoT & automation, and Training-of-Trainers.",
-    tags: ["Industrial Solutions", "IoT & Automation", "COE Laboratories"],
+      "Designs, manufactures and supplies experimental & lab equipment for technical education — Centre of Excellence laboratories, industrial solutions (software, IoT and automation) and Training of Trainers, serving colleges and universities since 2012.",
+    tags: ["COE Laboratories", "Industrial Solutions", "IoT & Automation", "Training of Trainers"],
     site: "https://www.theaccura.com",
   },
   {
     name: "AMS EMS",
     src: "/partners img/AMS EMS.jpeg",
+    tagline: "PCB Assembly & Electronics Manufacturing Services",
     overview:
-      "Electronics Manufacturing Services (EMS) specialised in PCB assembly, from Coimbatore — supporting product design, SMT assembly and end-to-end electronics production.",
-    tags: ["PCB Assembly", "Electronics Manufacturing", "SMT"],
+      "Electronics Manufacturing Services (EMS) based in Coimbatore, India — PCB assembly and electronic manufacturing support from prototyping through production.",
+    tags: ["PCB Assembly", "Electronics Manufacturing", "EMS", "Coimbatore"],
     site: "https://amsems.in",
   },
   {
     name: "ARK Infosolutions",
     src: "/partners img/ARK Infosolutions.svg",
+    tagline: "India's Leading Value-added Distributor",
     overview:
-      "India's leading value-added distributor for technology products — spanning Media & Entertainment, AEC, Digital Manufacturing (Ansys, Formlabs) and Education across 100+ Indian cities.",
-    tags: ["Value-added Distribution", "Media & Entertainment", "Digital Manufacturing"],
+      "Value-added distributor for technology products across Media & Entertainment, AEC, Digital Manufacturing and Education — with 250+ channel partners, 100+ Indian cities, 350+ experts and 80,000+ happy customers.",
+    tags: ["Value-added Distribution", "Media & Entertainment", "Digital Manufacturing", "AEC"],
     site: "https://www.arkinfo.in",
   },
   {
     name: "QuantumMate",
     src: "/partners img/QUANTUMMATE.jpeg",
+    tagline: "Empowering Future Technologies",
     overview:
-      "A quantum computing company — education, training and hands-on enablement that makes quantum accessible to students, researchers and industry.",
-    tags: ["Quantum Computing", "Training & Education", "Research Enablement"],
-    site: null,
+      "Making quantum computing accessible, practical and transformative — immersive training systems, teaching & research platforms, quantum simulation software and end-to-end quantum lab establishment for universities and enterprises.",
+    tags: ["Quantum Training", "Quantum Simulation", "Quantum Lab Setup", "FDPs"],
+    site: "https://quantummate.in",
   },
   {
     name: "RP3D Products",
     src: "/partners img/RP3D Products.jpg",
+    tagline: "Experience the best with us",
     overview:
-      "Chennai-based 3D printing house — professional-to-industrial 3D printers, rapid prototyping services, 3D scanning, filaments, resins and moulding for automotive, medical, education and R&D.",
-    tags: ["3D Printing", "Additive Manufacturing", "Rapid Prototyping"],
+      "Chennai-based 3D printing company — 3D design, rapid prototyping services, 3D scanners, filaments, resins and moulding, plus 3D printing labs for schools and institutes across automotive, medical, education and R&D.",
+    tags: ["3D Printing", "Rapid Prototyping", "3D Scanning", "Education Labs"],
     site: "https://rp3dproducts.com",
   },
   {
     name: "Silicon Systems",
     src: "/partners img/SILICON SYSTEM.jpeg",
+    tagline: "Coimbatore · Est. 2014",
     overview:
-      "Electronics design, embedded engineering and manufacturing services — turning deep-tech concepts into reliable hardware for IoT, mobility and industrial applications.",
-    tags: ["Electronics Design", "Embedded", "Manufacturing"],
-    site: null,
+      "Educational lab solutions and electronics development — VLSI, Embedded, DSP, Power Electronics, Drives & Power Systems and advanced process control, with PCB prototyping and product supply, support and development.",
+    tags: ["VLSI", "Embedded", "Power Electronics", "Lab Solutions"],
+    site: "https://siliconsystems.online",
   },
   {
     name: "Zorah Tech",
     src: "/partners img/Zora Technologies.png",
+    tagline: "Connect. Automate. Innovate.",
     overview:
-      "Industrial IoT & automation — condition monitoring, predictive maintenance and smart-factory solutions that make industrial operations measurable and intelligent.",
-    tags: ["Industrial IoT", "Automation", "Predictive Maintenance"],
+      "Industrial IoT, automation, AI security and smart infrastructure, engineered in Coimbatore — real-time machine monitoring, process automation and energy optimisation for smart factories and connected industries.",
+    tags: ["Industrial IoT", "Automation", "AI Security", "Smart Infrastructure"],
     site: "https://zorahtech.in",
   },
 ];
@@ -114,6 +122,13 @@ const MOTION_CSS = `
     background: linear-gradient(160deg, #24102d 0%, #12061a 100%);
     border: 2px solid rgba(215, 171, 106, 0.78);
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(215, 171, 106, 0.18);
+    animation: kbsFall 0.9s cubic-bezier(0.25, 0.8, 0.3, 1.1) backwards;
+    animation-delay: var(--kbs-fall-delay, 0s);
+  }
+  @keyframes kbsFall {
+    0% { opacity: 0; transform: translateY(-70px) scale(0.7) rotate(-4deg); }
+    65% { opacity: 1; transform: translateY(8px) scale(1.05) rotate(1deg); }
+    100% { opacity: 1; transform: translateY(0px) scale(1) rotate(0deg); }
   }
   .kbs-card .kbs-cover img {
     max-width: 64%;
@@ -122,9 +137,32 @@ const MOTION_CSS = `
   }
   .kbs-card.is-center { filter: none; }
   .kbs-card.is-edge { filter: saturate(0.9) brightness(0.96); }
+  .kbs-card:not(.is-center) .kbs-cover {
+    filter: saturate(0.92) brightness(0.96) blur(1.2px);
+  }
+  .kbs-card.is-edge .kbs-cover {
+    filter: saturate(0.85) brightness(0.92) blur(3px);
+  }
   .kbs-card.is-center .kbs-cover {
     border-color: rgba(233, 205, 151, 0.95);
     box-shadow: 0 0 0 3px rgba(217, 171, 102, 0.25), 0 26px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(215, 171, 106, 0.34);
+  }
+
+  /* Breathing gold aura behind the focused card */
+  .kbs-center-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(46vh, 440px);
+    height: min(46vh, 440px);
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(233, 205, 151, 0.3) 0%, rgba(215, 171, 106, 0.12) 42%, rgba(18, 3, 23, 0) 68%);
+    animation: kbsPulse 3.2s ease-in-out infinite;
+  }
+  @keyframes kbsPulse {
+    0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.92); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
   }
 
   /* Shining gold ambiance over the plum page */
@@ -180,6 +218,7 @@ const MOTION_CSS = `
 
   @media (prefers-reduced-motion: reduce) {
     .kbs-card { animation: none; }
+    .kbs-cover { animation: none; }
     .kbs-canvas { display: none; }
     .kbs-static { display: flex; }
   }
@@ -192,7 +231,7 @@ export const Route = createFileRoute("/partners")({
       {
         name: "description",
         content:
-          "Kanagam Technology Solutions partners with world-class deep-tech companies across quantum computing, semiconductors, AI, embedded systems and more — building tomorrow's digital frontier together.",
+          "Kanagam partners with world-class deep-tech companies across quantum computing, semiconductors, AI and embedded systems — building tomorrow's digital frontier together.",
       },
       {
         name: "keywords",
@@ -300,10 +339,11 @@ function PartnersPage() {
           <MotionThemeStage onCenterChange={setActiveName} />
         </div>
 
-        {/* Live overview of the centred partner */}
+        {/* Company info of the centred partner */}
         <InfoPanel
           key={active.name}
           name={active.name}
+          tagline={active.tagline}
           overview={active.overview}
           tags={active.tags}
           site={active.site}
@@ -327,6 +367,7 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
       const el = document.createElement("div");
       el.className = "kbs-card";
       el.style.setProperty("--kbs-bob-delay", `${(i % 5) * 0.3}s`);
+      el.style.setProperty("--kbs-fall-delay", `${i * 0.09}s`);
       const cover = document.createElement("div");
       cover.className = "kbs-cover";
       const shine = document.createElement("span");
@@ -344,7 +385,8 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
     let spacing = (cards[0]?.el.offsetWidth || 150) * 2;
     const total = cards.length;
     const maxAngle = 55;
-    const speed = 0.4;
+    const cardsPerSecond = 0.22;
+    let speed = (spacing * cardsPerSecond) / 60;
     let loopWidth = spacing * total;
     let depth = spacing * 0.85;
     let fadeDist = spacing * 3.2;
@@ -352,9 +394,11 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
     let lastCenter = -1;
     let rafId = 0;
     let paused = false;
+    let lastInteract = 0;
 
     const measure = () => {
       spacing = (cards[0]?.el.offsetWidth || 150) * 2;
+      speed = (spacing * cardsPerSecond) / 60;
       loopWidth = spacing * total;
       depth = spacing * 0.85;
       fadeDist = spacing * 3.2;
@@ -364,57 +408,91 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
       if (!paused) {
         offset += speed;
         if (offset > loopWidth) offset -= loopWidth;
+      } else if (lastInteract && performance.now() - lastInteract > 2400) {
+        paused = false;
+        lastInteract = 0;
+      }
 
-        let currentCenter = 0;
-        let currentCenterDist = Infinity;
+      let currentCenter = 0;
+      let currentCenterDist = Infinity;
 
-        for (let i = 0; i < total; i++) {
-          let pos = (i * spacing - offset) % loopWidth;
-          if (pos < -loopWidth / 2) pos += loopWidth;
-          if (pos > loopWidth / 2) pos -= loopWidth;
+      for (let i = 0; i < total; i++) {
+        let pos = (i * spacing - offset) % loopWidth;
+        if (pos < -loopWidth / 2) pos += loopWidth;
+        if (pos > loopWidth / 2) pos -= loopWidth;
 
-          const distRatio = Math.min(Math.abs(pos) / fadeDist, 1);
-          const angle = (pos / (loopWidth / 2)) * maxAngle;
-          const z = (-Math.abs(pos) / (loopWidth / 2)) * depth;
-          const push = (1 - distRatio) * 76;
-          const scale = 1.25 - distRatio * 0.4;
-          const opacity = 1 - distRatio * 0.85;
-          const isCenter = Math.abs(pos) < spacing * 0.4;
+        const distRatio = Math.min(Math.abs(pos) / fadeDist, 1);
+        const angle = (pos / (loopWidth / 2)) * maxAngle;
+        const z = (-Math.abs(pos) / (loopWidth / 2)) * depth;
+        const push = (1 - distRatio) * 76;
+        const scale = 1.25 - distRatio * 0.4;
+        const opacity = 1 - distRatio * 0.85;
+        const isCenter = Math.abs(pos) < spacing * 0.4;
 
-          const { el, img } = cards[i];
-          el.style.transform = `translateX(${pos}px) translateZ(${z + push}px) rotateY(${-angle}deg) scale(${scale})`;
-          el.style.opacity = String(opacity);
-          el.style.zIndex = String(Math.round(1000 - Math.abs(pos)));
-          el.classList.toggle("is-center", isCenter);
-          el.classList.toggle("is-edge", distRatio > 0.6);
-          img.style.filter = isCenter ? "none" : "grayscale(1) contrast(1.05)";
-          img.style.opacity = isCenter ? "1" : ".85";
+        const { el, img } = cards[i];
+        el.style.transform = `translateX(${pos}px) translateZ(${z + push}px) rotateY(${-angle}deg) scale(${scale})`;
+        el.style.opacity = String(opacity);
+        el.style.zIndex = String(Math.round(1000 - Math.abs(pos)));
+        el.classList.toggle("is-center", isCenter);
+        el.classList.toggle("is-edge", distRatio > 0.6);
+        img.style.filter = isCenter ? "none" : "grayscale(1) contrast(1.05)";
+        img.style.opacity = isCenter ? "1" : ".85";
 
-          if (Math.abs(pos) < currentCenterDist) {
-            currentCenterDist = Math.abs(pos);
-            currentCenter = i;
-          }
+        if (Math.abs(pos) < currentCenterDist) {
+          currentCenterDist = Math.abs(pos);
+          currentCenter = i;
         }
+      }
 
-        if (currentCenter !== lastCenter) {
-          lastCenter = currentCenter;
-          onCenterChange(cards[currentCenter].item.name);
-        }
+      if (currentCenter !== lastCenter) {
+        lastCenter = currentCenter;
+        onCenterChange(cards[currentCenter].item.name);
       }
       rafId = requestAnimationFrame(frame);
     };
     rafId = requestAnimationFrame(frame);
 
-    const onEnter = () => (paused = true);
-    const onLeave = () => (paused = false);
-    stage.addEventListener("mouseenter", onEnter);
-    stage.addEventListener("mouseleave", onLeave);
+    let dragging = false;
+    let lastX = 0;
+    const nudge = (delta: number) => {
+      offset += delta;
+      offset = ((offset % loopWidth) + loopWidth) % loopWidth;
+    };
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      paused = true;
+      lastInteract = performance.now();
+      nudge(e.deltaY * 0.45);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      dragging = true;
+      paused = true;
+      lastInteract = performance.now();
+      lastX = e.clientX;
+      stage.setPointerCapture?.(e.pointerId);
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      lastInteract = performance.now();
+      nudge(-dx * 0.4);
+    };
+    const onPointerUp = () => {
+      dragging = false;
+    };
+    stage.addEventListener("wheel", onWheel, { passive: false });
+    stage.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
     window.addEventListener("resize", measure);
 
     return () => {
       cancelAnimationFrame(rafId);
-      stage.removeEventListener("mouseenter", onEnter);
-      stage.removeEventListener("mouseleave", onLeave);
+      stage.removeEventListener("wheel", onWheel);
+      stage.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("resize", measure);
       track.innerHTML = "";
     };
@@ -426,7 +504,8 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
         ref={stageRef}
         className="kbs-stage kbs-canvas relative flex h-full w-full max-w-6xl items-center justify-center"
       >
-        <div ref={trackRef} className="kbs-track" />
+        <div className="kbs-center-glow" />
+        <div ref={trackRef} className="kbs-track relative z-[1]" />
       </div>
 
       {/* Static fallback for reduced-motion users */}
@@ -439,13 +518,18 @@ function MotionThemeStage({ onCenterChange }: { onCenterChange: (name: string) =
   );
 }
 
-function InfoPanel({ name, overview, tags, site }: Partner) {
+function InfoPanel({ name, tagline, overview, tags, site }: Partner) {
   return (
     <div className="mx-auto w-full max-w-4xl rounded-2xl border border-[#D7AB6A]/30 bg-[#130418]/70 px-5 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <div className="truncate text-base tracking-[0.14em] font-semibold text-[#EAD3A0] uppercase sm:text-lg">
-            {name}
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+            <span className="truncate text-base font-semibold tracking-[0.14em] text-[#EAD3A0] uppercase sm:text-lg">
+              {name}
+            </span>
+            <span className="text-[0.62rem] tracking-[0.16em] text-[#E9CD97]/70 uppercase italic">
+              {tagline}
+            </span>
           </div>
           <p className="mt-1 line-clamp-2 max-w-2xl text-xs text-[#E8D5C3]/90 sm:mt-0.5 sm:text-sm">
             {overview}

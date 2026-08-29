@@ -46,11 +46,11 @@ const YEAR_OF_STUDY_OPTIONS = ["1-st year", "2nd-year", "3rd-year", "4th-year"];
 export const Route = createFileRoute("/student-enquire")({
   head: () => ({
     meta: [
-      { title: "Student Enquiry | Bootcamps, Internships & Certifications — Kanagam Tech" },
+      { title: "Student Enquiry | Bootcamps, Internships & Certifications" },
       {
         name: "description",
         content:
-          "Students and fresh engineers — connect with Kanagam Tech for hands-on technical bootcamps, global certifications, internships, industrial training, final-year project guidance and quantum & AI learning tracks.",
+          "Students & engineers: hands-on bootcamps, global certifications, internships, industrial training, final-year projects and quantum & AI learning tracks with Kanagam Tech.",
       },
       {
         name: "keywords",

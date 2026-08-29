@@ -48,10 +48,15 @@ export const Route = createFileRoute("/service/$slug")({
       ? `${svc.title} Services | Kanagam Technology Solutions`
       : "Service — Kanagam Technology Solutions";
     const keywords = svc ? (SEO_KEYWORDS[svc.id] ?? svc.title) : "deep technology services";
+    const seoDesc = svc?.description
+      ? svc.description.length > 158
+        ? `${svc.description.slice(0, 158).replace(/\s+\S*$/, "")}…`
+        : svc.description
+      : "";
     return {
       meta: [
         { title },
-        { name: "description", content: svc?.description ?? "" },
+        { name: "description", content: seoDesc },
         { name: "keywords", content: keywords },
         { property: "og:title", content: title },
         { property: "og:description", content: svc?.description ?? "" },
@@ -60,7 +65,7 @@ export const Route = createFileRoute("/service/$slug")({
         { property: "og:image", content: svc?.images?.[0] ?? "/images/services/quantum-1.jpg" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
-        { name: "twitter:description", content: svc?.description ?? "" },
+        { name: "twitter:description", content: seoDesc },
         {
           "script:ld+json": {
             "@context": "https://schema.org",
