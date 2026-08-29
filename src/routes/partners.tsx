@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { PartnerOrbit3D } from "@/components/PartnerOrbit3D";
-import { ShiningBackground } from "@/components/ShiningBackground";
 import { ArrowLeft, Handshake } from "lucide-react";
 
 const PARTNERS = [
@@ -59,20 +58,20 @@ function PartnersPage() {
       className="relative min-h-screen overflow-hidden font-sans"
       style={
         {
-          background: "linear-gradient(155deg, #5f1f4d 0%, #3a1631 32%, #230824 64%, #120317 100%)",
-          ["--background"]: "#130417",
-          ["--foreground"]: "#F7EDE3",
-          ["--muted-foreground"]: "#D0B8A8",
-          ["--card"]: "#1d0824",
-          ["--card-foreground"]: "#F7EDE3",
-          ["--border"]: "rgba(240,196,120,0.24)",
+          background: "linear-gradient(165deg, #FEFBF5 0%, #F7ECD9 42%, #E9D9E0 100%)",
+          ["--background"]: "#FEFBF5",
+          ["--foreground"]: "#38122C",
+          ["--muted-foreground"]: "#7A6258",
+          ["--card"]: "#FFFFFF",
+          ["--card-foreground"]: "#38122C",
+          ["--secondary"]: "#F3E3D0",
+          ["--border"]: "rgba(102,45,86,0.18)",
         } as CSSProperties
       }
     >
       <style>{ORBIT_KEYS}</style>
-      {/* — Motion theme: full-screen, fixed, centred hologram — */}
+      {/* — Motion theme: full-screen, fixed, centred brand-wall — */}
       <div className="fixed inset-0 z-0">
-        <ShiningBackground variant="strong" />
         <PartnerOrbit3D className="kbs-canvas absolute inset-0" />
 
         {/* Static fallback for reduced-motion users */}
@@ -82,20 +81,22 @@ function PartnersPage() {
           ))}
         </div>
 
-        {/* Cinematic vignette so the headline stays readable over the hologram */}
-        <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_50%_40%,rgba(18,3,23,0.1)_0%,rgba(18,3,23,0.35)_46%,rgba(18,3,23,0.7)_78%,rgba(18,3,23,0.92)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
+        {/* Soft light sheet behind the logo ring so everything reads clearly */}
+        <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_50%_42%,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_58%)]" />
+        {/* Gentle edge tint for depth */}
+        <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_50%_50%,rgba(255,255,255,0)_58%,rgba(120,60,90,0.1)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:var(--grain)]" />
       </div>
 
       {/* Simple Header */}
-      <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
           <Link to="/" className="flex items-center gap-3">
             <KanagamLogo size="md" />
           </Link>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-semibold transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-semibold shadow-sm transition-colors hover:bg-secondary"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Home
@@ -105,24 +106,24 @@ function PartnersPage() {
 
       {/* Page Content — centred over the motion theme */}
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4.5rem)] max-w-6xl flex-col items-center justify-center gap-5 px-6 py-16 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-white/70 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase shadow-sm backdrop-blur-sm">
           <Handshake className="h-3.5 w-3.5" />
           Our Ecosystem
         </div>
-        <h1 className="font-display text-[clamp(2.25rem,6vw,3.75rem)] leading-tight font-bold tracking-tight text-foreground drop-shadow-[0_2px_18px_rgba(18,3,23,0.8)]">
+        <h1 className="font-display text-[clamp(2.25rem,6vw,3.75rem)] leading-tight font-bold tracking-tight text-foreground drop-shadow-[0_2px_18px_rgba(255,255,255,0.6)]">
           Partners in Deep-Tech
         </h1>
-        <p className="max-w-2xl text-sm text-[#E8D5C3]/85 drop-shadow-[0_1px_10px_rgba(18,3,23,0.9)] sm:text-base">
+        <p className="max-w-2xl text-sm text-[#6D544A] sm:text-base">
           A royal orbit of world-class companies — quantum, silicon, AI, embedded and beyond —
           animating Kanagam's deep-tech future.
         </p>
 
         {/* Partner name legend */}
-        <div className="flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1.5 rounded-3xl border border-[#D7AB6A]/25 bg-[#1d0824]/60 px-5 py-3 backdrop-blur-md">
+        <div className="flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-1.5 rounded-3xl border border-[#4B1D3F]/15 bg-white/70 px-5 py-3 shadow-[0_10px_30px_rgba(75,29,63,0.08)] backdrop-blur-md">
           {PARTNERS.map((p) => (
             <span
               key={p.name}
-              className="whitespace-nowrap text-[0.6rem] tracking-[0.22em] text-[#E9CD97]/90 uppercase"
+              className="whitespace-nowrap text-[0.6rem] tracking-[0.22em] text-[#4B1D3F] uppercase"
             >
               {p.name}
             </span>
@@ -147,7 +148,7 @@ function CapsuleCard({ name, src }: { name: string; src: string }) {
           />
         </div>
       </div>
-      <span className="text-[0.58rem] tracking-[0.22em] text-[#E9CD97] uppercase">{name}</span>
+      <span className="text-[0.58rem] tracking-[0.22em] text-[#4B1D3F] uppercase">{name}</span>
     </div>
   );
 }
