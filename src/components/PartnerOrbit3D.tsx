@@ -61,7 +61,9 @@ function capsuleTexture(src: string): Promise<THREE.CanvasTexture> {
       ctx.stroke();
       ctx.globalAlpha = 1;
 
-      // Logo, white-background keyed out for a holographic feel
+      // Logo drawn with its own background, then the background color is
+      // keyed out so the plum capsule shows through uniformly (handles
+      // white, black and tinted backings alike).
       const t = document.createElement("canvas");
       t.width = W;
       t.height = H;
@@ -74,15 +76,32 @@ function capsuleTexture(src: string): Promise<THREE.CanvasTexture> {
       tc.drawImage(img, dx, dy, iw * scale, ih * scale);
       const imageData = tc.getImageData(0, 0, W, H);
       const px = imageData.data;
-      const cornerIdx = (4 + 4 * W) * 4;
-      const hasLightBg =
-        px[cornerIdx + 3] > 200 &&
-        px[cornerIdx] > 228 &&
-        px[cornerIdx + 1] > 228 &&
-        px[cornerIdx + 2] > 228;
-      if (hasLightBg) {
+
+      let rSum = 0;
+      let gSum = 0;
+      let bSum = 0;
+      let n = 0;
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          if (x < 8 || y < 8 || x >= W - 8 || y >= H - 8) {
+            const i = (y * W + x) * 4;
+            if (px[i + 3] > 220) {
+              rSum += px[i];
+              gSum += px[i + 1];
+              bSum += px[i + 2];
+              n++;
+            }
+          }
+        }
+      }
+      if (n > 0) {
+        const bgR = rSum / n;
+        const bgG = gSum / n;
+        const bgB = bSum / n;
+        const thr = 48;
         for (let i = 0; i < px.length; i += 4) {
-          if (px[i] > 230 && px[i + 1] > 230 && px[i + 2] > 230 && px[i + 3] > 60) {
+          const d = Math.abs(px[i] - bgR) + Math.abs(px[i + 1] - bgG) + Math.abs(px[i + 2] - bgB);
+          if (d < thr && px[i + 3] > 60) {
             px[i + 3] = 0;
           }
         }
