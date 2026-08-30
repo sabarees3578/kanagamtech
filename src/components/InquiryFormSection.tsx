@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { CoverflowMotion } from "@/components/CoverflowMotion";
 import {
   Send,
   CheckCircle2,
@@ -134,6 +135,15 @@ export function InquiryFormSection() {
       >
         {activeTab === "institutional" ? <InstitutionalInquiryForm /> : <StudentInquiryForm />}
       </div>
+
+      {/* 3D coverflow partner motion — same animation as the /partners page, shown under the form */}
+      <CoverflowMotion
+        heightClass="h-44 sm:h-56 md:h-64 lg:h-72"
+        cardSize="clamp(84px, 14vh, 180px)"
+        glowSize="min(30vh, 320px)"
+        ambience
+        className="mt-14"
+      />
     </section>
   );
 }
