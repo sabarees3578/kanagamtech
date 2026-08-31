@@ -38,7 +38,7 @@ export const MOTION_CSS = `
   }
   .kbs-card .kbs-cover {
     position: absolute;
-    inset: 12px;
+    inset: 12px 12px 40px 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,6 +59,31 @@ export const MOTION_CSS = `
     max-width: 64%;
     max-height: 64%;
     object-fit: contain;
+  }
+  /* Company name riding below the logo tile, revolving in parallel with the card */
+  .kbs-name {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.5rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e9cd97;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    animation: kbsFall 0.9s cubic-bezier(0.25, 0.8, 0.3, 1.1) backwards;
+    animation-delay: var(--kbs-fall-delay, 0s);
   }
   .kbs-card.is-center { filter: none; }
   .kbs-card.is-edge { filter: saturate(0.9) brightness(0.96); }
@@ -205,6 +230,10 @@ export function CoverflowMotion({
       img.loading = "lazy";
       cover.append(img, shine);
       el.appendChild(cover);
+      const label = document.createElement("span");
+      label.className = "kbs-name";
+      label.textContent = item.name;
+      el.appendChild(label);
       track.appendChild(el);
       return { el, img, item };
     });

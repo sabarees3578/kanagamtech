@@ -138,9 +138,9 @@ export function InquiryFormSection() {
 
       {/* 3D coverflow partner motion — same animation as the /partners page, shown under the form */}
       <CoverflowMotion
-        heightClass="h-44 sm:h-56 md:h-64 lg:h-72"
-        cardSize="clamp(84px, 14vh, 180px)"
-        glowSize="min(30vh, 320px)"
+        heightClass="h-52 sm:h-64 md:h-80 lg:h-96"
+        cardSize="clamp(96px, 17vh, 240px)"
+        glowSize="min(34vh, 380px)"
         ambience
         className="mt-14"
       />

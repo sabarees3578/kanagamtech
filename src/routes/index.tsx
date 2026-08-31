@@ -18,8 +18,6 @@ import {
   Compass,
   Sun,
   Moon,
-  Target,
-  Eye,
   GraduationCap,
 } from "lucide-react";
 
@@ -407,13 +405,14 @@ function Index() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
-              <strong className="font-bold text-white">{FULL_BRAND}</strong> is an Education and
-              Technology solutions enterprise focused on establishing advanced technology
-              laboratories and delivering industry-oriented skill development and employability
-              training programs. The business provides end-to-end laboratory establishment solutions
-              for Colleges, Universities, Educational Institutions, and other organizations,
-              including consultation, planning, design, technology selection, supply, installation,
-              integration, commissioning, training, and ongoing technical support.
+              <strong className="font-bold text-white">Kanagam Technology Solutions pvt ltd</strong>{" "}
+              is an Education and Technology solutions enterprise focused on establishing advanced
+              technology laboratories and delivering industry-oriented skill development and
+              employability training programs. The business provides end-to-end laboratory
+              establishment solutions for Colleges, Universities, Educational Institutions, and
+              other organizations, including consultation, planning, design, technology selection,
+              supply, installation, integration, commissioning, training, and ongoing technical
+              support.
             </p>
             <p className="mx-auto mt-4 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
               Through a robust{" "}
@@ -463,9 +462,12 @@ function Index() {
               </h2>
 
               <p className="mt-6 text-base leading-relaxed text-muted-foreground font-normal">
-                At <strong className="text-foreground font-semibold">{FULL_BRAND}</strong>, we build
-                the intelligent infrastructure that powers connected, autonomous systems —
-                engineering robust IoT and IIoT architectures, embedded edge systems, and AI stack
+                At{" "}
+                <strong className="text-foreground font-semibold">
+                  Kanagam Technology Solutions pvt ltd
+                </strong>
+                , we build the intelligent infrastructure that powers connected, autonomous systems
+                — engineering robust IoT and IIoT architectures, embedded edge systems, and AI stack
                 solutions that turn raw data into real-time intelligence. From sensors, gateways,
                 and secure firmware to cloud analytics, our expertise spans AIoT, computer vision,
                 and generative AI — bringing intelligent automation, predictive maintenance, and
@@ -552,51 +554,6 @@ function Index() {
                   </li>
                 </ul>
               </div>
-            </div>
-          </div>
-
-          {/* Integrated Vision & Mission Section */}
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
-            {/* Vision Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-background p-8 shadow-xl backdrop-blur-md">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                  <Eye className="h-5 w-5" />
-                </div>
-                <span className="text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-                  Our Vision
-                </span>
-              </div>
-              <h3 className="font-display mt-4 text-lg font-bold text-foreground">
-                Shaping Tomorrow's Digital Frontier
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-normal italic">
-                "To engineer transformative deep-tech solutions across quantum computing,
-                semiconductors, VLSI/FPGA, embedded systems, AI, AIoT, AR/VR, drones, and 3D
-                fabrication — empowering global academic ecosystems to lead and shape tomorrow's
-                digital frontier."
-              </p>
-            </div>
-
-            {/* Mission Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-card to-background p-8 shadow-xl backdrop-blur-md">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
-                  <Target className="h-5 w-5" />
-                </div>
-                <span className="text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-                  Our Mission
-                </span>
-              </div>
-              <h3 className="font-display mt-4 text-lg font-bold text-foreground">
-                Empowering Innovation & Skill Excellence
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground font-normal italic">
-                "To deliver industry-defining deep-tech solutions across quantum computing,
-                semiconductors, VLSI/FPGA, embedded systems, AI, AIoT, AR/VR, drones, and 3D
-                fabrication, while equipping academia and industry with world-class skill
-                development and hands-on technological capability."
-              </p>
             </div>
           </div>
         </section>
