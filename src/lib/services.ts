@@ -470,7 +470,7 @@ export const ALL_SERVICES: ServiceDetail[] = [
     ...(p.images ? { images: p.images } : {}),
     highlightsTitle: "Key Application Domains",
     highlights: p.keyApplications,
-    badge: p.readiness,
+    badge: "PRODUCTS",
     icon: p.icon,
   })),
   ...ACADEMIC_PROGRAMS.map((prog) => ({
