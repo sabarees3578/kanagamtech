@@ -1,5 +1,5 @@
 # Build stage
-FROM oven/bun:1.4 AS builder
+FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 RUN bun run build
 
 # Production stage
-FROM oven/bun:1.4 AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 
@@ -22,4 +22,4 @@ COPY --from=builder /app/package.json ./package.json
 
 EXPOSE 3000
 
-CMD ["bun", "run", ".output/server/index.mjs"]
+CMD ["node", ".output/server/index.mjs"]
