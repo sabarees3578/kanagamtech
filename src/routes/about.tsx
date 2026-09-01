@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { QuantumOrb } from "@/components/QuantumOrb";
 import { ShiningBackground } from "@/components/ShiningBackground";
-import { ArrowLeft, Eye, Sparkles, Target } from "lucide-react";
+import { ArrowLeft, Eye, Target } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -70,17 +70,13 @@ function AboutPage() {
         </div>
       </header>
 
-      {/* Centered 3/4-width page body */}
-      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center px-6 py-16 md:w-3/4">
-        {/* Three.js motion visual */}
+      {/* Centered page body */}
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center px-6 py-16">
+        {/* Quantum Orb — centered */}
         <QuantumOrb className="h-[300px] w-[300px] shrink-0 sm:h-[340px] sm:w-[340px]" />
 
-        <div className="mt-20 text-center sm:mt-24">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
-            <Sparkles className="h-3.5 w-3.5" />
-            About Us | Kanagam Technology Solutions
-          </div>
-          <h1 className="font-display mt-4 text-[clamp(1.9rem,4.5vw,2.8rem)] leading-tight font-bold tracking-tight text-foreground">
+        <div className="mt-16 text-center sm:mt-20">
+          <h1 className="font-display text-[clamp(1.8rem,4.2vw,2.8rem)] leading-tight font-bold tracking-tight text-foreground">
             Kanagam Technology Solutions
           </h1>
           <p className="mt-3 text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
@@ -88,21 +84,17 @@ function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-8 space-y-5 text-center text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
+        <div className="mt-8 max-w-4xl space-y-5 text-center text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
           <p>
-            <strong className="font-semibold text-foreground">Kanagam Technology Solutions</strong>{" "}
+            <strong className="font-semibold text-foreground">
+              Kanagam Technology Solutions India Pvt Ltd
+            </strong>{" "}
             is a premier GenQ (Quantum Generation) enterprise standing at the confluence of quantum
             research, intelligent systems, and global education — engineering the technologies that
-            define tomorrow.
-          </p>
-          <p>
-            Founded and led by seasoned industry veterans, we carry decades of combined leadership
-            in building and scaling enterprise-grade technology companies across continents, with a
-            track record of taking complex hardware and software systems from concept to global
-            deployment.
-          </p>
-          <p>
-            Our expertise spans ten deep-tech pillars —{" "}
+            define tomorrow. Founded and led by seasoned industry veterans, we carry decades of
+            combined leadership in building and scaling enterprise-grade technology companies across
+            continents, with a track record of taking complex hardware and software systems from
+            concept to global deployment. Our expertise spans ten deep-tech pillars —{" "}
             <strong className="text-foreground">Quantum Computing &amp; GenQ</strong>, Semiconductor
             &amp; ESDM (PCB Design, Prototype &amp; SMT Assembly), VLSI/FPGA Engineering, Embedded
             Systems &amp; IIoT/AIoT (Enterprise Deployed), AI Engineering &amp; GenAI, AIBots,
@@ -112,17 +104,15 @@ function AboutPage() {
           <p>
             As a full-scale tech house, we deliver end-to-end design, rapid prototyping, automated
             SMT assembly, and rigorous testing — transforming bold ideas into reliable,
-            production-grade products.
-          </p>
-          <p>
-            Beyond engineering, we are deeply invested in academia: modernizing curricula,
-            establishing Centers of Excellence, nurturing startup incubation hubs, and delivering
-            globally recognized certifications that prepare the next generation of innovators.
+            production-grade products. Beyond engineering, we are deeply invested in academia:
+            modernizing curricula, establishing Centers of Excellence, nurturing startup incubation
+            hubs, and delivering globally recognized certifications that prepare the next generation
+            of innovators.
           </p>
         </div>
 
         {/* Mission & Vision */}
-        <div className="mt-12 grid w-full max-w-4xl gap-5 sm:grid-cols-2">
+        <div className="mt-10 grid w-full max-w-4xl gap-5 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
@@ -132,11 +122,11 @@ function AboutPage() {
                 Our Mission
               </div>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              To establish advanced technology laboratories and deliver industry-oriented skill
-              development and employability training programs — providing end-to-end solutions from
+            <p className="mt-4 text-justify font-mono text-[0.83rem] leading-relaxed text-muted-foreground">
+              "To establish advanced technology laboratories and deliver industry oriented skill
+              development and employability training programs, providing end to end solutions from
               consultation, planning and design to supply, installation, commissioning, training and
-              ongoing technical support.
+              ongoing technical support."
             </p>
           </div>
           <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
@@ -148,10 +138,10 @@ function AboutPage() {
                 Our Vision
               </div>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              To engineer transformative deep-tech solutions across quantum computing,
-              semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D fabrication —
-              empowering global academic ecosystems to lead and shape tomorrow's digital frontier.
+            <p className="mt-4 text-justify font-mono text-[0.83rem] leading-relaxed text-muted-foreground">
+              "To engineer transformative deep tech solutions across quantum computing,
+              semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D fabrication,
+              empowering global academic ecosystems to lead and shape tomorrow's digital frontier."
             </p>
           </div>
         </div>

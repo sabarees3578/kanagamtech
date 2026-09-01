@@ -10,7 +10,6 @@ import { KanagamLogo } from "@/components/KanagamLogo";
 import { PILLARS, ACADEMIC_PROGRAMS } from "@/lib/services";
 import {
   Sparkles,
-  ShieldCheck,
   ArrowRight,
   Quote,
   Globe,
@@ -405,14 +404,26 @@ function Index() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
-              <strong className="font-bold text-white">Kanagam Technology Solutions pvt ltd</strong>{" "}
-              is an Education and Technology solutions enterprise focused on establishing advanced
-              technology laboratories and delivering industry-oriented skill development and
-              employability training programs. The business provides end-to-end laboratory
-              establishment solutions for Colleges, Universities, Educational Institutions, and
-              other organizations, including consultation, planning, design, technology selection,
-              supply, installation, integration, commissioning, training, and ongoing technical
-              support.
+              <strong className="font-bold text-white">
+                Kanagam Technology Solutions India Pvt Ltd
+              </strong>{" "}
+              is an Education and Technology solutions enterprise focused on{" "}
+              <strong className="font-bold text-white">
+                establishing advanced technology laboratories
+              </strong>{" "}
+              and delivering{" "}
+              <strong className="font-bold text-white">industry-oriented skill development</strong>{" "}
+              and <strong className="font-bold text-white">employability training</strong> programs.
+              The business provides end-to-end laboratory establishment solutions for{" "}
+              <strong className="font-bold text-white">
+                Colleges, Universities, Educational Institutions
+              </strong>
+              , and other organizations, including{" "}
+              <strong className="font-bold text-white">
+                consultation, planning, design, technology selection, supply, installation,
+                integration, commissioning, training
+              </strong>
+              , and ongoing <strong className="font-bold text-white">technical support</strong>.
             </p>
             <p className="mx-auto mt-4 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
               Through a robust{" "}
@@ -452,11 +463,6 @@ function Index() {
         <section id="about" className="relative z-10 mx-auto max-w-6xl px-6 py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                About Us | {FULL_BRAND}
-              </div>
-
               <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
                 Driving Deep-Tech Innovation & Scaling Future Enterprises
               </h2>
@@ -464,7 +470,7 @@ function Index() {
               <p className="mt-6 text-base leading-relaxed text-muted-foreground font-normal">
                 At{" "}
                 <strong className="text-foreground font-semibold">
-                  Kanagam Technology Solutions pvt ltd
+                  Kanagam Technology Solutions India Pvt Ltd
                 </strong>
                 , we build the intelligent infrastructure that powers connected, autonomous systems
                 — engineering robust IoT and IIoT architectures, embedded edge systems, and AI stack
