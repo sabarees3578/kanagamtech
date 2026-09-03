@@ -135,10 +135,13 @@ function HexCard({
 export function CoreFocusSection() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [hexSize, setHexSize] = useState(236);
+  const [mobileHexW, setMobileHexW] = useState(165);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const mobileWrapRef = useRef<HTMLDivElement>(null);
 
   const activePillar = PILLARS.find((p) => p.id === activeId);
 
+  // Desktop coordinate observer
   useLayoutEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -153,6 +156,24 @@ export function CoreFocusSection() {
     return () => ro.disconnect();
   }, []);
 
+  // Mobile coordinate observer (mathematically calculates exact mobile hexagon width)
+  useLayoutEffect(() => {
+    const el = mobileWrapRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.clientWidth;
+      // Fit 2 interlocking columns: total width = SX + hexW = (0.75 * hexW + 8) + hexW = 1.75 * hexW + 8
+      const maxAvailable = Math.min(w - 12, 380);
+      const computedW = Math.round(Math.min(Math.max((maxAvailable - 8) / 1.75, 135), 210));
+      setMobileHexW(computedW);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Desktop geometry
   const HEX_W = hexSize;
   const GAP = 16;
   const HEX_H = Math.round(hexSize * (2 / Math.sqrt(3)));
@@ -162,6 +183,15 @@ export function CoreFocusSection() {
   const PAD_Y = Math.round(HEX_H / 2);
   const DESC_W = PAD_X + 3 * SX + HEX_W / 2;
   const DESC_H = PAD_Y + 2 * SY + HEX_H / 2;
+
+  // Mobile mathematical geometry (Pointy-topped interlocking lattice)
+  const M_HEX_W = mobileHexW;
+  const M_HEX_H = Math.round(M_HEX_W * (2 / Math.sqrt(3)));
+  const M_GAP = 8;
+  const M_SX = Math.round(M_HEX_W * 0.75 + M_GAP);
+  const M_SY = Math.round(M_HEX_H * 0.5 + M_GAP * 0.5);
+  const M_CONTAINER_W = M_SX + M_HEX_W;
+  const M_CONTAINER_H = 9 * M_SY + M_HEX_H;
 
   return (
     <section
@@ -197,7 +227,7 @@ export function CoreFocusSection() {
         </p>
       </div>
 
-      {/* Honeycomb — desktop, fills the full available width */}
+      {/* Honeycomb — desktop (4-2-4 grid), fills the full available width */}
       <div ref={wrapRef} className="mt-12 hidden w-full md:block">
         <div className="relative mx-auto" style={{ width: DESC_W, height: DESC_H }}>
           {PILLARS.map((pillar, i) => {
@@ -249,12 +279,12 @@ export function CoreFocusSection() {
         </div>
       </div>
 
-      {/* Honeycomb — mobile (authentic 2-column staggered interlocking lattice) */}
-      <div className="mt-8 md:hidden">
+      {/* Honeycomb — mobile (mathematically calculated interlocking honeycomb) */}
+      <div ref={mobileWrapRef} className="mt-8 md:hidden">
         {/* Interactive guidance pill */}
-        <div className="mb-4 flex justify-center px-2">
+        <div className="mb-6 flex justify-center px-2">
           <div
-            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-[0.65rem] tracking-wider font-mono transition-all duration-300 ${
+            className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[0.65rem] tracking-wider font-mono transition-all duration-300 ${
               activePillar
                 ? "border-[#D7AB6A]/60 bg-[#D7AB6A]/15 text-[#E8C576] shadow-[0_0_15px_rgba(215,171,106,0.25)]"
                 : "border-primary/20 bg-card/60 text-muted-foreground"
@@ -271,83 +301,96 @@ export function CoreFocusSection() {
           </div>
         </div>
 
-        {/* 2-column interlocking honeycomb container */}
+        {/* The mathematically exact mobile honeycomb stage */}
         <div
-          className="mx-auto flex max-w-[420px] justify-center gap-2 sm:gap-3 px-1"
+          className="relative mx-auto"
+          style={{ width: M_CONTAINER_W, height: M_CONTAINER_H }}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setActiveId(null);
             }
           }}
         >
-          {/* Column 1 (Even indexed pillars: 01, 03, 05, 07, 09) */}
-          <div className="flex flex-1 flex-col -space-y-4 sm:-space-y-6">
-            {PILLARS.filter((_, i) => i % 2 === 0).map((pillar) => {
-              const originalIndex = PILLARS.findIndex((p) => p.id === pillar.id);
-              const isActive = activeId === pillar.id;
-              const isDimmed = activeId !== null && !isActive;
-              return (
-                <div
-                  key={pillar.id}
-                  className="relative w-full transition-all duration-300"
-                  style={{
-                    aspectRatio: "1 / 1.155",
-                    animation: `kfFloat 6s ease-in-out ${originalIndex * 0.35}s infinite`,
-                    filter: isActive
-                      ? "drop-shadow(0 14px 28px rgba(61,21,56,0.75)) drop-shadow(0 0 20px rgba(215,171,106,0.6))"
-                      : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
-                    zIndex: isActive ? 30 : 10,
-                  }}
-                >
-                  <HexCard
-                    pillar={pillar}
-                    index={originalIndex}
-                    active={isActive}
-                    dimmed={isDimmed}
-                    onEnter={() => setActiveId(pillar.id)}
-                    onLeave={() => setActiveId(null)}
-                    onTap={() => setActiveId(isActive ? null : pillar.id)}
-                    isMobile
-                  />
-                </div>
-              );
-            })}
-          </div>
+          {PILLARS.map((pillar, i) => {
+            const isCol1 = i % 2 === 1;
+            const left = isCol1 ? M_SX : 0;
+            const top = i * M_SY;
+            const isActive = activeId === pillar.id;
+            const isDimmed = activeId !== null && !isActive;
 
-          {/* Column 2 (Odd indexed pillars: 02, 04, 06, 08, 10) — staggered downwards */}
-          <div className="flex flex-1 flex-col -space-y-4 sm:-space-y-6 pt-10 sm:pt-14">
-            {PILLARS.filter((_, i) => i % 2 === 1).map((pillar) => {
-              const originalIndex = PILLARS.findIndex((p) => p.id === pillar.id);
-              const isActive = activeId === pillar.id;
-              const isDimmed = activeId !== null && !isActive;
-              return (
-                <div
-                  key={pillar.id}
-                  className="relative w-full transition-all duration-300"
-                  style={{
-                    aspectRatio: "1 / 1.155",
-                    animation: `kfFloat 6s ease-in-out ${originalIndex * 0.35}s infinite`,
-                    filter: isActive
-                      ? "drop-shadow(0 14px 28px rgba(61,21,56,0.75)) drop-shadow(0 0 20px rgba(215,171,106,0.6))"
-                      : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
-                    zIndex: isActive ? 30 : 10,
-                  }}
-                >
-                  <HexCard
-                    pillar={pillar}
-                    index={originalIndex}
-                    active={isActive}
-                    dimmed={isDimmed}
-                    onEnter={() => setActiveId(pillar.id)}
-                    onLeave={() => setActiveId(null)}
-                    onTap={() => setActiveId(isActive ? null : pillar.id)}
-                    isMobile
-                  />
-                </div>
-              );
-            })}
-          </div>
+            return (
+              <div
+                key={pillar.id}
+                className="absolute transition-all duration-300"
+                style={{
+                  left,
+                  top,
+                  width: M_HEX_W,
+                  height: M_HEX_H,
+                  animation: `kfFloat 6s ease-in-out ${i * 0.35}s infinite`,
+                  filter: isActive
+                    ? "drop-shadow(0 14px 28px rgba(61,21,56,0.85)) drop-shadow(0 0 22px rgba(215,171,106,0.65))"
+                    : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
+                  zIndex: isActive ? 40 : 10,
+                }}
+              >
+                <HexCard
+                  pillar={pillar}
+                  index={i}
+                  active={isActive}
+                  dimmed={isDimmed}
+                  onEnter={() => setActiveId(pillar.id)}
+                  onLeave={() => setActiveId(null)}
+                  onTap={() => setActiveId(isActive ? null : pillar.id)}
+                  isMobile
+                />
+              </div>
+            );
+          })}
         </div>
+
+        {/* Active Pillar Spotlight Panel (Thumb-friendly mobile card) */}
+        {activePillar && (
+          <div className="mt-8 rounded-2xl border border-[#D7AB6A]/40 bg-gradient-to-r from-[#3d1538]/95 via-[#2b0b30]/95 to-[#18051e]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-300">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D7AB6A]/50 bg-white/10 text-[#E8C576] shadow-[0_0_12px_rgba(215,171,106,0.3)]">
+                  {(() => {
+                    const ActiveIcon = activePillar.icon;
+                    return <ActiveIcon className="h-5 w-5" />;
+                  })()}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[0.6rem] font-mono font-bold tracking-widest text-[#D7AB6A] uppercase">
+                      Pillar 0{PILLARS.findIndex((p) => p.id === activePillar.id) + 1}
+                    </span>
+                    <span className="rounded-full bg-black/40 px-2 py-0.5 text-[0.5rem] font-semibold tracking-wider text-white/80 uppercase">
+                      {activePillar.readiness}
+                    </span>
+                  </div>
+                  <h4 className="font-display mt-0.5 text-sm sm:text-base font-bold text-[#FFF3E4] leading-snug">
+                    {activePillar.title}
+                  </h4>
+                  <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
+                    {activePillar.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end pt-1 sm:pt-0">
+                <Link
+                  to="/service/$slug"
+                  params={{ slug: activePillar.id }}
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[image:var(--gradient-gold)] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-[var(--shadow-gold)] transition-transform active:scale-95"
+                >
+                  <span>Explore Pillar</span>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* All Ten Key Focus Areas — each opens its own service page */}
