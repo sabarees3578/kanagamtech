@@ -257,8 +257,8 @@ function Index() {
         {/* Sticky Header Navigation */}
         <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl transition-colors">
           <div className="relative flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <Link to="/" className="ml-1 flex min-w-0 items-center gap-3 sm:ml-3">
-              <KanagamLogo size="md" />
+            <Link to="/" className="ml-1 flex shrink-0 items-center gap-3 sm:ml-3">
+              <KanagamLogo size="lg" />
             </Link>
 
             {/* Nav centered to the screen, with click-to-open dropdowns */}

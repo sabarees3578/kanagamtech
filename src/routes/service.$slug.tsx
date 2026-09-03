@@ -136,8 +136,8 @@ function ServiceDetailPage() {
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <Link to="/" hash="focus" className="flex min-w-0 items-center gap-3">
-            <KanagamLogo size="sm" />
+          <Link to="/" hash="focus" className="flex shrink-0 items-center gap-3">
+            <KanagamLogo size="md" />
           </Link>
           <Link
             to="/"
