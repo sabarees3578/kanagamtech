@@ -19,5 +19,12 @@ export default defineConfig({
   },
   nitro: {
     preset: "node",
+    server: {
+      // Bind to all interfaces so container hosts (Coolify, Docker, etc.)
+      // can route traffic regardless of any HOST env var they inject.
+      host: "0.0.0.0",
+      // Default port; Coolify overrides this via the PORT env var at runtime.
+      port: 3000,
+    },
   },
 });
