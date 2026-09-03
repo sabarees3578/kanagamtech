@@ -166,7 +166,7 @@ function RotatingTagline() {
   const current = MULTILINGUAL_TAGLINES[currentIndex % MULTILINGUAL_TAGLINES.length];
 
   return (
-    <div className="mx-auto mt-5 flex min-h-[2.5rem] w-full max-w-4xl items-center justify-center px-2 text-center">
+    <div className="mx-auto mt-3 sm:mt-5 flex min-h-[2.5rem] w-full max-w-4xl items-center justify-center px-2 text-center">
       {current && (
         <p
           className={`text-foreground transition-all duration-300 ease-in-out sm:whitespace-nowrap ${current.fontClass} ${
@@ -256,8 +256,8 @@ function Index() {
 
         {/* Sticky Header Navigation */}
         <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl transition-colors">
-          <div className="relative flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <Link to="/" className="ml-1 flex shrink-0 items-center gap-3 sm:ml-3">
+          <div className="relative flex w-full items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3 md:px-6">
+            <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3 sm:ml-3">
               <KanagamLogo size="lg" />
             </Link>
 
@@ -445,11 +445,11 @@ function Index() {
           />
           {/* Panel */}
           <div
-            className={`absolute top-0 right-0 flex h-full w-[min(20rem,85vw)] flex-col overflow-y-auto border-l border-border bg-background shadow-2xl transition-transform duration-300 ${
+            className={`absolute top-0 right-0 flex h-full w-[min(18rem,82vw)] flex-col overflow-y-auto border-l border-border bg-background shadow-2xl transition-transform duration-300 pb-safe ${
               mobileOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <div className="flex items-center justify-between border-b border-border/60 px-5 py-4">
+            <div className="flex items-center justify-between border-b border-border/60 px-4 py-3 sm:px-5 sm:py-4 pt-safe">
               <KanagamLogo size="sm" />
               <button
                 type="button"
@@ -568,8 +568,8 @@ function Index() {
         </div>
 
         {/* Hero Section */}
-        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 pt-2 pb-3 text-center">
-          <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,150vw)] -translate-x-1/2 opacity-75" />
+        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 pt-2 pb-3 text-center">
+          <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,140vw)] -translate-x-1/2 opacity-75" />
 
           <div className="relative mt-4 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.68rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
@@ -581,7 +581,7 @@ function Index() {
               {TAGLINE}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
+            <p className="mx-auto mt-4 sm:mt-6 max-w-4xl text-sm sm:text-base leading-relaxed font-normal text-muted-foreground">
               <strong className="font-bold text-white">
                 Kanagam Technology Solutions India Pvt Ltd
               </strong>{" "}
@@ -603,7 +603,7 @@ function Index() {
               </strong>
               , and ongoing <strong className="font-bold text-white">technical support</strong>.
             </p>
-            <p className="mx-auto mt-4 max-w-4xl text-base leading-relaxed font-normal text-muted-foreground">
+            <p className="mx-auto mt-3 sm:mt-4 max-w-4xl text-sm sm:text-base leading-relaxed font-normal text-muted-foreground">
               Through a robust{" "}
               <strong className="text-foreground font-semibold">
                 global academic and industrial training ecosystem
@@ -623,10 +623,10 @@ function Index() {
 
         {/* Metrics Ribbon */}
         <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-4 px-6 py-6 md:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-3 sm:gap-y-4 px-4 sm:px-6 py-4 sm:py-6 md:grid-cols-4">
             {METRICS.map((s) => (
               <div key={s.label} className="text-center">
-                <div className="font-display text-3xl font-extrabold tracking-tight text-primary">
+                <div className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-primary">
                   {s.val}
                 </div>
                 <div className="mt-1 text-[0.7rem] tracking-[0.1em] text-muted-foreground font-mono font-medium">
@@ -638,14 +638,14 @@ function Index() {
         </section>
 
         {/* About Us Section */}
-        <section id="about" className="relative z-10 mx-auto max-w-6xl px-6 py-28">
+        <section id="about" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
               <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
                 Driving Deep-Tech Innovation & Scaling Future Enterprises
               </h2>
 
-              <p className="mt-6 text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 At{" "}
                 <strong className="text-foreground font-semibold">
                   Kanagam Technology Solutions India Pvt Ltd
@@ -658,7 +658,7 @@ function Index() {
                 connected decision-making to industrial and enterprise environments alike.
               </p>
 
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 Founded and led by a team of seasoned industry veterans with decades of proven
                 success in building and scaling tech enterprises,{" "}
                 <strong className="text-foreground font-semibold">Kanagam Tech</strong> stands at
@@ -666,15 +666,15 @@ function Index() {
                 design, quantum computing, drones and robotics, AR/VR, and additive manufacturing.
               </p>
 
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 We engineer state-of-the-art solutions while empowering institutions around the
                 world to build sustainable technological capability — through university labs,
                 Centers of Excellence, research partnerships, and workforce skill-development
                 programs that keep talent and industry advancing together.
               </p>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
                   <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
                     <Compass className="h-4 w-4" />
                     Veteran Leadership
@@ -686,7 +686,7 @@ function Index() {
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+                <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
                   <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
                     <Globe className="h-4 w-4" />
                     Global Integration
@@ -701,7 +701,7 @@ function Index() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-card via-card to-background p-8 shadow-2xl backdrop-blur-xl">
+              <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-card via-card to-background p-5 sm:p-8 shadow-2xl backdrop-blur-xl">
                 <div className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#D7AB6A] text-[#4B1D3F] shadow-md font-bold">
                   <Sparkles className="h-5 w-5" />
                 </div>
@@ -753,7 +753,7 @@ function Index() {
 
         {/* Footer */}
         <footer className="relative z-10 border-t border-border/70 py-12 text-center text-xs text-muted-foreground bg-card/40">
-          <div className="mx-auto max-w-6xl px-6 flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col items-center justify-between gap-4 sm:gap-6 md:flex-row">
             <div className="flex items-center gap-3">
               <KanagamLogo size="sm" />
             </div>

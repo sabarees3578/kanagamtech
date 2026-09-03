@@ -135,7 +135,7 @@ function ServiceDetailPage() {
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-3">
           <Link to="/" hash="focus" className="flex shrink-0 items-center gap-3">
             <KanagamLogo size="md" />
           </Link>
@@ -152,9 +152,9 @@ function ServiceDetailPage() {
       </header>
 
       {/* Detail Content */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-16 pb-20">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-16 pb-14 sm:pb-20">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase font-mono">
+        <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 text-[0.55rem] sm:text-[0.65rem] tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground uppercase font-mono">
           <Link to="/" hash="focus" className="transition-colors hover:text-primary">
             Home
           </Link>
@@ -165,10 +165,10 @@ function ServiceDetailPage() {
         </div>
 
         {/* Title Block */}
-        <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+        <div className="mt-6 sm:mt-8 flex flex-col gap-4 sm:gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
-              <Icon className="h-7 w-7" />
+            <div className="flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-primary/20 bg-primary/10 text-primary">
+              <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
             </div>
             <div>
               <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
@@ -253,11 +253,11 @@ function ServiceDetailPage() {
         )}
 
         {/* Highlights */}
-        <div className="mt-10 rounded-2xl border border-border bg-card p-8 shadow-xl backdrop-blur-md">
+        <div className="mt-8 sm:mt-10 rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl backdrop-blur-md">
           <h2 className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
             {svc.highlightsTitle}
           </h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="mt-4 sm:mt-5 grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2">
             {svc.highlights.map((item, i) => (
               <div
                 key={i}

@@ -77,7 +77,7 @@ function PartnersPage() {
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
 
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:px-6 sm:py-2.5">
           <Link to="/" className="flex shrink-0 items-center gap-3">
             <KanagamLogo size="md" />
           </Link>
@@ -92,7 +92,7 @@ function PartnersPage() {
         </div>
       </header>
 
-      <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 py-3 pb-6 min-h-[calc(100vh-3.6rem)]">
+      <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 py-2 sm:py-3 pb-4 sm:pb-6 min-h-[calc(100vh-3.6rem)]">
         <div className="flex flex-col items-center gap-1.5 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-0.5 text-[0.6rem] tracking-[0.25em] text-primary uppercase">
             <Handshake className="h-3 w-3" />
@@ -119,9 +119,9 @@ function PartnersPage() {
         <div className="flex flex-1 items-center justify-center py-2">
           <CoverflowMotion
             onCenterChange={setActiveName}
-            heightClass="h-[30vh] min-h-[220px] md:h-full md:min-h-0"
-            cardSize="clamp(96px, 22vh, 264px)"
-            glowSize="min(26vh, 360px)"
+            heightClass="h-[26vh] min-h-[180px] sm:h-[30vh] sm:min-h-[220px] md:h-full md:min-h-0"
+            cardSize="clamp(80px, 18vh, 264px)"
+            glowSize="min(22vh, 360px)"
           />
         </div>
 
@@ -141,7 +141,7 @@ function PartnersPage() {
 
 function InfoPanel({ name, tagline, overview, tags, site }: Partner) {
   return (
-    <div className="mx-auto w-full max-w-4xl rounded-2xl border border-[#D7AB6A]/30 bg-[#130418]/70 px-5 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md">
+    <div className="mx-auto w-full max-w-4xl rounded-2xl border border-[#D7AB6A]/30 bg-[#130418]/70 px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">

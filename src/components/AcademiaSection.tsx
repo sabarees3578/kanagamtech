@@ -5,9 +5,9 @@ export function AcademiaSection() {
   return (
     <section
       id="academia"
-      className="relative z-10 border-t border-border/60 bg-secondary/20 py-28"
+      className="relative z-10 border-t border-border/60 bg-secondary/20 py-14 sm:py-20 md:py-28"
     >
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
             <GraduationCap className="h-3.5 w-3.5" />
@@ -26,13 +26,13 @@ export function AcademiaSection() {
         </div>
 
         {/* 4 Pillars Grid */}
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
+        <div className="mt-10 sm:mt-16 grid gap-5 sm:gap-8 md:grid-cols-2">
           {ACADEMIC_PROGRAMS.map((prog, idx) => {
             const Icon = prog.icon;
             return (
               <div
                 key={prog.title}
-                className="group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-card/60 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5"
+                className="group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-card/60 p-5 sm:p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -60,7 +60,7 @@ export function AcademiaSection() {
                   <h4 className="text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold">
                     Core Outcomes
                   </h4>
-                  <div className="mt-3 grid grid-cols-2 gap-2.5">
+                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {prog.deliverables.map((item, i) => (
                       <div
                         key={i}

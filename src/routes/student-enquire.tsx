@@ -92,7 +92,7 @@ function StudentEnquirePage() {
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-3">
           <Link to="/" className="flex shrink-0 items-center gap-3">
             <KanagamLogo size="md" />
           </Link>
@@ -108,7 +108,7 @@ function StudentEnquirePage() {
       </header>
 
       {/* Page Content */}
-      <section className="relative z-10 mx-auto max-w-3xl px-6 pt-16 pb-24">
+      <section className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-24">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
             <GraduationCap className="h-3.5 w-3.5" />
@@ -243,7 +243,7 @@ function StudentEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-12 rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-8 md:p-10 shadow-2xl backdrop-blur-xl"
+      className="mt-8 sm:mt-12 rounded-2xl sm:rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-5 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl"
     >
       <div className="grid gap-6 md:grid-cols-2">
         {/* Full Name */}
@@ -463,7 +463,7 @@ function StudentEnquiryForm() {
         <button
           type="submit"
           disabled={loading}
-          className="group inline-flex items-center justify-center gap-3 rounded-full bg-[image:var(--gradient-gold)] px-9 py-3.5 text-xs font-medium tracking-[0.25em] text-primary-foreground uppercase shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5 disabled:opacity-50"
+          className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 rounded-full bg-[image:var(--gradient-gold)] px-9 py-3.5 text-xs font-medium tracking-[0.25em] text-primary-foreground uppercase shadow-[var(--shadow-gold)] transition-transform hover:-translate-y-0.5 disabled:opacity-50"
         >
           {loading ? (
             <span>Processing...</span>

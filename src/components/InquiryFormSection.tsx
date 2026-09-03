@@ -81,7 +81,7 @@ export function InquiryFormSection() {
   }, []);
 
   return (
-    <section id="inquire" className="relative z-10 mx-auto max-w-4xl px-6 py-24">
+    <section id="inquire" className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 py-14 sm:py-20 md:py-24">
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center mb-10">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
@@ -103,7 +103,7 @@ export function InquiryFormSection() {
           <button
             type="button"
             onClick={() => setActiveTab("institutional")}
-            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 ${
+            className={`flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 text-[0.65rem] sm:text-xs md:text-sm font-semibold tracking-wide transition-all duration-300 ${
               activeTab === "institutional"
                 ? "bg-[#4B1D3F] text-white dark:bg-[#D7AB6A] dark:text-[#4B1D3F] shadow-md scale-[1.02]"
                 : "text-muted-foreground hover:text-foreground"
@@ -116,7 +116,7 @@ export function InquiryFormSection() {
           <button
             type="button"
             onClick={() => setActiveTab("student")}
-            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 ${
+            className={`flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 text-[0.65rem] sm:text-xs md:text-sm font-semibold tracking-wide transition-all duration-300 ${
               activeTab === "student"
                 ? "bg-[#4B1D3F] text-white dark:bg-[#D7AB6A] dark:text-[#4B1D3F] shadow-md scale-[1.02]"
                 : "text-muted-foreground hover:text-foreground"
@@ -131,16 +131,16 @@ export function InquiryFormSection() {
       {/* Single Dynamic Card Container */}
       <div
         id={activeTab === "institutional" ? "institutional-inquire" : "student-inquire"}
-        className="rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-6 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300"
+        className="rounded-2xl sm:rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-4 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300"
       >
         {activeTab === "institutional" ? <InstitutionalInquiryForm /> : <StudentInquiryForm />}
       </div>
 
       {/* 3D coverflow partner motion — same animation as the /partners page, shown under the form */}
       <CoverflowMotion
-        heightClass="h-52 sm:h-64 md:h-80 lg:h-96"
-        cardSize="clamp(96px, 17vh, 240px)"
-        glowSize="min(34vh, 380px)"
+        heightClass="h-40 sm:h-52 md:h-80 lg:h-96"
+        cardSize="clamp(72px, 14vh, 240px)"
+        glowSize="min(28vh, 380px)"
         ambience
         className="mt-14"
       />

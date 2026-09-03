@@ -56,7 +56,7 @@ function AboutPage() {
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-3">
           <Link to="/" className="flex shrink-0 items-center gap-3">
             <KanagamLogo size="md" />
           </Link>
@@ -72,11 +72,11 @@ function AboutPage() {
       </header>
 
       {/* Centered page body */}
-      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center px-6 py-16">
+      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center px-4 sm:px-6 py-10 sm:py-16">
         {/* Quantum Orb — centered */}
-        <QuantumOrb className="h-[min(56vw,300px)] w-[min(56vw,300px)] shrink-0 sm:h-[340px] sm:w-[340px]" />
+        <QuantumOrb className="h-[min(50vw,260px)] w-[min(50vw,260px)] shrink-0 sm:h-[340px] sm:w-[340px]" />
 
-        <div className="mt-16 text-center sm:mt-20">
+        <div className="mt-10 text-center sm:mt-20">
           <h1 className="font-display text-[clamp(1.8rem,4.2vw,2.8rem)] leading-tight font-bold tracking-tight text-foreground">
             Kanagam Technology Solutions
           </h1>
@@ -85,7 +85,7 @@ function AboutPage() {
           </p>
         </div>
 
-        <div className="mt-8 max-w-4xl space-y-5 text-center text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
+        <div className="mt-6 sm:mt-8 max-w-4xl space-y-4 sm:space-y-5 text-center text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
           <p>
             <strong className="font-semibold text-foreground">
               Kanagam Technology Solutions India Pvt Ltd
@@ -113,8 +113,8 @@ function AboutPage() {
         </div>
 
         {/* Mission & Vision */}
-        <div className="mt-10 grid w-full max-w-4xl gap-5 sm:grid-cols-2">
-          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
+        <div className="mt-8 sm:mt-10 grid w-full max-w-4xl gap-4 sm:gap-5 sm:grid-cols-2">
+          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-4 sm:p-6 backdrop-blur-md">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
                 <Target className="h-5 w-5 text-[#E9CD97]" />
@@ -123,14 +123,14 @@ function AboutPage() {
                 Our Mission
               </div>
             </div>
-            <p className="mt-4 text-justify font-mono text-[0.83rem] leading-relaxed text-muted-foreground">
+            <p className="mt-3 sm:mt-4 text-justify font-mono text-[0.78rem] sm:text-[0.83rem] leading-relaxed text-muted-foreground">
               "To establish advanced technology laboratories and deliver industry oriented skill
               development and employability training programs, providing end to end solutions from
               consultation, planning and design to supply, installation, commissioning, training and
               ongoing technical support."
             </p>
           </div>
-          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-6 backdrop-blur-md">
+          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-4 sm:p-6 backdrop-blur-md">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
                 <Eye className="h-5 w-5 text-[#E9CD97]" />
@@ -139,7 +139,7 @@ function AboutPage() {
                 Our Vision
               </div>
             </div>
-            <p className="mt-4 text-justify font-mono text-[0.83rem] leading-relaxed text-muted-foreground">
+            <p className="mt-3 sm:mt-4 text-justify font-mono text-[0.78rem] sm:text-[0.83rem] leading-relaxed text-muted-foreground">
               "To engineer transformative deep tech solutions across quantum computing,
               semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D fabrication,
               empowering global academic ecosystems to lead and shape tomorrow's digital frontier."

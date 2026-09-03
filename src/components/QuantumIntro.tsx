@@ -113,7 +113,7 @@ export function QuantumIntro({
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden />
 
       <div
-        className="absolute inset-x-0 bottom-[8vh] flex flex-col items-center gap-5 px-6 text-center sm:bottom-[10vh]"
+        className="absolute inset-x-0 bottom-[6vh] sm:bottom-[8vh] flex flex-col items-center gap-3 sm:gap-5 px-4 sm:px-6 text-center md:bottom-[10vh]"
         style={{ opacity: uiAlpha }}
       >
         <div

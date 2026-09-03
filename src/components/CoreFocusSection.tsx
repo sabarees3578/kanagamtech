@@ -31,6 +31,8 @@ function HexCard({
   dimmed,
   onEnter,
   onLeave,
+  onTap,
+  isMobile,
 }: {
   pillar: Pillar;
   index: number;
@@ -38,6 +40,8 @@ function HexCard({
   dimmed: boolean;
   onEnter: () => void;
   onLeave: () => void;
+  onTap?: () => void;
+  isMobile?: boolean;
 }) {
   const Icon = pillar.icon;
 
@@ -47,15 +51,35 @@ function HexCard({
       params={{ slug: pillar.id }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onClick={(e) => {
+        if (isMobile) {
+          if (!active) {
+            // First tap: toggle active state, do not navigate yet
+            e.preventDefault();
+            e.stopPropagation();
+            onTap?.();
+          }
+          // If already active: allow standard <Link> navigation to proceed!
+        }
+      }}
       className={`group relative block h-full w-full outline-none transition-all duration-300 ease-out will-change-transform focus-visible:scale-110 ${
-        active ? "z-30 scale-110" : dimmed ? "z-10 scale-90 opacity-75" : "z-10 scale-100"
+        active
+          ? "z-30 scale-105 sm:scale-110"
+          : dimmed
+            ? "z-10 scale-95 opacity-50 sm:opacity-65"
+            : "z-10 scale-100 opacity-100"
       }`}
     >
       {/* Hexagonal ring */}
-      <span className="absolute inset-0" style={{ clipPath: HEX_CLIP, background: RING_BG }} />
+      <span
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          active ? "opacity-100" : "opacity-90"
+        }`}
+        style={{ clipPath: HEX_CLIP, background: RING_BG }}
+      />
       {/* Hexagonal plum face */}
       <span
-        className="absolute inset-[7px] flex flex-col items-center justify-center overflow-hidden px-7 text-center"
+        className="absolute inset-[5px] sm:inset-[6px] md:inset-[7px] flex flex-col items-center justify-between overflow-hidden px-2 sm:px-3 md:px-7 py-3 sm:py-4 md:py-6 text-center"
         style={{
           clipPath: HEX_CLIP,
           background: PLUM_BG,
@@ -76,24 +100,32 @@ function HexCard({
         {/* Uniform coordinate shine — sweeps top-left -> bottom-right, then back */}
         <span className="kf-shine" />
 
-        <span className="relative z-10 flex w-full items-center justify-between text-[0.6rem] font-mono font-bold tracking-[0.25em] text-[#D7AB6A]">
+        {/* Top bar: 01 and Readiness Badge */}
+        <span className="relative z-10 flex w-full items-center justify-between px-1 text-[0.55rem] sm:text-[0.6rem] md:text-[0.62rem] font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] text-[#D7AB6A]">
           <span>0{index + 1}</span>
-          <span className="rounded-full bg-black/30 px-2 py-0.5 text-[0.5rem] tracking-wider text-white/75 uppercase">
+          <span
+            className="rounded-full bg-black/40 border border-white/10 px-1.5 sm:px-2 py-0.5 text-[0.45rem] sm:text-[0.5rem] tracking-wider text-white/85 uppercase truncate max-w-[72px] sm:max-w-[90px] md:max-w-[110px]"
+            title={pillar.readiness}
+          >
             {pillar.readiness}
           </span>
         </span>
 
-        <span className="relative z-10 mt-3 flex h-10 w-10 items-center justify-center rounded-xl border border-[#D7AB6A]/40 bg-white/10 text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
-          <Icon className="h-5 w-5" />
-        </span>
+        {/* Center: Icon + Title */}
+        <div className="relative z-10 flex flex-col items-center justify-center my-auto w-full px-0.5">
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 items-center justify-center rounded-lg sm:rounded-xl border border-[#D7AB6A]/40 bg-white/10 text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
+            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+          </span>
 
-        <h3 className="font-display relative z-10 mt-3 text-[0.82rem] leading-snug font-bold tracking-tight text-[#FFF3E4] [text-shadow:0_1px_8px_rgba(0,0,0,0.35)]">
-          {pillar.title}
-        </h3>
+          <h3 className="font-display mt-1 sm:mt-1.5 md:mt-2.5 text-[0.64rem] sm:text-[0.72rem] md:text-[0.82rem] leading-snug font-bold tracking-tight text-[#FFF3E4] [text-shadow:0_1px_8px_rgba(0,0,0,0.4)] line-clamp-2">
+            {pillar.title}
+          </h3>
+        </div>
 
-        <span className="relative z-10 mt-2 inline-flex items-center gap-1 text-[0.6rem] font-bold tracking-[0.2em] text-[#D7AB6A] uppercase">
-          <span>View Page</span>
-          <ChevronRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+        {/* Bottom CTA: View Page */}
+        <span className="relative z-10 inline-flex items-center gap-1 text-[0.48rem] sm:text-[0.55rem] md:text-[0.6rem] font-bold tracking-[0.14em] sm:tracking-[0.18em] md:tracking-[0.2em] text-[#D7AB6A] uppercase transition-colors">
+          <span>{active && isMobile ? "Tap to Open" : "View Page"}</span>
+          <ChevronRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </span>
     </Link>
@@ -104,6 +136,8 @@ export function CoreFocusSection() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [hexSize, setHexSize] = useState(236);
   const wrapRef = useRef<HTMLDivElement>(null);
+
+  const activePillar = PILLARS.find((p) => p.id === activeId);
 
   useLayoutEffect(() => {
     const el = wrapRef.current;
@@ -132,7 +166,7 @@ export function CoreFocusSection() {
   return (
     <section
       id="focus"
-      className="relative z-10 mx-auto max-w-6xl scroll-mt-24 px-6 py-24"
+      className="relative z-10 mx-auto max-w-6xl scroll-mt-24 px-4 sm:px-6 py-12 sm:py-16 md:py-24"
       onMouseLeave={() => setActiveId(null)}
     >
       <style>{`
@@ -215,27 +249,105 @@ export function CoreFocusSection() {
         </div>
       </div>
 
-      {/* Honeycomb — mobile (2-col hex grid) */}
-      <div className="mt-12 grid grid-cols-2 gap-3 md:hidden">
-        {PILLARS.map((pillar, i) => (
+      {/* Honeycomb — mobile (authentic 2-column staggered interlocking lattice) */}
+      <div className="mt-8 md:hidden">
+        {/* Interactive guidance pill */}
+        <div className="mb-4 flex justify-center px-2">
           <div
-            key={pillar.id}
-            className="relative"
-            style={{
-              aspectRatio: `1.155 / 1`,
-              animation: `kfFloat 6s ease-in-out ${i * 0.35}s infinite`,
-            }}
+            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-[0.65rem] tracking-wider font-mono transition-all duration-300 ${
+              activePillar
+                ? "border-[#D7AB6A]/60 bg-[#D7AB6A]/15 text-[#E8C576] shadow-[0_0_15px_rgba(215,171,106,0.25)]"
+                : "border-primary/20 bg-card/60 text-muted-foreground"
+            }`}
           >
-            <HexCard
-              pillar={pillar}
-              index={i}
-              active={activeId === pillar.id}
-              dimmed={activeId !== null && activeId !== pillar.id}
-              onEnter={() => setActiveId(pillar.id)}
-              onLeave={() => setActiveId(null)}
-            />
+            <Sparkles className="h-3 w-3 text-primary animate-pulse" />
+            {activePillar ? (
+              <span className="truncate max-w-[280px]">
+                <strong className="text-foreground">{activePillar.title}</strong> — Tap again to open →
+              </span>
+            ) : (
+              <span>Tap a hexagon to toggle • Tap again to open</span>
+            )}
           </div>
-        ))}
+        </div>
+
+        {/* 2-column interlocking honeycomb container */}
+        <div
+          className="mx-auto flex max-w-[420px] justify-center gap-2 sm:gap-3 px-1"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setActiveId(null);
+            }
+          }}
+        >
+          {/* Column 1 (Even indexed pillars: 01, 03, 05, 07, 09) */}
+          <div className="flex flex-1 flex-col -space-y-4 sm:-space-y-6">
+            {PILLARS.filter((_, i) => i % 2 === 0).map((pillar) => {
+              const originalIndex = PILLARS.findIndex((p) => p.id === pillar.id);
+              const isActive = activeId === pillar.id;
+              const isDimmed = activeId !== null && !isActive;
+              return (
+                <div
+                  key={pillar.id}
+                  className="relative w-full transition-all duration-300"
+                  style={{
+                    aspectRatio: "1 / 1.155",
+                    animation: `kfFloat 6s ease-in-out ${originalIndex * 0.35}s infinite`,
+                    filter: isActive
+                      ? "drop-shadow(0 14px 28px rgba(61,21,56,0.75)) drop-shadow(0 0 20px rgba(215,171,106,0.6))"
+                      : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
+                    zIndex: isActive ? 30 : 10,
+                  }}
+                >
+                  <HexCard
+                    pillar={pillar}
+                    index={originalIndex}
+                    active={isActive}
+                    dimmed={isDimmed}
+                    onEnter={() => setActiveId(pillar.id)}
+                    onLeave={() => setActiveId(null)}
+                    onTap={() => setActiveId(isActive ? null : pillar.id)}
+                    isMobile
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Column 2 (Odd indexed pillars: 02, 04, 06, 08, 10) — staggered downwards */}
+          <div className="flex flex-1 flex-col -space-y-4 sm:-space-y-6 pt-10 sm:pt-14">
+            {PILLARS.filter((_, i) => i % 2 === 1).map((pillar) => {
+              const originalIndex = PILLARS.findIndex((p) => p.id === pillar.id);
+              const isActive = activeId === pillar.id;
+              const isDimmed = activeId !== null && !isActive;
+              return (
+                <div
+                  key={pillar.id}
+                  className="relative w-full transition-all duration-300"
+                  style={{
+                    aspectRatio: "1 / 1.155",
+                    animation: `kfFloat 6s ease-in-out ${originalIndex * 0.35}s infinite`,
+                    filter: isActive
+                      ? "drop-shadow(0 14px 28px rgba(61,21,56,0.75)) drop-shadow(0 0 20px rgba(215,171,106,0.6))"
+                      : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
+                    zIndex: isActive ? 30 : 10,
+                  }}
+                >
+                  <HexCard
+                    pillar={pillar}
+                    index={originalIndex}
+                    active={isActive}
+                    dimmed={isDimmed}
+                    onEnter={() => setActiveId(pillar.id)}
+                    onLeave={() => setActiveId(null)}
+                    onTap={() => setActiveId(isActive ? null : pillar.id)}
+                    isMobile
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* All Ten Key Focus Areas — each opens its own service page */}
@@ -243,7 +355,7 @@ export function CoreFocusSection() {
         <h5 className="text-center text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
           All Ten Key Focus Areas
         </h5>
-        <ul className="mt-4 grid gap-1 sm:grid-cols-2">
+        <ul className="mt-4 grid gap-1 grid-cols-1 sm:grid-cols-2">
           {PILLARS.map((pillar, i) => (
             <li key={pillar.id}>
               <Link

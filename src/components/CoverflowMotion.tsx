@@ -10,11 +10,12 @@ import { PARTNERS, type Partner } from "@/lib/partners";
    ========================================================= */
 export const MOTION_CSS = `
   .kbs-stage {
-    --motion-card-w: clamp(128px, 30vh, 264px);
-    --motion-card-h: clamp(128px, 30vh, 264px);
+    --motion-card-w: clamp(112px, 24vh, 264px);
+    --motion-card-h: clamp(112px, 24vh, 264px);
     --motion-idle-bob: 6px;
     --motion-idle-duration: 3.6s;
     perspective: 1200px;
+    touch-action: pan-y;
   }
   .kbs-track {
     position: relative;
