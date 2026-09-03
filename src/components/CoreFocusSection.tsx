@@ -135,13 +135,13 @@ function HexCard({
 export function CoreFocusSection() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [hexSize, setHexSize] = useState(236);
-  const [mobileHexW, setMobileHexW] = useState(165);
+  const [mobileHexW, setMobileHexW] = useState(160);
   const wrapRef = useRef<HTMLDivElement>(null);
   const mobileWrapRef = useRef<HTMLDivElement>(null);
 
   const activePillar = PILLARS.find((p) => p.id === activeId);
 
-  // Desktop coordinate observer
+  // Desktop coordinate observer (4-2-4 grid)
   useLayoutEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -156,15 +156,15 @@ export function CoreFocusSection() {
     return () => ro.disconnect();
   }, []);
 
-  // Mobile coordinate observer (mathematically calculates exact mobile hexagon width)
+  // Mobile coordinate observer (measures width and scales 2-1-2 cluster)
   useLayoutEffect(() => {
     const el = mobileWrapRef.current;
     if (!el) return;
     const update = () => {
       const w = el.clientWidth;
-      // Fit 2 interlocking columns: total width = SX + hexW = (0.75 * hexW + 8) + hexW = 1.75 * hexW + 8
-      const maxAvailable = Math.min(w - 12, 380);
-      const computedW = Math.round(Math.min(Math.max((maxAvailable - 8) / 1.75, 135), 210));
+      // 2 hexagons across the screen: stage width = 2 * hexW + GAP
+      const maxAvailable = Math.min(w - 24, 380);
+      const computedW = Math.round(Math.min(Math.max((maxAvailable - 10) / 2, 130), 180));
       setMobileHexW(computedW);
     };
     update();
@@ -173,7 +173,7 @@ export function CoreFocusSection() {
     return () => ro.disconnect();
   }, []);
 
-  // Desktop geometry
+  // Desktop geometry (4-2-4 grid) — 100% UNTOUCHED
   const HEX_W = hexSize;
   const GAP = 16;
   const HEX_H = Math.round(hexSize * (2 / Math.sqrt(3)));
@@ -184,14 +184,34 @@ export function CoreFocusSection() {
   const DESC_W = PAD_X + 3 * SX + HEX_W / 2;
   const DESC_H = PAD_Y + 2 * SY + HEX_H / 2;
 
-  // Mobile mathematical geometry (Pointy-topped interlocking lattice)
+  // Mobile 2-1-2 Geometry
+  // Row 1: 2 hexagons (left & right)
+  // Row 2: 1 hexagon (centered in notch)
+  // Row 3: 2 hexagons (left & right)
   const M_HEX_W = mobileHexW;
   const M_HEX_H = Math.round(M_HEX_W * (2 / Math.sqrt(3)));
-  const M_GAP = 8;
-  const M_SX = Math.round(M_HEX_W * 0.75 + M_GAP);
-  const M_SY = Math.round(M_HEX_H * 0.5 + M_GAP * 0.5);
-  const M_CONTAINER_W = M_SX + M_HEX_W;
-  const M_CONTAINER_H = 9 * M_SY + M_HEX_H;
+  const M_GAP = 10;
+  const M_SX = M_HEX_W + M_GAP;
+  const M_SY = Math.round(M_HEX_H * 0.75 + M_GAP * 0.5);
+  const M_STAGE_W = M_SX + M_HEX_W;
+  const M_STAGE_H = 2 * M_SY + M_HEX_H;
+
+  // 2-1-2 layout coordinates for each 5-pillar cluster:
+  // Index 0: Row 1, Left  [0, 0]
+  // Index 1: Row 1, Right [1, 0]
+  // Index 2: Row 2, Center [0.5, 1]
+  // Index 3: Row 3, Left  [0, 2]
+  // Index 4: Row 3, Right [1, 2]
+  const POS_212: [number, number][] = [
+    [0, 0],
+    [1, 0],
+    [0.5, 1],
+    [0, 2],
+    [1, 2],
+  ];
+
+  const cluster1 = PILLARS.slice(0, 5);
+  const cluster2 = PILLARS.slice(5, 10);
 
   return (
     <section
@@ -227,7 +247,9 @@ export function CoreFocusSection() {
         </p>
       </div>
 
-      {/* Honeycomb — desktop (4-2-4 grid), fills the full available width */}
+      {/* =========================================================================
+          DESKTOP VIEW: Dedicated 4-2-4 Honeycomb Code (Preserved Exactly as Is)
+          ========================================================================= */}
       <div ref={wrapRef} className="mt-12 hidden w-full md:block">
         <div className="relative mx-auto" style={{ width: DESC_W, height: DESC_H }}>
           {PILLARS.map((pillar, i) => {
@@ -279,9 +301,13 @@ export function CoreFocusSection() {
         </div>
       </div>
 
-      {/* Honeycomb — mobile (mathematically calculated interlocking honeycomb) */}
+      {/* =========================================================================
+          MOBILE VIEW: Dedicated 2-1-2 Row and Column Honeycomb Code (Mobile Only)
+          Cluster 1: Pillars 01–05 arranged in 2 - 1 - 2 rows
+          Cluster 2: Pillars 06–10 arranged in 2 - 1 - 2 rows
+          ========================================================================= */}
       <div ref={mobileWrapRef} className="mt-8 md:hidden">
-        {/* Interactive guidance pill */}
+        {/* Mobile Guidance Pill */}
         <div className="mb-6 flex justify-center px-2">
           <div
             className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[0.65rem] tracking-wider font-mono transition-all duration-300 ${
@@ -301,20 +327,24 @@ export function CoreFocusSection() {
           </div>
         </div>
 
-        {/* The mathematically exact mobile honeycomb stage */}
+        {/* --- CLUSTER I (2-1-2): Pillars 01 to 05 --- */}
+        <div className="mb-2 text-center">
+          <span className="text-[0.6rem] font-mono font-bold tracking-[0.25em] text-[#D7AB6A]/80 uppercase">
+            Core Deep-Tech Pillars
+          </span>
+        </div>
+
         <div
           className="relative mx-auto"
-          style={{ width: M_CONTAINER_W, height: M_CONTAINER_H }}
+          style={{ width: M_STAGE_W, height: M_STAGE_H }}
           onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setActiveId(null);
-            }
+            if (e.target === e.currentTarget) setActiveId(null);
           }}
         >
-          {PILLARS.map((pillar, i) => {
-            const isCol1 = i % 2 === 1;
-            const left = isCol1 ? M_SX : 0;
-            const top = i * M_SY;
+          {cluster1.map((pillar, i) => {
+            const [px, py] = POS_212[i];
+            const left = px * M_SX;
+            const top = py * M_SY;
             const isActive = activeId === pillar.id;
             const isDimmed = activeId !== null && !isActive;
 
@@ -337,6 +367,62 @@ export function CoreFocusSection() {
                 <HexCard
                   pillar={pillar}
                   index={i}
+                  active={isActive}
+                  dimmed={isDimmed}
+                  onEnter={() => setActiveId(pillar.id)}
+                  onLeave={() => setActiveId(null)}
+                  onTap={() => setActiveId(isActive ? null : pillar.id)}
+                  isMobile
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Inter-Cluster Divider */}
+        <div className="my-8 flex items-center justify-center gap-3">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#D7AB6A]/40" />
+          <span className="text-[0.6rem] font-mono font-bold tracking-[0.25em] text-[#D7AB6A]/80 uppercase">
+            Applied &amp; Autonomous Pillars
+          </span>
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#D7AB6A]/40" />
+        </div>
+
+        {/* --- CLUSTER II (2-1-2): Pillars 06 to 10 --- */}
+        <div
+          className="relative mx-auto"
+          style={{ width: M_STAGE_W, height: M_STAGE_H }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveId(null);
+          }}
+        >
+          {cluster2.map((pillar, i) => {
+            const [px, py] = POS_212[i];
+            const left = px * M_SX;
+            const top = py * M_SY;
+            const globalIndex = i + 5;
+            const isActive = activeId === pillar.id;
+            const isDimmed = activeId !== null && !isActive;
+
+            return (
+              <div
+                key={pillar.id}
+                className="absolute transition-all duration-300"
+                style={{
+                  left,
+                  top,
+                  width: M_HEX_W,
+                  height: M_HEX_H,
+                  animation: `kfFloat 6s ease-in-out ${globalIndex * 0.35}s infinite`,
+                  filter: isActive
+                    ? "drop-shadow(0 14px 28px rgba(61,21,56,0.85)) drop-shadow(0 0 22px rgba(215,171,106,0.65))"
+                    : "drop-shadow(0 6px 14px rgba(24,5,30,0.5)) drop-shadow(0 0 10px rgba(109,31,85,0.3))",
+                  zIndex: isActive ? 40 : 10,
+                }}
+              >
+                <HexCard
+                  pillar={pillar}
+                  index={globalIndex}
                   active={isActive}
                   dimmed={isDimmed}
                   onEnter={() => setActiveId(pillar.id)}
