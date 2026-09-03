@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
 import { QuantumIntro } from "@/components/QuantumIntro";
 import { QuantumAmbient } from "@/components/QuantumAmbient";
 import { CoreFocusSection } from "@/components/CoreFocusSection";
@@ -18,6 +19,7 @@ import {
   Sun,
   Moon,
   GraduationCap,
+  ChevronDown,
 } from "lucide-react";
 
 const BRAND = "Kanagam Tech";
@@ -167,7 +169,7 @@ function RotatingTagline() {
     <div className="mx-auto mt-5 flex min-h-[2.5rem] w-full max-w-4xl items-center justify-center px-2 text-center">
       {current && (
         <p
-          className={`whitespace-nowrap text-foreground transition-all duration-300 ease-in-out ${current.fontClass} ${
+          className={`text-foreground transition-all duration-300 ease-in-out sm:whitespace-nowrap ${current.fontClass} ${
             isVisible
               ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 -translate-y-1 scale-[0.98]"
@@ -180,16 +182,45 @@ function RotatingTagline() {
   );
 }
 
+function MobileNavLink({
+  to,
+  label,
+  onNavigate,
+}: {
+  to: string;
+  label: string;
+  onNavigate: () => void;
+}) {
+  return (
+    <Link
+      to={to}
+      onClick={onNavigate}
+      className="flex w-full items-center rounded-lg px-3 py-2.5 text-[0.72rem] font-semibold tracking-[0.18em] text-foreground uppercase transition-colors hover:bg-secondary/60"
+    >
+      {label}
+    </Link>
+  );
+}
+
 function Index() {
   const [intro, setIntro] = useState(false);
   // Dark theme is the brand default; user's explicit choice persists via localStorage.
   const [isDark, setIsDark] = useState(true);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIntro(checkShouldShowIntro());
   }, []);
+
+  // Lock body scroll while the mobile drawer is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -225,9 +256,9 @@ function Index() {
 
         {/* Sticky Header Navigation */}
         <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl transition-colors">
-          <div className="relative flex w-full items-center justify-between gap-4 px-6 py-3.5">
-            <Link to="/" className="ml-3 flex items-center gap-3">
-              <KanagamLogo size="lg" />
+          <div className="relative flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-6">
+            <Link to="/" className="ml-1 flex min-w-0 items-center gap-3 sm:ml-3">
+              <KanagamLogo size="md" />
             </Link>
 
             {/* Nav centered to the screen, with click-to-open dropdowns */}
@@ -359,7 +390,7 @@ function Index() {
             </nav>
 
             {/* Theme toggle + CTAs pinned to the far-right end of the site */}
-            <div className="flex shrink-0 items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
               <button
                 onClick={() => setIsDark(!isDark)}
                 title="Toggle Brand Light / Dark Mode"
@@ -374,20 +405,167 @@ function Index() {
 
               <Link
                 to="/partners"
-                className="rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-2 text-[0.65rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md transition-transform hover:scale-105"
+                className="hidden rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-2 text-[0.65rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md transition-transform hover:scale-105 sm:inline-flex"
               >
                 Partner With Us
               </Link>
 
               <a
                 href="#focus"
-                className="rounded-full border border-primary/30 bg-card/60 px-5 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-bold shadow-md transition-all hover:bg-secondary hover:scale-105"
+                className="hidden rounded-full border border-primary/30 bg-card/60 px-5 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-bold shadow-md transition-all hover:bg-secondary hover:scale-105 md:inline-flex"
               >
                 All Products
               </a>
+
+              {/* Mobile hamburger menu toggle */}
+              <button
+                type="button"
+                onClick={() => setMobileOpen((v) => !v)}
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-all hover:bg-secondary md:hidden"
+              >
+                {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </button>
             </div>
           </div>
         </header>
+
+        {/* Mobile navigation drawer */}
+        <div
+          className={`fixed inset-0 z-50 md:hidden ${mobileOpen ? "" : "pointer-events-none"}`}
+          aria-hidden={!mobileOpen}
+        >
+          {/* Backdrop */}
+          <div
+            className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+              mobileOpen ? "opacity-100" : "opacity-0"
+            }`}
+            onClick={() => setMobileOpen(false)}
+          />
+          {/* Panel */}
+          <div
+            className={`absolute top-0 right-0 flex h-full w-[min(20rem,85vw)] flex-col overflow-y-auto border-l border-border bg-background shadow-2xl transition-transform duration-300 ${
+              mobileOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            <div className="flex items-center justify-between border-b border-border/60 px-5 py-4">
+              <KanagamLogo size="sm" />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-secondary"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <nav className="flex flex-1 flex-col gap-1 p-4">
+              <MobileNavLink to="/about" label="About Us" onNavigate={() => setMobileOpen(false)} />
+              <button
+                type="button"
+                onClick={() => setOpenMenu(openMenu === "focus" ? null : "focus")}
+                className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[0.72rem] font-semibold tracking-[0.18em] text-foreground uppercase transition-colors hover:bg-secondary/60"
+              >
+                Core Focus
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${openMenu === "focus" ? "rotate-180" : ""}`}
+                />
+              </button>
+              {openMenu === "focus" && (
+                <div className="ml-2 flex flex-col gap-0.5 border-l border-border/60 pl-3">
+                  {PILLARS.map((p) => {
+                    const PIcon = p.icon;
+                    return (
+                      <Link
+                        key={p.id}
+                        to="/service/$slug"
+                        params={{ slug: p.id }}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[0.78rem] tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                      >
+                        <PIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                        <span>{p.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => setOpenMenu(openMenu === "academia" ? null : "academia")}
+                className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[0.72rem] font-semibold tracking-[0.18em] text-foreground uppercase transition-colors hover:bg-secondary/60"
+              >
+                Academia &amp; Talent
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${openMenu === "academia" ? "rotate-180" : ""}`}
+                />
+              </button>
+              {openMenu === "academia" && (
+                <div className="ml-2 flex flex-col gap-0.5 border-l border-border/60 pl-3">
+                  {ACADEMIC_PROGRAMS.map((prog) => {
+                    const GIcon = prog.icon;
+                    return (
+                      <Link
+                        key={prog.slug}
+                        to="/service/$slug"
+                        params={{ slug: prog.slug }}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[0.78rem] tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                      >
+                        <GIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                        <span>{prog.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => setOpenMenu(openMenu === "enquire" ? null : "enquire")}
+                className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[0.72rem] font-semibold tracking-[0.18em] text-foreground uppercase transition-colors hover:bg-secondary/60"
+              >
+                Enquire
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${openMenu === "enquire" ? "rotate-180" : ""}`}
+                />
+              </button>
+              {openMenu === "enquire" && (
+                <div className="ml-2 flex flex-col gap-0.5 border-l border-border/60 pl-3">
+                  <a
+                    href="#institutional-inquire"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[0.78rem] tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                  >
+                    <Sparkles className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <span>Institutional / Partnership Enquiry</span>
+                  </a>
+                  <a
+                    href="#student-inquire"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[0.78rem] tracking-normal text-muted-foreground normal-case transition-colors hover:bg-primary/10 hover:text-primary"
+                  >
+                    <GraduationCap className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <span>Student Enquire</span>
+                  </a>
+                </div>
+              )}
+            </nav>
+
+            <div className="border-t border-border/60 p-4">
+              <Link
+                to="/partners"
+                onClick={() => setMobileOpen(false)}
+                className="flex w-full items-center justify-center rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-3 text-[0.7rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md"
+              >
+                Partner With Us
+              </Link>
+            </div>
+          </div>
+        </div>
 
         {/* Hero Section */}
         <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-6 pt-2 pb-3 text-center">

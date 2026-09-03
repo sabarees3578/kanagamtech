@@ -56,16 +56,17 @@ function AboutPage() {
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-          <Link to="/" className="flex items-center gap-3">
-            <KanagamLogo size="md" />
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+          <Link to="/" className="flex min-w-0 items-center gap-3">
+            <KanagamLogo size="sm" />
           </Link>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-[0.65rem] tracking-[0.2em] text-foreground uppercase font-semibold transition-colors hover:bg-secondary"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-[0.6rem] tracking-[0.18em] text-foreground uppercase font-semibold transition-colors hover:bg-secondary sm:px-4"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Back to Home
+            <span className="hidden sm:inline">Back to Home</span>
+            <span className="sm:hidden">Home</span>
           </Link>
         </div>
       </header>
@@ -73,7 +74,7 @@ function AboutPage() {
       {/* Centered page body */}
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center px-6 py-16">
         {/* Quantum Orb — centered */}
-        <QuantumOrb className="h-[300px] w-[300px] shrink-0 sm:h-[340px] sm:w-[340px]" />
+        <QuantumOrb className="h-[min(56vw,300px)] w-[min(56vw,300px)] shrink-0 sm:h-[340px] sm:w-[340px]" />
 
         <div className="mt-16 text-center sm:mt-20">
           <h1 className="font-display text-[clamp(1.8rem,4.2vw,2.8rem)] leading-tight font-bold tracking-tight text-foreground">
