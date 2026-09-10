@@ -20,7 +20,9 @@ const POS: [number, number][] = [
   [3, 2],
 ];
 const HEX_CLIP = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
-const PLUM_BG = "linear-gradient(150deg, #6d1f55 0%, #3d1538 38%, #2b0b30 68%, #18051e 100%)";
+// Theme-aware face: --hex-face-bg (styles.css) swaps between the shiny plum
+// gradient (dark) and a warm ivory/gold gradient (light) automatically.
+const PLUM_BG = "var(--hex-face-bg)";
 const RING_BG =
   "linear-gradient(160deg, rgba(240,196,120,0.95) 0%, rgba(168,64,128,0.6) 45%, rgba(215,171,106,0.55) 100%)";
 
@@ -79,7 +81,7 @@ function HexCard({
       />
       {/* Hexagonal plum face */}
       <span
-        className="absolute inset-[5px] sm:inset-[6px] md:inset-[7px] flex flex-col items-center justify-between overflow-hidden px-2 sm:px-3 md:px-7 py-3 sm:py-4 md:py-6 text-center"
+        className="absolute inset-[5px] sm:inset-[6px] md:inset-[7px] flex flex-col items-center justify-center overflow-hidden px-2 sm:px-3 md:px-7 py-3 sm:py-4 md:py-6 text-center"
         style={{
           clipPath: HEX_CLIP,
           background: PLUM_BG,
@@ -100,30 +102,19 @@ function HexCard({
         {/* Uniform coordinate shine — sweeps top-left -> bottom-right, then back */}
         <span className="kf-shine" />
 
-        {/* Top bar: 01 and Readiness Badge */}
-        <span className="relative z-10 flex w-full items-center justify-between px-1 text-[0.55rem] sm:text-[0.6rem] md:text-[0.62rem] font-mono font-bold tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] text-[#D7AB6A]">
-          <span>0{index + 1}</span>
-          <span
-            className="rounded-full bg-black/40 border border-white/10 px-1.5 sm:px-2 py-0.5 text-[0.45rem] sm:text-[0.5rem] tracking-wider text-white/85 uppercase truncate max-w-[72px] sm:max-w-[90px] md:max-w-[110px]"
-            title={pillar.readiness}
-          >
-            {pillar.readiness}
-          </span>
-        </span>
-
         {/* Center: Icon + Title */}
-        <div className="relative z-10 flex flex-col items-center justify-center my-auto w-full px-0.5">
-          <span className="flex h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 items-center justify-center rounded-lg sm:rounded-xl border border-[#D7AB6A]/40 bg-white/10 text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
-            <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+        <div className="relative z-10 flex flex-col items-center justify-center w-full px-0.5">
+          <span className="flex h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-lg sm:rounded-xl border border-accent/40 bg-accent/15 text-primary dark:bg-white/10 dark:text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
+            <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" />
           </span>
 
-          <h3 className="font-display mt-1 sm:mt-1.5 md:mt-2.5 text-[0.64rem] sm:text-[0.72rem] md:text-[0.82rem] leading-snug font-bold tracking-tight text-[#FFF3E4] [text-shadow:0_1px_8px_rgba(0,0,0,0.4)] line-clamp-2">
+          <h3 className="font-display mt-1 sm:mt-1.5 md:mt-2.5 text-[0.64rem] sm:text-[0.72rem] md:text-[0.82rem] leading-snug font-bold tracking-tight text-foreground [text-shadow:0_1px_8px_rgba(0,0,0,0.25)] line-clamp-2">
             {pillar.title}
           </h3>
         </div>
 
         {/* Bottom CTA: View Page */}
-        <span className="relative z-10 inline-flex items-center gap-1 text-[0.48rem] sm:text-[0.55rem] md:text-[0.6rem] font-bold tracking-[0.14em] sm:tracking-[0.18em] md:tracking-[0.2em] text-[#D7AB6A] uppercase transition-colors">
+        <span className="relative z-10 mt-1.5 sm:mt-2 md:mt-3 inline-flex items-center gap-1 text-[0.48rem] sm:text-[0.55rem] md:text-[0.6rem] font-bold tracking-[0.14em] sm:tracking-[0.18em] md:tracking-[0.2em] text-primary uppercase transition-colors">
           <span>{active && isMobile ? "Tap to Open" : "View Page"}</span>
           <ChevronRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
@@ -229,6 +220,15 @@ export function CoreFocusSection() {
           mix-blend-mode: screen;
           animation: kfDiag 3.8s ease-in-out infinite alternate;
           pointer-events: none; }
+        @keyframes kfWordmarkShine {
+          0% { background-position: -150% 0; }
+          100% { background-position: 250% 0; }
+        }
+        .kf-wordmark-shine {
+          background-image: linear-gradient(100deg, #B9853F 0%, #E8C576 35%, #FFF6DE 50%, #E8C576 65%, #B9853F 100%);
+          background-size: 250% 100%;
+          animation: kfWordmarkShine 3.5s ease-in-out infinite;
+        }
       `}</style>
 
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
@@ -286,12 +286,13 @@ export function CoreFocusSection() {
             );
           })}
 
-          {/* Brand mark — fills the center gap between the two middle hexes */}
+          {/* Brand mark — flat golden wordmark with a subtle shine sweep, fills
+              the center gap between the two middle hexes */}
           <div
             className="pointer-events-none absolute z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center"
             style={{ left: PAD_X + 1.5 * SX, top: PAD_Y + SY, width: SX }}
           >
-            <span className="font-display bg-gradient-to-b from-[#F6DFAE] via-[#E8C576] to-[#B9853F] bg-clip-text pb-1 pr-0.5 text-[clamp(1.05rem,2vw,1.6rem)] leading-[1.2] font-bold tracking-tight text-transparent">
+            <span className="font-display kf-wordmark-shine bg-clip-text pb-1 pr-0.5 text-[clamp(1.05rem,2vw,1.6rem)] leading-[1.2] font-bold tracking-tight text-transparent">
               Kanagam
             </span>
             <span className="mt-1.5 text-[0.45rem] font-mono font-bold tracking-[0.22em] whitespace-nowrap text-[#D7AB6A]/90 uppercase">
@@ -312,14 +313,15 @@ export function CoreFocusSection() {
           <div
             className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[0.65rem] tracking-wider font-mono transition-all duration-300 ${
               activePillar
-                ? "border-[#D7AB6A]/60 bg-[#D7AB6A]/15 text-[#E8C576] shadow-[0_0_15px_rgba(215,171,106,0.25)]"
+                ? "border-accent/60 bg-accent/15 text-primary dark:text-[#E8C576] shadow-[0_0_15px_rgba(215,171,106,0.25)]"
                 : "border-primary/20 bg-card/60 text-muted-foreground"
             }`}
           >
             <Sparkles className="h-3 w-3 text-primary animate-pulse" />
             {activePillar ? (
               <span className="truncate max-w-[280px]">
-                <strong className="text-foreground">{activePillar.title}</strong> — Tap again to open →
+                <strong className="text-foreground">{activePillar.title}</strong> — Tap again to
+                open →
               </span>
             ) : (
               <span>Tap a hexagon to toggle • Tap again to open</span>
@@ -437,10 +439,10 @@ export function CoreFocusSection() {
 
         {/* Active Pillar Spotlight Panel (Thumb-friendly mobile card) */}
         {activePillar && (
-          <div className="mt-8 rounded-2xl border border-[#D7AB6A]/40 bg-gradient-to-r from-[#3d1538]/95 via-[#2b0b30]/95 to-[#18051e]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-300">
+          <div className="mt-8 rounded-2xl border border-accent/40 bg-card/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-300">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D7AB6A]/50 bg-white/10 text-[#E8C576] shadow-[0_0_12px_rgba(215,171,106,0.3)]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/50 bg-accent/15 text-primary dark:bg-white/10 dark:text-[#E8C576] shadow-[0_0_12px_rgba(215,171,106,0.3)]">
                   {(() => {
                     const ActiveIcon = activePillar.icon;
                     return <ActiveIcon className="h-5 w-5" />;
@@ -448,14 +450,14 @@ export function CoreFocusSection() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[0.6rem] font-mono font-bold tracking-widest text-[#D7AB6A] uppercase">
+                    <span className="text-[0.6rem] font-mono font-bold tracking-widest text-primary uppercase">
                       Pillar 0{PILLARS.findIndex((p) => p.id === activePillar.id) + 1}
                     </span>
-                    <span className="rounded-full bg-black/40 px-2 py-0.5 text-[0.5rem] font-semibold tracking-wider text-white/80 uppercase">
+                    <span className="rounded-full bg-foreground/10 px-2 py-0.5 text-[0.5rem] font-semibold tracking-wider text-foreground/80 uppercase">
                       {activePillar.readiness}
                     </span>
                   </div>
-                  <h4 className="font-display mt-0.5 text-sm sm:text-base font-bold text-[#FFF3E4] leading-snug">
+                  <h4 className="font-display mt-0.5 text-sm sm:text-base font-bold text-foreground leading-snug">
                     {activePillar.title}
                   </h4>
                   <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
@@ -477,30 +479,6 @@ export function CoreFocusSection() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* All Ten Key Focus Areas — each opens its own service page */}
-      <div className="mt-16 rounded-2xl border border-primary/30 bg-card/80 p-6 shadow-lg backdrop-blur-md">
-        <h5 className="text-center text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-          All Ten Key Focus Areas
-        </h5>
-        <ul className="mt-4 grid gap-1 grid-cols-1 sm:grid-cols-2">
-          {PILLARS.map((pillar, i) => (
-            <li key={pillar.id}>
-              <Link
-                to="/service/$slug"
-                params={{ slug: pillar.id }}
-                className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-xs font-normal text-foreground transition-colors hover:bg-secondary/60 hover:text-primary"
-              >
-                <span className="font-mono text-[0.6rem] tracking-widest text-muted-foreground/70">
-                  0{i + 1}
-                </span>
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-border" />
-                <span>{pillar.title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

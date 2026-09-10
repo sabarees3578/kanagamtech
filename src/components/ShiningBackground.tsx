@@ -1,13 +1,14 @@
 const SHINE_KEYS = `
-  @keyframes kbsMove { 0%,100% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } }
-  @keyframes kbsDrift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-24px, 20px); } }
+  @keyframes kbsMoveDown { 0% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
+  @keyframes kbsDriftDown { 0% { transform: translate(0,0); } 100% { transform: translate(0, 30px); } }
   @keyframes kbsPulse { 0%,100% { opacity: 0.35; } 50% { opacity: 0.8; } }
 `;
 
 /**
  * Plum "shining motion" background theme — layered, always-animating glows
- * and a diagonal shine sweep. Render as the first child inside a
- * `relative overflow-hidden` parent (e.g. each page's <main>).
+ * and a diagonal shine sweep that loops strictly top-to-bottom. Render as the
+ * first child inside a `relative overflow-hidden` parent (e.g. each page's
+ * <main>).
  */
 export function ShiningBackground({
   variant = "default",
@@ -32,23 +33,23 @@ export function ShiningBackground({
             : "radial-gradient(130% 110% at 18% 0%, rgba(122,42,99,0.26) 0%, rgba(75,29,63,0.18) 45%, rgba(24,5,30,0) 100%)",
           backgroundSize: "180% 180%",
           animation: strong
-            ? "kbsMove 9s ease-in-out infinite alternate"
-            : "kbsMove 14s ease-in-out infinite alternate",
+            ? "kbsMoveDown 9s ease-in-out infinite"
+            : "kbsMoveDown 14s ease-in-out infinite",
         }}
       />
 
-      {/* Drifting gold & plum glows */}
+      {/* Drifting gold & plum glows (loop downward) */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
             "radial-gradient(120% 90% at 18% 8%, rgba(240,196,120,0.15) 0%, transparent 52%), radial-gradient(110% 90% at 85% 95%, rgba(160,64,128,0.2) 0%, transparent 55%)",
           backgroundSize: "160% 160%, 150% 150%",
-          animation: "kbsDrift 12s ease-in-out infinite",
+          animation: "kbsDriftDown 12s ease-in-out infinite",
         }}
       />
 
-      {/* Diagonal shine band — sweeps top-left -> bottom-right, then back */}
+      {/* Diagonal shine band — sweeps top-left -> bottom-right in a loop */}
       <div
         className="absolute inset-0"
         style={{
@@ -56,7 +57,7 @@ export function ShiningBackground({
             "linear-gradient(120deg, transparent 44%, rgba(255,255,255,0.10) 50%, rgba(240,196,120,0.26) 56%, transparent 64%)",
           backgroundSize: "220% 220%",
           mixBlendMode: "screen",
-          animation: "kbsMove 7s ease-in-out infinite alternate",
+          animation: "kbsMoveDown 7s ease-in-out infinite",
         }}
       />
 

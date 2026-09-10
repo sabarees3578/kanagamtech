@@ -211,7 +211,11 @@ function Index() {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    setIntro(checkShouldShowIntro());
+    const shouldShow = checkShouldShowIntro();
+    // Force the reload that triggers the intro to always hand off at the top of
+    // the page, regardless of the browser's own scroll restoration.
+    if (shouldShow) window.scrollTo(0, 0);
+    setIntro(shouldShow);
   }, []);
 
   // Lock body scroll while the mobile drawer is open
@@ -243,6 +247,7 @@ function Index() {
   }, [isDark]);
 
   const handleIntroComplete = () => {
+    window.scrollTo(0, 0);
     setIntro(false);
   };
 
@@ -320,7 +325,7 @@ function Index() {
                   onClick={() => setOpenMenu(openMenu === "academia" ? null : "academia")}
                   className={`transition-colors ${openMenu === "academia" ? "text-primary" : "hover:text-primary"}`}
                 >
-                  ACADIMEA &amp; TALENT
+                  ACADEMIA &amp; TALENT
                 </button>
                 <div
                   className={`absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 transition-all duration-200 ${
@@ -403,12 +408,12 @@ function Index() {
                 )}
               </button>
 
-              <Link
-                to="/partners"
+              <a
+                href="#inquire"
                 className="hidden rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-2 text-[0.65rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md transition-transform hover:scale-105 sm:inline-flex"
               >
                 Partner With Us
-              </Link>
+              </a>
 
               <a
                 href="#focus"
@@ -556,13 +561,13 @@ function Index() {
             </nav>
 
             <div className="border-t border-border/60 p-4">
-              <Link
-                to="/partners"
+              <a
+                href="#inquire"
                 onClick={() => setMobileOpen(false)}
                 className="flex w-full items-center justify-center rounded-full bg-[#4B1D3F] dark:bg-[#D7AB6A] px-5 py-3 text-[0.7rem] tracking-[0.2em] text-white dark:text-[#4B1D3F] uppercase font-bold shadow-md"
               >
                 Partner With Us
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -638,7 +643,10 @@ function Index() {
         </section>
 
         {/* About Us Section */}
-        <section id="about" className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28">
+        <section
+          id="about"
+          className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28"
+        >
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7">
               <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
@@ -754,8 +762,8 @@ function Index() {
         {/* Footer */}
         <footer className="relative z-10 border-t border-border/70 py-12 text-center text-xs text-muted-foreground bg-card/40">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col items-center justify-between gap-4 sm:gap-6 md:flex-row">
-            <div className="flex items-center gap-3">
-              <KanagamLogo size="sm" />
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+              <KanagamLogo size="lg" />
             </div>
 
             <div className="text-[0.65rem] tracking-[0.2em] uppercase font-mono font-medium">

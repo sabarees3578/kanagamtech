@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
-import { QuantumOrb } from "@/components/QuantumOrb";
 import { ShiningBackground } from "@/components/ShiningBackground";
 import { ArrowLeft, Eye, Target } from "lucide-react";
 
@@ -38,7 +37,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <main
-      className="relative min-h-screen overflow-hidden font-sans"
+      className="relative h-[100dvh] overflow-hidden font-sans"
       style={
         {
           background: "linear-gradient(155deg, #7a2a63 0%, #4B1D3F 32%, #2b0b30 64%, #18051e 100%)",
@@ -53,12 +52,17 @@ function AboutPage() {
     >
       <ShiningBackground variant="strong" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
+      <img
+        src="/img/kanagam-final.png"
+        alt="Kanagam Technology Solutions 2026"
+        className="pointer-events-none absolute left-[3%] top-[46%] w-[min(48vw,640px)] -translate-y-1/2 rounded-2xl object-contain select-none"
+      />
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-3">
-          <Link to="/" className="flex shrink-0 items-center gap-3">
-            <KanagamLogo size="md" />
+        <div className="flex items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-4 md:px-6">
+          <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3 sm:ml-3">
+            <KanagamLogo size="lg" />
           </Link>
           <Link
             to="/"
@@ -71,78 +75,102 @@ function AboutPage() {
         </div>
       </header>
 
-      {/* Centered page body */}
-      <section className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-5xl flex-col items-center px-4 sm:px-6 py-10 sm:py-16">
-        {/* Quantum Orb — centered */}
-        <QuantumOrb className="h-[min(50vw,260px)] w-[min(50vw,260px)] shrink-0 sm:h-[340px] sm:w-[340px]" />
-
-        <div className="mt-10 text-center sm:mt-20">
-          <h1 className="font-display text-[clamp(1.8rem,4.2vw,2.8rem)] leading-tight font-bold tracking-tight text-foreground">
+      {/* Centered page body: content collage — fixed to one screen */}
+      <section className="relative z-10 mx-auto flex h-[calc(100dvh-3.5rem)] w-full flex-col overflow-hidden px-4 sm:px-6 py-4 sm:py-6">
+        <div className="my-auto ml-auto mr-0 w-full max-w-3xl text-center">
+          <h1 className="font-display text-[clamp(1.3rem,3.7vh,2.1rem)] leading-tight font-bold tracking-tight text-foreground">
             Kanagam Technology Solutions
           </h1>
-          <p className="mt-3 text-[0.7rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
+          <p className="mt-1 text-[0.62rem] tracking-[0.25em] text-[#E9CD97] uppercase font-mono font-medium">
             Driving the Next Wave of Technological Evolution
           </p>
+
+          <div className="mt-3 max-w-4xl space-y-2 text-left text-[clamp(0.82rem,2.1vh,1rem)] leading-relaxed font-semibold text-foreground">
+            <p>
+              <strong className="font-bold text-[#EAD3A0]">
+                Kanagam Technology Solutions India Pvt Ltd
+              </strong>{" "}
+              was founded on a{" "}
+              <strong className="font-bold text-[#EAD3A0]">shared upbringing</strong> and{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                two decades of working side by side
+              </strong>{" "}
+              a rare closeness that shaped not just how its founders think, but how they build. That
+              deep-rooted alignment shapes our approach today:{" "}
+              <strong className="font-bold text-[#EAD3A0]">disciplined execution</strong>,{" "}
+              <strong className="font-bold text-[#EAD3A0]">strong fundamentals</strong>, and an{" "}
+              <strong className="font-bold text-[#EAD3A0]">unrelenting focus on quality</strong>.
+            </p>
+            <p>
+              That same <strong className="font-bold text-[#EAD3A0]">depth of experience</strong>{" "}
+              runs through our team, professionals who bring both{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                technical mastery and industry insight
+              </strong>{" "}
+              to everything we build. Guided by this collective expertise, we are laying{" "}
+              <strong className="font-bold text-[#EAD3A0]">strong foundations</strong> across our
+              people, processes, and partnerships as we begin this new journey with{" "}
+              <strong className="font-bold text-[#EAD3A0]">clarity and purpose</strong>.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-6 sm:mt-8 max-w-4xl space-y-4 sm:space-y-5 text-center text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
-          <p>
-            <strong className="font-semibold text-foreground">
-              Kanagam Technology Solutions India Pvt Ltd
-            </strong>{" "}
-            is a premier GenQ (Quantum Generation) enterprise standing at the confluence of quantum
-            research, intelligent systems, and global education — engineering the technologies that
-            define tomorrow. Founded and led by seasoned industry veterans, we carry decades of
-            combined leadership in building and scaling enterprise-grade technology companies across
-            continents, with a track record of taking complex hardware and software systems from
-            concept to global deployment. Our expertise spans ten deep-tech pillars —{" "}
-            <strong className="text-foreground">Quantum Computing &amp; GenQ</strong>, Semiconductor
-            &amp; ESDM (PCB Design, Prototype &amp; SMT Assembly), VLSI/FPGA Engineering, Embedded
-            Systems &amp; IIoT/AIoT (Enterprise Deployed), AI Engineering &amp; GenAI, AIBots,
-            AR/VR, Drones, 3D Scanner &amp; 3D Printer, and Skill Development &amp; Technical
-            Training.
-          </p>
-          <p>
-            As a full-scale tech house, we deliver end-to-end design, rapid prototyping, automated
-            SMT assembly, and rigorous testing — transforming bold ideas into reliable,
-            production-grade products. Beyond engineering, we are deeply invested in academia:
-            modernizing curricula, establishing Centers of Excellence, nurturing startup incubation
-            hubs, and delivering globally recognized certifications that prepare the next generation
-            of innovators.
-          </p>
-        </div>
-
-        {/* Mission & Vision */}
-        <div className="mt-8 sm:mt-10 grid w-full max-w-4xl gap-4 sm:gap-5 sm:grid-cols-2">
-          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-4 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
-                <Target className="h-5 w-5 text-[#E9CD97]" />
+        {/* Mission & Vision — bottom, opposite side of content */}
+        <div className="mb-0 mt-auto mx-auto w-full max-w-5xl items-stretch gap-4 grid sm:grid-cols-2 sm:gap-4">
+          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
+            <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#E9CD97]/70 to-transparent" />
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
+                <Target className="h-4.5 w-4.5 text-[#E9CD97]" />
               </div>
-              <div className="text-[0.7rem] font-bold tracking-[0.3em] text-primary uppercase">
+              <div className="text-[0.74rem] font-bold tracking-[0.28em] text-[#E9CD97] uppercase">
                 Our Mission
               </div>
             </div>
-            <p className="mt-3 sm:mt-4 text-justify font-mono text-[0.78rem] sm:text-[0.83rem] leading-relaxed text-muted-foreground">
-              "To establish advanced technology laboratories and deliver industry oriented skill
-              development and employability training programs, providing end to end solutions from
-              consultation, planning and design to supply, installation, commissioning, training and
-              ongoing technical support."
+            <p className="mt-2.5 flex-1 text-left font-mono text-[clamp(0.72rem,1.95vh,0.86rem)] leading-relaxed font-semibold text-foreground">
+              "To establish{" "}
+              <strong className="font-bold text-[#EAD3A0]">advanced technology laboratories</strong>{" "}
+              and deliver{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                industry oriented skill development and employability training programs
+              </strong>
+              , providing <strong className="font-bold text-[#EAD3A0]">end to end solutions</strong>{" "}
+              from{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                consultation, planning and design
+              </strong>{" "}
+              to{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                supply, installation, commissioning, training and ongoing technical support
+              </strong>
+              ."
             </p>
           </div>
-          <div className="rounded-2xl border border-[#D7AB6A]/25 bg-card/40 p-4 sm:p-6 backdrop-blur-md">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
-                <Eye className="h-5 w-5 text-[#E9CD97]" />
+          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
+            <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#E9CD97]/70 to-transparent" />
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
+                <Eye className="h-4.5 w-4.5 text-[#E9CD97]" />
               </div>
-              <div className="text-[0.7rem] font-bold tracking-[0.3em] text-primary uppercase">
+              <div className="text-[0.74rem] font-bold tracking-[0.28em] text-[#E9CD97] uppercase">
                 Our Vision
               </div>
             </div>
-            <p className="mt-3 sm:mt-4 text-justify font-mono text-[0.78rem] sm:text-[0.83rem] leading-relaxed text-muted-foreground">
-              "To engineer transformative deep tech solutions across quantum computing,
-              semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D fabrication,
-              empowering global academic ecosystems to lead and shape tomorrow's digital frontier."
+            <p className="mt-2.5 flex-1 text-left font-mono text-[clamp(0.72rem,1.95vh,0.86rem)] leading-relaxed font-semibold text-foreground">
+              "To engineer{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                transformative deep tech solutions
+              </strong>{" "}
+              across{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                quantum computing, semiconductors, embedded systems, AI, AIoT, AR/VR, drones and 3D
+                fabrication
+              </strong>
+              , empowering{" "}
+              <strong className="font-bold text-[#EAD3A0]">global academic ecosystems</strong> to
+              lead and shape{" "}
+              <strong className="font-bold text-[#EAD3A0]">tomorrow's digital frontier</strong>
+              ."
             </p>
           </div>
         </div>

@@ -104,6 +104,9 @@
   --shadow-plum: 0 20px 50px -20px rgba(75, 29, 63, 0.3);
   --shadow-glass: 0 24px 70px -30px rgba(39, 33, 40, 0.12);
   --grain: radial-gradient(rgba(75, 29, 63, 0.06) 0.5px, transparent 0.6px);
+
+  /* Honeycomb hex-card face — rich multi-stop shine, swapped per theme below */
+  --hex-face-bg: linear-gradient(150deg, #fffdf8 0%, #fbf1de 38%, #ead7ba 68%, #e3c18e 100%);
 }
 
 .dark {
@@ -132,6 +135,9 @@
   --shadow-gold: 0 14px 40px -14px rgba(215, 171, 106, 0.45);
   --shadow-glass: 0 24px 70px -30px rgba(0, 0, 0, 0.5);
   --grain: radial-gradient(rgba(215, 171, 106, 0.08) 0.5px, transparent 0.6px);
+
+  /* Honeycomb hex-card face — original shiny plum */
+  --hex-face-bg: linear-gradient(150deg, #6d1f55 0%, #3d1538 38%, #2b0b30 68%, #18051e 100%);
 }
 
 @utility bg-grain {

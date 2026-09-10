@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { CoverflowMotion } from "@/components/CoverflowMotion";
+import { PARTNERS, type Partner } from "@/lib/partners";
 import {
   Send,
   CheckCircle2,
@@ -12,6 +13,7 @@ import {
   Sparkles,
   GraduationCap,
   BookOpen,
+  Handshake,
 } from "lucide-react";
 
 // TODO: Replace with your Formspree form IDs (from https://formspree.io → your form → Endpoint)
@@ -24,7 +26,7 @@ const INSTITUTIONAL_INTEREST_OPTIONS = [
   "MOU",
   "BOS",
   "lab setup",
-  "New product development ",
+  "New product development",
   "Center of Excellence (CoE)",
   "Incubation & Startup Hub",
   "Global Certifications & Training",
@@ -33,8 +35,8 @@ const INSTITUTIONAL_INTEREST_OPTIONS = [
 ];
 
 const STUDENT_INTEREST_OPTIONS = [
-  "Industrial vist",
-  "hacktaton support",
+  "Industrial visit",
+  "Hackathon Support",
   "New product development",
   "Hands-on Technical Bootcamps",
   "Workshop",
@@ -81,7 +83,13 @@ export function InquiryFormSection() {
   }, []);
 
   return (
-    <section id="inquire" className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 py-14 sm:py-20 md:py-24">
+    <section
+      id="inquire"
+      className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 py-14 sm:py-20 md:py-24"
+    >
+      {/* Partners in Deep-Tech showcase — moved here from the standalone /partners page */}
+      <PartnersShowcase />
+
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center mb-10">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
@@ -135,16 +143,93 @@ export function InquiryFormSection() {
       >
         {activeTab === "institutional" ? <InstitutionalInquiryForm /> : <StudentInquiryForm />}
       </div>
-
-      {/* 3D coverflow partner motion — same animation as the /partners page, shown under the form */}
-      <CoverflowMotion
-        heightClass="h-40 sm:h-52 md:h-80 lg:h-96"
-        cardSize="clamp(72px, 14vh, 240px)"
-        glowSize="min(28vh, 380px)"
-        ambience
-        className="mt-14"
-      />
     </section>
+  );
+}
+
+/** Partners in Deep-Tech showcase — content migrated from the former /partners page */
+function PartnersShowcase() {
+  const [activeName, setActiveName] = useState<string>(PARTNERS[0].name);
+  const active = PARTNERS.find((p) => p.name === activeName) ?? PARTNERS[0];
+
+  return (
+    <div className="relative mb-16 sm:mb-20">
+      <div className="relative z-10 flex flex-col items-center gap-1.5 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-0.5 text-[0.6rem] tracking-[0.25em] text-primary uppercase">
+          <Handshake className="h-3 w-3" />
+          Our Ecosystem
+        </div>
+        <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.6rem)] leading-tight font-bold tracking-tight text-foreground">
+          Partners in Deep-Tech
+        </h2>
+        <div className="flex max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-0.5">
+          {PARTNERS.map((p) => (
+            <span
+              key={p.name}
+              className={`whitespace-nowrap text-[0.55rem] tracking-[0.22em] uppercase transition-colors ${
+                p.name === activeName ? "text-[#EAD3A0]" : "text-[#E9CD97]/55"
+              }`}
+            >
+              {p.name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* — Motion theme: compact 3D coverflow carousel — */}
+      <div className="relative z-10 flex items-center justify-center py-2">
+        <CoverflowMotion
+          onCenterChange={setActiveName}
+          heightClass="h-[30vh] min-h-[170px] sm:h-[36vh] sm:min-h-[220px] md:h-[42vh] md:min-h-[260px]"
+          cardSize="clamp(72px, 16vw, 170px)"
+          glowSize="min(32vh, 340px)"
+        />
+      </div>
+
+      {/* Company info of the centred partner */}
+      <PartnerInfoPanel
+        key={active.name}
+        name={active.name}
+        tagline={active.tagline}
+        overview={active.overview}
+        tags={active.tags}
+        site={active.site}
+      />
+    </div>
+  );
+}
+
+function PartnerInfoPanel({ name, tagline, overview, tags }: Partner) {
+  return (
+    <div className="relative z-10 mx-auto w-full max-w-4xl rounded-2xl border border-[#D7AB6A]/30 bg-[#130418]/70 px-4 py-2.5 sm:px-5 sm:py-3 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-md">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+            <span className="truncate text-base font-semibold tracking-[0.14em] text-[#EAD3A0] uppercase sm:text-lg">
+              {name}
+            </span>
+            <span className="text-[0.62rem] tracking-[0.16em] text-[#E9CD97]/70 uppercase italic">
+              {tagline}
+            </span>
+          </div>
+          <p className="mt-1 line-clamp-2 max-w-2xl text-xs text-[#E8D5C3]/90 sm:mt-0.5 sm:text-sm">
+            {overview}
+          </p>
+        </div>
+        <div className="flex shrink-0 flex-row items-center gap-2">
+          <div className="hidden flex-wrap items-center justify-end gap-1.5 md:flex">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-[#D7AB6A]/25 bg-[#1d0824]/70 px-2.5 py-0.5 text-[0.55rem] tracking-[0.14em] whitespace-nowrap text-[#E9CD97]/90 uppercase"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

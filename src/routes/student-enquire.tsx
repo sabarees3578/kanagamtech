@@ -92,9 +92,9 @@ function StudentEnquirePage() {
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-3 py-2.5 sm:px-6 sm:py-3">
-          <Link to="/" className="flex shrink-0 items-center gap-3">
-            <KanagamLogo size="md" />
+        <div className="flex items-center justify-between gap-2 px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3 md:px-6">
+          <Link to="/" className="flex shrink-0 items-center gap-2 sm:gap-3 sm:ml-3">
+            <KanagamLogo size="lg" />
           </Link>
           <Link
             to="/"
