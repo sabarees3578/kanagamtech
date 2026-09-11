@@ -104,11 +104,11 @@ function HexCard({
 
         {/* Center: Icon + Title */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full px-0.5">
-          <span className="flex h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-lg sm:rounded-xl border border-accent/40 bg-accent/15 text-primary dark:bg-white/10 dark:text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
-            <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" />
+          <span className="flex h-11 w-11 sm:h-10 sm:w-10 md:h-12 md:w-12 items-center justify-center rounded-lg sm:rounded-xl border border-accent/40 bg-accent/15 text-primary dark:bg-white/10 dark:text-[#E8C576] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_18px_rgba(215,171,106,0.55)]">
+            <Icon className="h-6 w-6 sm:h-6 sm:w-6 md:h-7 md:w-7" />
           </span>
 
-          <h3 className="font-display mt-1 sm:mt-1.5 md:mt-2.5 text-[0.64rem] sm:text-[0.72rem] md:text-[0.82rem] leading-snug font-bold tracking-tight text-foreground [text-shadow:0_1px_8px_rgba(0,0,0,0.25)] line-clamp-2">
+          <h3 className="font-display mt-1 sm:mt-1.5 md:mt-2.5 text-[0.7rem] sm:text-[0.72rem] md:text-[0.82rem] leading-snug font-bold tracking-tight text-foreground [text-shadow:0_1px_8px_rgba(0,0,0,0.25)] line-clamp-2">
             {pillar.title}
           </h3>
         </div>
@@ -155,7 +155,7 @@ export function CoreFocusSection() {
       const w = el.clientWidth;
       // 2 hexagons across the screen: stage width = 2 * hexW + GAP
       const maxAvailable = Math.min(w - 24, 380);
-      const computedW = Math.round(Math.min(Math.max((maxAvailable - 10) / 2, 130), 180));
+      const computedW = Math.round(Math.min(Math.max((maxAvailable - 12) / 2, 140), 195));
       setMobileHexW(computedW);
     };
     update();
@@ -181,7 +181,7 @@ export function CoreFocusSection() {
   // Row 3: 2 hexagons (left & right)
   const M_HEX_W = mobileHexW;
   const M_HEX_H = Math.round(M_HEX_W * (2 / Math.sqrt(3)));
-  const M_GAP = 10;
+  const M_GAP = 12;
   const M_SX = M_HEX_W + M_GAP;
   const M_SY = Math.round(M_HEX_H * 0.75 + M_GAP * 0.5);
   const M_STAGE_W = M_SX + M_HEX_W;
@@ -319,7 +319,7 @@ export function CoreFocusSection() {
           >
             <Sparkles className="h-3 w-3 text-primary animate-pulse" />
             {activePillar ? (
-              <span className="truncate max-w-[280px]">
+              <span className="truncate max-w-[min(64vw,240px)]">
                 <strong className="text-foreground">{activePillar.title}</strong> — Tap again to
                 open →
               </span>

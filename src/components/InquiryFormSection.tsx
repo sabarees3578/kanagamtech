@@ -20,6 +20,10 @@ import {
 const FORMSPREE_PARTNERSHIP_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 const FORMSPREE_STUDENT_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
+const sanitizeName = (value: string) => value.replace(/[^a-zA-Z\s.'-]/g, "");
+const sanitizePhone = (value: string) => value.replace(/\D/g, "").slice(0, 15);
+const sanitizeEmail = (value: string) => value.replace(/\s/g, "");
+
 const INSTITUTIONAL_INTEREST_OPTIONS = [
   "Industrial visit",
   "Curriculum Modernization",
@@ -92,14 +96,14 @@ export function InquiryFormSection() {
 
       {/* Section Header */}
       <div className="mx-auto max-w-3xl text-center mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-[#EAD3A0] uppercase font-mono font-medium">
           <Sparkles className="h-3.5 w-3.5" />
           Connect, Collaborate &amp; Learn
         </div>
-        <h2 className="font-display mt-4 text-[clamp(1.9rem,4.5vw,2.8rem)] font-bold tracking-tight text-foreground">
+        <h2 className="font-display mt-4 text-[clamp(1.9rem,4.5vw,2.8rem)] font-bold tracking-tight text-[#EAD3A0]">
           Partner With Us or Start Your Journey
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground font-normal">
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white font-normal">
           Toggle between Institutional Partnerships and Student Enquiries to transmit your
           requirements directly to our team.
         </p>
@@ -107,14 +111,14 @@ export function InquiryFormSection() {
 
       {/* Interactive Toggle Switch */}
       <div className="flex justify-center mb-8">
-        <div className="inline-flex max-w-full flex-wrap justify-center gap-1.5 rounded-full border border-primary/30 bg-background/90 p-1.5 shadow-xl backdrop-blur-md">
+        <div className="inline-flex max-w-full flex-wrap justify-center gap-1.5 rounded-3xl border border-[#EAD3A0]/30 bg-background/90 p-1.5 shadow-xl backdrop-blur-md">
           <button
             type="button"
             onClick={() => setActiveTab("institutional")}
             className={`flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 text-[0.65rem] sm:text-xs md:text-sm font-semibold tracking-wide transition-all duration-300 ${
               activeTab === "institutional"
                 ? "bg-[#4B1D3F] text-white dark:bg-[#D7AB6A] dark:text-[#4B1D3F] shadow-md scale-[1.02]"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-white/80 hover:text-white"
             }`}
           >
             <Sparkles className="h-3.5 w-3.5 shrink-0" />
@@ -127,7 +131,7 @@ export function InquiryFormSection() {
             className={`flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 text-[0.65rem] sm:text-xs md:text-sm font-semibold tracking-wide transition-all duration-300 ${
               activeTab === "student"
                 ? "bg-[#4B1D3F] text-white dark:bg-[#D7AB6A] dark:text-[#4B1D3F] shadow-md scale-[1.02]"
-                : "text-muted-foreground hover:text-foreground"
+                : "text-white/80 hover:text-white"
             }`}
           >
             <GraduationCap className="h-3.5 w-3.5 shrink-0" />
@@ -139,7 +143,7 @@ export function InquiryFormSection() {
       {/* Single Dynamic Card Container */}
       <div
         id={activeTab === "institutional" ? "institutional-inquire" : "student-inquire"}
-        className="rounded-2xl sm:rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-4 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300"
+        className="rounded-2xl sm:rounded-3xl border border-[#EAD3A0]/30 bg-gradient-to-b from-card via-card/80 to-background p-4 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl transition-all duration-300"
       >
         {activeTab === "institutional" ? <InstitutionalInquiryForm /> : <StudentInquiryForm />}
       </div>
@@ -180,8 +184,8 @@ function PartnersShowcase() {
       <div className="relative z-10 flex items-center justify-center py-2">
         <CoverflowMotion
           onCenterChange={setActiveName}
-          heightClass="h-[30vh] min-h-[170px] sm:h-[36vh] sm:min-h-[220px] md:h-[42vh] md:min-h-[260px]"
-          cardSize="clamp(72px, 16vw, 170px)"
+          heightClass="h-[32vh] min-h-[180px] sm:h-[36vh] sm:min-h-[220px] md:h-[42vh] md:min-h-[260px]"
+          cardSize="clamp(88px, 25vw, 170px)"
           glowSize="min(32vh, 340px)"
         />
       </div>
@@ -299,15 +303,15 @@ function InstitutionalInquiryForm() {
   return (
     <div className="animate-in fade-in zoom-in-95 duration-300">
       {/* Form Header */}
-      <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.62rem] tracking-[0.22em] text-primary uppercase font-mono font-medium w-fit">
+      <div className="flex items-center gap-2 rounded-full border border-[#EAD3A0]/30 bg-[#EAD3A0]/10 px-3 py-1 text-[0.62rem] tracking-[0.22em] text-[#EAD3A0] uppercase font-mono font-medium w-fit">
         <Sparkles className="h-3 w-3" />
         Connect &amp; Collaborate
       </div>
 
-      <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+      <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#EAD3A0]">
         Academic &amp; Enterprise Partnership
       </h3>
-      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground font-normal">
+      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-white font-normal">
         Share your institution's goals, research vision, or deep-tech requirements. Our team will
         tailor a collaboration roadmap for your organization.
       </p>
@@ -317,10 +321,10 @@ function InstitutionalInquiryForm() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
             <CheckCircle2 className="h-7 w-7" />
           </div>
-          <h4 className="font-display mt-3 text-lg font-bold text-foreground">
+          <h4 className="font-display mt-3 text-lg font-bold text-[#EAD3A0]">
             Inquiry Submitted Successfully
           </h4>
-          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-white">
             Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>{" "}
             from{" "}
             <span className="font-semibold text-foreground">
@@ -356,9 +360,9 @@ function InstitutionalInquiryForm() {
             <div>
               <label
                 htmlFor="inst-institution"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Building2 className="h-3 w-3 text-primary" />
+                <Building2 className="h-3 w-3 text-[#EAD3A0]" />
                 Institution / Organization *
               </label>
               <input
@@ -376,9 +380,9 @@ function InstitutionalInquiryForm() {
             <div>
               <label
                 htmlFor="inst-name"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <User className="h-3 w-3 text-primary" />
+                <User className="h-3 w-3 text-[#EAD3A0]" />
                 Contact Person Name *
               </label>
               <input
@@ -386,7 +390,9 @@ function InstitutionalInquiryForm() {
                 type="text"
                 required
                 value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, fullName: sanitizeName(e.target.value) })
+                }
                 placeholder="e.g. Dr. Priya Raghavan"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -396,9 +402,9 @@ function InstitutionalInquiryForm() {
             <div>
               <label
                 htmlFor="inst-email"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Mail className="h-3 w-3 text-primary" />
+                <Mail className="h-3 w-3 text-[#EAD3A0]" />
                 Official Email Address *
               </label>
               <input
@@ -406,7 +412,7 @@ function InstitutionalInquiryForm() {
                 type="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, email: sanitizeEmail(e.target.value) })}
                 placeholder="e.g. contact@university.edu"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -416,16 +422,16 @@ function InstitutionalInquiryForm() {
             <div>
               <label
                 htmlFor="inst-phone"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Phone className="h-3 w-3 text-primary" />
+                <Phone className="h-3 w-3 text-[#EAD3A0]" />
                 Phone / WhatsApp Number
               </label>
               <input
                 id="inst-phone"
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, phone: sanitizePhone(e.target.value) })}
                 placeholder="e.g. +91 98765 43210"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -436,9 +442,9 @@ function InstitutionalInquiryForm() {
           <div>
             <label
               htmlFor="inst-location"
-              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
             >
-              <MapPin className="h-3 w-3 text-primary" />
+              <MapPin className="h-3 w-3 text-[#EAD3A0]" />
               Campus Location &amp; Region
             </label>
             <input
@@ -453,7 +459,7 @@ function InstitutionalInquiryForm() {
 
           {/* Interest Badges Selection */}
           <div>
-            <span className="text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold block mb-2">
+            <span className="text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold block mb-2">
               Areas of Interest (Select all that apply)
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -482,9 +488,9 @@ function InstitutionalInquiryForm() {
           <div>
             <label
               htmlFor="inst-message"
-              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
             >
-              <MessageSquare className="h-3 w-3 text-primary" />
+              <MessageSquare className="h-3 w-3 text-[#EAD3A0]" />
               Collaboration Scope &amp; Details *
             </label>
             <textarea
@@ -604,15 +610,15 @@ function StudentInquiryForm() {
   return (
     <div className="animate-in fade-in zoom-in-95 duration-300">
       {/* Form Header */}
-      <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[0.62rem] tracking-[0.22em] text-primary uppercase font-mono font-medium w-fit">
+      <div className="flex items-center gap-2 rounded-full border border-[#EAD3A0]/30 bg-[#EAD3A0]/10 px-3 py-1 text-[0.62rem] tracking-[0.22em] text-[#EAD3A0] uppercase font-mono font-medium w-fit">
         <GraduationCap className="h-3 w-3" />
         For Students &amp; Fresh Engineers
       </div>
 
-      <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+      <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#EAD3A0]">
         Student Enquire
       </h3>
-      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground font-normal">
+      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-white font-normal">
         Kick-start your deep-tech career. Tell us what you're looking for — bootcamps,
         certifications, internships, or project guidance — and our academic team will reach out.
       </p>
@@ -622,10 +628,10 @@ function StudentInquiryForm() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
             <CheckCircle2 className="h-7 w-7" />
           </div>
-          <h4 className="font-display mt-3 text-lg font-bold text-foreground">
+          <h4 className="font-display mt-3 text-lg font-bold text-[#EAD3A0]">
             Enquiry Submitted Successfully
           </h4>
-          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-white">
             Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>.
             Our academic team will reach out to you shortly at{" "}
             <span className="font-semibold text-foreground">{formData.email}</span>.
@@ -660,9 +666,9 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-name"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <User className="h-3 w-3 text-primary" />
+                <User className="h-3 w-3 text-[#EAD3A0]" />
                 Full Name *
               </label>
               <input
@@ -670,7 +676,9 @@ function StudentInquiryForm() {
                 type="text"
                 required
                 value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, fullName: sanitizeName(e.target.value) })
+                }
                 placeholder="e.g. Priya Sharma"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -680,9 +688,9 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-email"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Mail className="h-3 w-3 text-primary" />
+                <Mail className="h-3 w-3 text-[#EAD3A0]" />
                 Email Address *
               </label>
               <input
@@ -690,7 +698,7 @@ function StudentInquiryForm() {
                 type="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, email: sanitizeEmail(e.target.value) })}
                 placeholder="e.g. priya@college.edu"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -700,16 +708,16 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-phone"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Phone className="h-3 w-3 text-primary" />
+                <Phone className="h-3 w-3 text-[#EAD3A0]" />
                 Phone / WhatsApp Number
               </label>
               <input
                 id="std-phone"
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, phone: sanitizePhone(e.target.value) })}
                 placeholder="e.g. +91 98765 43210"
                 className="mt-1.5 w-full rounded-xl border border-border bg-background/80 px-3.5 py-2.5 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
               />
@@ -719,9 +727,9 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-institution"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <Building2 className="h-3 w-3 text-primary" />
+                <Building2 className="h-3 w-3 text-[#EAD3A0]" />
                 College / Institution *
               </label>
               <input
@@ -742,9 +750,9 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-dept"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <BookOpen className="h-3 w-3 text-primary" />
+                <BookOpen className="h-3 w-3 text-[#EAD3A0]" />
                 Department *
               </label>
               <select
@@ -769,7 +777,7 @@ function StudentInquiryForm() {
                 <div className="mt-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
                   <label
                     htmlFor="std-custom-dept"
-                    className="flex items-center gap-1.5 text-[0.6rem] tracking-[0.2em] text-primary uppercase font-mono font-semibold"
+                    className="flex items-center gap-1.5 text-[0.6rem] tracking-[0.2em] text-[#EAD3A0] uppercase font-mono font-semibold"
                   >
                     Specify Your Department *
                   </label>
@@ -790,9 +798,9 @@ function StudentInquiryForm() {
             <div>
               <label
                 htmlFor="std-year"
-                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+                className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
               >
-                <GraduationCap className="h-3 w-3 text-primary" />
+                <GraduationCap className="h-3 w-3 text-[#EAD3A0]" />
                 Year of Study *
               </label>
               <select
@@ -816,7 +824,7 @@ function StudentInquiryForm() {
 
           {/* Interest Badges Selection */}
           <div>
-            <span className="text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold block mb-2">
+            <span className="text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold block mb-2">
               What are you interested in? (Select all that apply)
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -845,9 +853,9 @@ function StudentInquiryForm() {
           <div>
             <label
               htmlFor="std-message"
-              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-muted-foreground uppercase font-semibold"
+              className="flex items-center gap-1.5 text-[0.62rem] tracking-[0.2em] text-white uppercase font-semibold"
             >
-              <MessageSquare className="h-3 w-3 text-primary" />
+              <MessageSquare className="h-3 w-3 text-[#EAD3A0]" />
               Your Goals &amp; Requirements *
             </label>
             <textarea

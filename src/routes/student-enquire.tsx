@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
+import { Footer } from "@/components/Footer";
 import {
   Send,
   CheckCircle2,
@@ -19,6 +20,10 @@ import {
 
 // TODO: Replace with your Formspree form ID for student enquiries
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+const sanitizeName = (value: string) => value.replace(/[^a-zA-Z\s.'-]/g, "");
+const sanitizePhone = (value: string) => value.replace(/\D/g, "").slice(0, 15);
+const sanitizeEmail = (value: string) => value.replace(/\s/g, "");
 
 const STUDENT_INTEREST_OPTIONS = [
   "Hands-on Technical Bootcamps",
@@ -110,14 +115,14 @@ function StudentEnquirePage() {
       {/* Page Content */}
       <section className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-24">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-primary uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#EAD3A0]/30 bg-[#EAD3A0]/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-[#EAD3A0] uppercase">
             <GraduationCap className="h-3.5 w-3.5" />
             For Students &amp; Fresh Engineers
           </div>
-          <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-foreground">
+          <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-[#EAD3A0]">
             Student Enquire
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white">
             Kick-start your deep-tech career. Tell us what you're looking for — training,
             certifications, internships, or project guidance — and our academic team will get back
             to you.
@@ -126,6 +131,8 @@ function StudentEnquirePage() {
 
         <StudentEnquiryForm />
       </section>
+
+      <Footer />
     </main>
   );
 }
@@ -208,10 +215,10 @@ function StudentEnquiryForm() {
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-primary">
           <CheckCircle2 className="h-8 w-8" />
         </div>
-        <h3 className="font-display mt-4 text-2xl font-bold text-foreground">
+        <h3 className="font-display mt-4 text-2xl font-bold text-[#EAD3A0]">
           Enquiry Submitted Successfully
         </h3>
-        <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-md text-sm text-white">
           Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>. Our
           academic team will reach out to you shortly at{" "}
           <span className="font-semibold text-foreground">{formData.email}</span>.
@@ -243,16 +250,16 @@ function StudentEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-8 sm:mt-12 rounded-2xl sm:rounded-3xl border border-primary/30 bg-gradient-to-b from-card via-card/80 to-background p-5 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl"
+      className="mt-8 sm:mt-12 rounded-2xl sm:rounded-3xl border border-[#EAD3A0]/30 bg-gradient-to-b from-card via-card/80 to-background p-5 sm:p-8 md:p-10 shadow-2xl backdrop-blur-xl"
     >
       <div className="grid gap-6 md:grid-cols-2">
         {/* Full Name */}
         <div>
           <label
             htmlFor="student-name"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <User className="h-3.5 w-3.5 text-primary" />
+            <User className="h-3.5 w-3.5 text-[#EAD3A0]" />
             Full Name *
           </label>
           <input
@@ -260,7 +267,7 @@ function StudentEnquiryForm() {
             type="text"
             required
             value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, fullName: sanitizeName(e.target.value) })}
             placeholder="e.g. Priya Sharma"
             className="mt-2 w-full rounded-xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           />
@@ -270,9 +277,9 @@ function StudentEnquiryForm() {
         <div>
           <label
             htmlFor="student-email"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <Mail className="h-3.5 w-3.5 text-primary" />
+            <Mail className="h-3.5 w-3.5 text-[#EAD3A0]" />
             Email Address *
           </label>
           <input
@@ -280,7 +287,7 @@ function StudentEnquiryForm() {
             type="email"
             required
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, email: sanitizeEmail(e.target.value) })}
             placeholder="e.g. priya@college.edu"
             className="mt-2 w-full rounded-xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           />
@@ -290,16 +297,16 @@ function StudentEnquiryForm() {
         <div>
           <label
             htmlFor="student-phone"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <Phone className="h-3.5 w-3.5 text-primary" />
+            <Phone className="h-3.5 w-3.5 text-[#EAD3A0]" />
             Phone / WhatsApp Number
           </label>
           <input
             id="student-phone"
             type="tel"
             value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, phone: sanitizePhone(e.target.value) })}
             placeholder="e.g. +91 98765 43210"
             className="mt-2 w-full rounded-xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           />
@@ -309,9 +316,9 @@ function StudentEnquiryForm() {
         <div>
           <label
             htmlFor="student-institution"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <Building2 className="h-3.5 w-3.5 text-primary" />
+            <Building2 className="h-3.5 w-3.5 text-[#EAD3A0]" />
             College / Institution *
           </label>
           <input
@@ -332,9 +339,9 @@ function StudentEnquiryForm() {
         <div>
           <label
             htmlFor="student-dept"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <BookOpen className="h-3.5 w-3.5 text-primary" />
+            <BookOpen className="h-3.5 w-3.5 text-[#EAD3A0]" />
             Department *
           </label>
           <select
@@ -359,7 +366,7 @@ function StudentEnquiryForm() {
             <div className="mt-3 animate-in fade-in slide-in-from-top-1 duration-200">
               <label
                 htmlFor="student-custom-dept"
-                className="flex items-center gap-2 text-[0.6rem] tracking-[0.2em] text-primary uppercase font-mono font-semibold"
+                className="flex items-center gap-2 text-[0.6rem] tracking-[0.2em] text-[#EAD3A0] uppercase font-mono font-semibold"
               >
                 Specify Your Department *
               </label>
@@ -380,9 +387,9 @@ function StudentEnquiryForm() {
         <div>
           <label
             htmlFor="student-year"
-            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+            className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
           >
-            <GraduationCap className="h-3.5 w-3.5 text-primary" />
+            <GraduationCap className="h-3.5 w-3.5 text-[#EAD3A0]" />
             Year of Study *
           </label>
           <select
@@ -406,7 +413,7 @@ function StudentEnquiryForm() {
 
       {/* Interest Badges Selection */}
       <div className="mt-6">
-        <span className="mb-2 block text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold">
+        <span className="mb-2 block text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold">
           What are you interested in? (Select all that apply)
         </span>
         <div className="flex flex-wrap gap-2">
@@ -435,9 +442,9 @@ function StudentEnquiryForm() {
       <div className="mt-6">
         <label
           htmlFor="student-message"
-          className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-muted-foreground uppercase font-semibold"
+          className="flex items-center gap-2 text-[0.65rem] tracking-[0.25em] text-white uppercase font-semibold"
         >
-          <MessageSquare className="h-3.5 w-3.5 text-primary" />
+          <MessageSquare className="h-3.5 w-3.5 text-[#EAD3A0]" />
           Your Goals &amp; Requirements *
         </label>
         <textarea
@@ -474,8 +481,8 @@ function StudentEnquiryForm() {
             </>
           )}
         </button>
-        <p className="mt-4 flex items-center justify-center gap-1.5 text-[0.6rem] tracking-[0.2em] text-muted-foreground/70 uppercase font-mono">
-          <Sparkles className="h-3 w-3 text-primary" />
+        <p className="mt-4 flex items-center justify-center gap-1.5 text-[0.6rem] tracking-[0.2em] text-white/70 uppercase font-mono">
+          <Sparkles className="h-3 w-3 text-[#EAD3A0]" />
           Our team typically responds within 24–48 hours
         </p>
       </div>

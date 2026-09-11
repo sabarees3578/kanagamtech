@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <main
-      className="relative h-[100dvh] overflow-hidden font-sans"
+      className="relative min-h-[100dvh] overflow-hidden font-sans"
       style={
         {
           background: "linear-gradient(155deg, #7a2a63 0%, #4B1D3F 32%, #2b0b30 64%, #18051e 100%)",
@@ -52,11 +52,15 @@ function AboutPage() {
     >
       <ShiningBackground variant="strong" />
       <div className="pointer-events-none absolute inset-0 opacity-[0.25] [background-image:var(--grain)]" />
-      <img
-        src="/img/kanagam-final.png"
-        alt="Kanagam Technology Solutions 2026"
-        className="pointer-events-none absolute left-[3%] top-[46%] w-[min(48vw,640px)] -translate-y-1/2 rounded-2xl object-contain select-none"
-      />
+      <div className="pointer-events-none absolute left-[3%] top-[42%] -translate-y-1/2 hidden sm:block">
+        <div className="about-float">
+          <img
+            src="/img/kanagam-final.png"
+            alt="Kanagam Technology Solutions 2026"
+            className="w-[min(44vw,640px)] rounded-2xl object-contain select-none"
+          />
+        </div>
+      </div>
 
       {/* Simple Header */}
       <header className="sticky top-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-xl">
@@ -75,8 +79,8 @@ function AboutPage() {
         </div>
       </header>
 
-      {/* Centered page body: content collage — fixed to one screen */}
-      <section className="relative z-10 mx-auto flex h-[calc(100dvh-3.5rem)] w-full flex-col overflow-hidden px-4 sm:px-6 py-4 sm:py-6">
+      {/* Centered page body: content collage â€” fixed to one screen */}
+      <section className="relative z-10 mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full flex-col px-4 sm:px-6 py-4 sm:py-6">
         <div className="my-auto ml-auto mr-0 w-full max-w-3xl text-center">
           <h1 className="font-display text-[clamp(1.3rem,3.7vh,2.1rem)] leading-tight font-bold tracking-tight text-foreground">
             Kanagam Technology Solutions
@@ -85,39 +89,60 @@ function AboutPage() {
             Driving the Next Wave of Technological Evolution
           </p>
 
-          <div className="mt-3 max-w-4xl space-y-2 text-left text-[clamp(0.82rem,2.1vh,1rem)] leading-relaxed font-semibold text-foreground">
+          <div className="mt-3 max-w-4xl space-y-2 text-justify text-[clamp(0.82rem,2.1vh,1rem)] leading-relaxed font-semibold text-foreground">
             <p>
               <strong className="font-bold text-[#EAD3A0]">
                 Kanagam Technology Solutions India Pvt Ltd
               </strong>{" "}
-              was founded on a{" "}
-              <strong className="font-bold text-[#EAD3A0]">shared upbringing</strong> and{" "}
+              is a{" "}
               <strong className="font-bold text-[#EAD3A0]">
-                two decades of working side by side
+                new-generation technology company
               </strong>{" "}
-              a rare closeness that shaped not just how its founders think, but how they build. That
-              deep-rooted alignment shapes our approach today:{" "}
-              <strong className="font-bold text-[#EAD3A0]">disciplined execution</strong>,{" "}
-              <strong className="font-bold text-[#EAD3A0]">strong fundamentals</strong>, and an{" "}
-              <strong className="font-bold text-[#EAD3A0]">unrelenting focus on quality</strong>.
+              built on{" "}
+              <strong className="font-bold text-[#EAD3A0]">two decades of shared experience</strong>
+              , a <strong className="font-bold text-[#EAD3A0]">common vision</strong>, and a{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                deep commitment to technology and learning
+              </strong>
+              . Our founders have worked{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                side by side for over two decades
+              </strong>
+              , an experience that has shaped not only how they think, but also how they approach
+              challenges, build capabilities, and pursue meaningful outcomes. That shared foundation
+              continues to guide Kanagam today through{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                disciplined execution, strong fundamentals, and an unrelenting focus on quality
+              </strong>
+              .
             </p>
             <p>
-              That same <strong className="font-bold text-[#EAD3A0]">depth of experience</strong>{" "}
-              runs through our team, professionals who bring both{" "}
+              That <strong className="font-bold text-[#EAD3A0]">depth of experience</strong> shapes
+              how we approach technology, education, and industryâ€”combining{" "}
               <strong className="font-bold text-[#EAD3A0]">
-                technical mastery and industry insight
+                technical expertise with practical industry insight
               </strong>{" "}
-              to everything we build. Guided by this collective expertise, we are laying{" "}
-              <strong className="font-bold text-[#EAD3A0]">strong foundations</strong> across our
-              people, processes, and partnerships as we begin this new journey with{" "}
-              <strong className="font-bold text-[#EAD3A0]">clarity and purpose</strong>.
+              and a{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                strong culture of continuous learning
+              </strong>
+              . Through{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                meaningful partnerships and hands-on innovation
+              </strong>
+              , we transform knowledge into{" "}
+              <strong className="font-bold text-[#EAD3A0]">
+                practical solutions, future-ready skills, and impactful technology initiatives
+              </strong>{" "}
+              that create <strong className="font-bold text-[#EAD3A0]">lasting value</strong> for
+              learners, institutions, professionals, and industry.
             </p>
           </div>
         </div>
 
-        {/* Mission & Vision — bottom, opposite side of content */}
-        <div className="mb-0 mt-auto mx-auto w-full max-w-5xl items-stretch gap-4 grid sm:grid-cols-2 sm:gap-4">
-          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
+        {/* Mission & Vision â€” bottom, opposite side of content */}
+        <div className="mb-2 sm:mb-3 mt-auto mx-auto grid w-full max-w-4xl items-stretch gap-5 sm:grid-cols-2 sm:gap-8">
+          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
             <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#E9CD97]/70 to-transparent" />
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
@@ -127,7 +152,7 @@ function AboutPage() {
                 Our Mission
               </div>
             </div>
-            <p className="mt-2.5 flex-1 text-left font-mono text-[clamp(0.72rem,1.95vh,0.86rem)] leading-relaxed font-semibold text-foreground">
+            <p className="mt-2.5 flex-1 text-justify font-sans text-[clamp(0.82rem,1.95vh,0.95rem)] leading-relaxed font-medium text-foreground">
               "To establish{" "}
               <strong className="font-bold text-[#EAD3A0]">advanced technology laboratories</strong>{" "}
               and deliver{" "}
@@ -146,7 +171,7 @@ function AboutPage() {
               ."
             </p>
           </div>
-          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
+          <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[#D7AB6A]/25 bg-card/50 p-4 sm:p-5 shadow-[inset_0_1px_0_rgba(240,196,120,0.14)] backdrop-blur-md">
             <span className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#E9CD97]/70 to-transparent" />
             <div className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#D7AB6A]/40 bg-[#D7AB6A]/10">
@@ -156,7 +181,7 @@ function AboutPage() {
                 Our Vision
               </div>
             </div>
-            <p className="mt-2.5 flex-1 text-left font-mono text-[clamp(0.72rem,1.95vh,0.86rem)] leading-relaxed font-semibold text-foreground">
+            <p className="mt-2.5 flex-1 text-justify font-sans text-[clamp(0.82rem,1.95vh,0.95rem)] leading-relaxed font-medium text-foreground">
               "To engineer{" "}
               <strong className="font-bold text-[#EAD3A0]">
                 transformative deep tech solutions

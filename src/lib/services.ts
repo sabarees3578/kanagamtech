@@ -39,13 +39,19 @@ export const PILLARS: Pillar[] = [
     description:
       "Developing **cryogenic control hardware**, **quantum algorithm orchestration**, and **hybrid classical-quantum computing** infrastructure for complex scientific computation.",
     longDescription: [
-      "Kanagam Tech's Quantum Computing & GenQ practice delivers **full-stack quantum capability** — from the **millikelvin hardware layer** where **qubits** live, all the way up through **control electronics**, **orchestration software**, and the **hybrid classical-quantum** applications that solve real industrial problems. As a **GenQ (Quantum Generation)** enterprise, we build the foundations that let research labs, universities, and industries move from quantum theory to working quantum workflows.",
-      "At the hardware layer, we develop **cryogenic control and measurement systems** purpose-built for **superconducting and photonic qubit platforms**. This includes **FPGA- and CMOS-based qubit control** and readout electronics, precision **Arbitrary Waveform Generation (AWG)** channels, cryogenic wiring looms, attenuator and filter stacks, and **low-noise signal chains** engineered to preserve **coherence** at dilution-refrigerator temperatures. Every board we ship is validated for thermal load, crosstalk, and timing jitter — because at 15 millikelvin, physics tolerates no shortcuts.",
-      "Our **quantum algorithm orchestration** layer abstracts the complexity of the machines themselves. We build tooling for **circuit design and transpilation**, **pulse-level scheduling**, **noise characterisation**, and **error suppression and mitigation** strategies that squeeze usable **fidelity** out of today's **NISQ-era** devices. **Hardware-agnostic execution runtimes** let researchers target different **QPU backends** without rewriting a single line of their experiment code.",
-      "Because useful **quantum advantage** emerges from **hybrid workflows**, we integrate quantum processors tightly with classical **high-performance compute**. Our infrastructure supports **variational algorithms** such as **VQE and QAOA**, **GPU-accelerated statevector and tensor-network simulators**, intelligent workload schedulers that partition jobs between CPU, GPU, and QPU resources, and **cloud-burst architectures** for institutions without on-premises quantum hardware.",
-      "Beyond computation, our **GenQ mandate** covers **quantum-safe readiness** for the enterprises we serve: **post-quantum cryptography** migration assessments, **quantum random number generation (QRNG)**, **quantum-safe communication** pilots, and the organisational playbooks needed to secure data against harvest-now-decrypt-later threats.",
-      "Every engagement runs on our **Co-R&D model** — shared roadmaps, joint intellectual property, and co-developed labs with universities and industry partners. Combined with our **skill-development tracks**, we don't just deliver **quantum infrastructure**; we grow the **quantum-ready workforce** that will operate it.",
-      "Anchored in our **ten-pillar strategy** and **two decades of veteran leadership**, this **GenQ capability** extends from our technology house to Tamil Nadu campuses like Anna University and our global academic network — ensuring Kanagam Tech's quantum infrastructure is both **Homegrown** and globally relevant.",
+      "We build **foundational and industry-ready skills** in **quantum computing and GenQ** through **structured learning**, **practical exploration**, and **project-based education**. Learners are introduced to **quantum concepts**, **computational models**, and **emerging technologies** while developing an understanding of how quantum systems connect with modern computing.",
+
+      "Our curriculum covers the **fundamentals of quantum computing**, including **qubits**, **quantum gates**, **circuits**, **measurement**, **quantum algorithms**, and **programming workflows**. Through guided exercises and practical projects, learners develop the ability to **design**, **simulate**, and **evaluate quantum programs** using modern quantum computing environments.",
+
+      "Learners explore **quantum algorithm development** and **hybrid classical-quantum computing** through practical applications. Topics include **algorithm orchestration**, **circuit design**, **optimization**, **simulation**, and **quantum-classical workflows**, helping learners understand how quantum computing can be applied to emerging computational challenges.",
+
+      "The learning experience extends to **quantum hardware and system architecture**, introducing learners to the principles behind **quantum processors**, **control systems**, **measurement technologies**, and **cryogenic computing environments**. Practical demonstrations and laboratory activities help connect theoretical concepts with the engineering challenges of real quantum systems.",
+
+      "Our programs also introduce **GenQ concepts** and **emerging quantum technologies** through workshops, technical projects, and research-oriented learning. Learners gain exposure to **quantum software ecosystems**, **hybrid computing approaches**, and the evolving applications of quantum technologies across science, engineering, and advanced computing.",
+
+      "For academic institutions, we support **quantum learning environments** through **curriculum-aligned laboratories**, **faculty development**, **technical workshops**, and **hands-on bootcamps**. These initiatives help institutions introduce quantum computing education and provide learners with practical exposure to emerging computational technologies.",
+
+      "Our **project-based approach** connects academic learning with the evolving needs of the **quantum technology ecosystem**. By combining **quantum fundamentals**, **programming**, **algorithms**, **system architecture**, and **practical experimentation**, we help learners build the knowledge and confidence required for **higher education**, **research**, and **emerging careers** in quantum computing.",
     ],
     images: [
       "/images/services/quantum-1.jpg",
@@ -152,15 +158,21 @@ export const PILLARS: Pillar[] = [
     category: "Full-Stack AI Engines & LLM Pipelines",
     icon: AiGenAiMark,
     description:
-      "Engineering **production-grade artificial intelligence** and domain-specific **Generative AI** models — **RAG pipelines**, **agentic workflows**, and high-throughput **inference engines** across academia and industry.",
+      "Building **industry-ready skills** in **AI Engineering** and **Generative AI** through **practical learning**, **applied projects**, **intelligent applications**, and **real-world development workflows**.",
     longDescription: [
-      "Our AI Engineering & GenAI practice builds **production-grade artificial intelligence** — not demos. We own the entire lifecycle: **data engineering**, **model development**, **retrieval architectures**, **inference infrastructure**, and the **MLOps** discipline that keeps systems accurate, fast, and safe after launch.",
-      "Every serious AI system starts with a serious data foundation. We design **ingestion pipelines**, **feature stores**, **vector databases**, and **data-governance** layers that give models clean, current, and permission-aware context — because a **GenAI system** is only ever as good as what it can reliably retrieve.",
-      "On the model layer, we **fine-tune** open-weight and frontier **LLMs** on domain-specific corpora, build **Retrieval-Augmented Generation (RAG)** pipelines with **hybrid search and re-ranking**, and develop specialised **generative engines** for documents, code, designs, and conversational support — tuned to your organisation's tone, terminology, and compliance boundaries.",
-      "**Inference** is an engineering discipline of its own. We deploy **GPU-optimised serving** stacks with **quantisation**, **KV-cache tuning**, continuous batching, and autoscaling strategies that cut latency and cost simultaneously, whether workloads run on-premises, in private cloud, or at the edge.",
-      "Beyond single-shot generation, we assemble **agentic workflows** — reasoning engines that plan multi-step tasks, call enterprise tools and APIs, verify their own outputs, and escalate to humans when confidence drops. These agents plug into existing **ERP, CRM, and ticketing systems** so AI amplifies the processes you already trust.",
-      "Everything ships inside an **MLOps envelope**: automated **evaluation suites**, **drift monitoring**, **red-teaming** for prompt injection and data leakage, audit trails, and rollback pipelines. **Responsible-AI guardrails** are engineered in from day one, not bolted on after an incident.",
-      "As a core pillar among our ten, this AI stack embodies **two decades of veteran leadership** — engineered **Homegrown** in our technology house and enriched by our global academic network, with institutions co-developing domain-specific GenAI for local enterprise needs.",
+      "We build **industry-ready skills** in **AI Engineering** and **Generative AI** through **structured learning**, **practical laboratories**, and **project-based development**. Learners explore the AI lifecycle from **data preparation** and **model development** to **application deployment**, **evaluation**, and **responsible use** of intelligent systems.",
+
+      "Our curriculum covers **machine learning**, **deep learning**, **large language models**, and modern **Generative AI workflows**. Through guided exercises and practical projects, learners gain experience in **preparing data**, **developing AI solutions**, **evaluating model performance**, and **applying intelligent technologies** to real-world challenges.",
+
+      "Learners explore **Generative AI application development** using technologies such as **large language models**, **embeddings**, **vector databases**, and **Retrieval-Augmented Generation**. Practical projects demonstrate how AI systems can **retrieve relevant knowledge**, **generate meaningful responses**, and support **domain-specific applications**.",
+
+      "The learning experience extends to **AI agents** and **intelligent workflow automation**. Learners explore **agent-based systems**, **tool integration**, **APIs**, **multi-step workflows**, and **human-in-the-loop** approaches while understanding how AI can support complex tasks across different application domains.",
+
+      "Our programs also introduce **AI deployment** and **MLOps** concepts, including **model evaluation**, **inference**, **monitoring**, **optimization**, and **scalable application development**. Learners gain an understanding of how AI solutions move from experimentation to reliable applications across **cloud and edge environments**.",
+
+      "For academic institutions, we support **AI learning environments** through **curriculum-aligned projects**, **faculty development**, **technical workshops**, and **hands-on bootcamps**. These initiatives help learners gain practical exposure to modern AI technologies while enabling institutions to strengthen their **applied AI** and **Generative AI** capabilities.",
+
+      "Our **project-based approach** connects academic learning with industry expectations by combining **AI fundamentals**, **Generative AI**, **intelligent applications**, and **practical deployment skills**. Learners develop the technical knowledge, problem-solving ability, and confidence required for careers in **AI engineering**, **machine learning**, **Generative AI**, and **intelligent software development**.",
     ],
     images: [
       "/images/services/aigenai-1.jpg",
@@ -239,14 +251,21 @@ export const PILLARS: Pillar[] = [
     category: "UAV Systems & Autonomous Flight",
     icon: DronesMark,
     description:
-      "Designing, building, and training with **unmanned aerial systems** — **custom UAV airframes**, **flight controllers**, **payload integration**, and **aerial-data pipelines** for inspection, mapping, and research.",
+      "Building **industry-ready skills** in **UAV and drone technologies** through **hands-on learning**, **practical laboratories**, **autonomous systems**, and **real-world technology projects**.",
     longDescription: [
-      "Our Drones practice covers the full **unmanned-aerial-systems stack** — from hand-built **quadcopters** and **fixed-wing airframes** to **autonomous flight**, payload electronics, and the data pipelines that turn flights into decisions.",
-      "On the hardware side we design and assemble **custom UAV airframes** sized to mission: **heavy-lift multirotors** for industrial inspection, compact **FPV racers** and trainer quads for education, and **fixed-wing platforms** for long-endurance mapping. Each build integrates motors, ESCs, **flight controllers**, GPS, telemetry, and power systems engineered for reliability and safe flight.",
-      "**Flight software** is where capability is unlocked. We configure and tune **autopilot stacks (ArduPilot, PX4)**, implement **GPS-guided autonomous missions**, **geofencing**, failsafe behaviour, and **first-person-view (FPV)** systems, and integrate camera gimbals, **LiDAR**, thermal, and **multispectral payloads** for inspection, agriculture, and survey applications.",
-      "Behind every drone is a **data pipeline**: **photogrammetric and LiDAR processing** that turns raw captures into **orthomosaics**, **3D point clouds**, and **digital elevation models** used for asset inspection, stockpile measurement, and site mapping — delivered as layers in your existing GIS or inspection software.",
-      "For academic institutions we establish complete **drone laboratories**: build-and-fly student kits, simulation and flight-training bays, **DGCA-aligned** awareness modules, and research support for environmental, agricultural, and disaster-response studies. Students graduate having assembled, flown, and programmed the very systems industry deploys.",
-      "Enterprise engagements follow **regulated, safe playbooks**: mission planning, permissions and compliance, **pilot training and certification** support, maintenance regimes, and outcome reports tied to your operational KPIs.",
+      "We build **practical skills** in **UAV and drone technologies** through **structured learning**, **hands-on laboratories**, **simulation**, and **project-based development**. Learners explore UAV systems from **basic architecture and design** to **flight control**, **autonomous operation**, and **real-world applications**.",
+
+      "Our curriculum covers **UAV architecture**, **airframe design**, **propulsion**, **power systems**, **flight controllers**, **navigation**, and **telemetry**. Through guided build-and-test activities, learners gain practical experience in **assembling**, **configuring**, **testing**, and **maintaining drone platforms** while understanding the engineering principles behind reliable UAV systems.",
+
+      "Learners explore **flight control** and **autonomous navigation** using platforms such as **ArduPilot** and **PX4**. Practical projects introduce **mission planning**, **GPS navigation**, **telemetry**, **flight simulation**, **geofencing**, and **safety mechanisms**, helping learners develop a strong foundation in **autonomous UAV technologies**.",
+
+      "The learning experience extends to **payload integration** and **aerial data applications**. Learners explore how **imaging and sensing technologies** can be integrated with UAV platforms and how captured data can support applications in **mapping**, **inspection**, **agriculture**, **environmental studies**, **surveying**, and **research**.",
+
+      "Our programs introduce **aerial data processing** through **photogrammetry**, **3D mapping**, **point-cloud generation**, and **digital terrain modelling**. Project-based activities help learners understand how aerial data can be transformed into meaningful information for engineering, research, and industrial applications.",
+
+      "For academic institutions, we support **UAV learning environments** through **curriculum-aligned laboratories**, **build-and-fly projects**, **flight simulation**, **faculty development**, **technical workshops**, and **hands-on bootcamps**. These programs provide learners with practical exposure to **drone hardware**, **embedded systems**, **flight technologies**, **programming**, and **aerial data workflows**.",
+
+      "Our **project-based approach** connects academic learning with industry expectations by combining **UAV engineering**, **embedded technologies**, **autonomous systems**, and **aerial data processing**. Learners develop the technical knowledge, practical experience, and confidence required for careers in **drone technology**, **robotics**, **automation**, **surveying**, **research**, and **emerging aerospace applications**.",
     ],
     images: [
       "/images/services/drones-1.jpg",
@@ -267,15 +286,21 @@ export const PILLARS: Pillar[] = [
     category: "Additive Manufacturing & Digital Capture",
     icon: Scanner3dMark,
     description:
-      "Providing **industrial 3D printing** and **3D scanning** capabilities — **additive manufacturing lines**, **precision scanners**, and **maker-lab ecosystems** for prototyping, **reverse engineering**, and R&D.",
+      "Building **industry-ready skills** in **3D printing** and **3D scanning** through **hands-on learning**, **digital manufacturing**, **practical laboratories**, and **real-world design projects**.",
     longDescription: [
-      "Our 3D Scanner & 3D Printer practice brings complete **additive-manufacturing and digital-capture** capability to product teams, institutions, and makerspaces — closing the loop between the physical world and the **CAD model** that represents it.",
-      "On the print side we deploy and operate **industrial 3D printing fleets** spanning **FDM, SLA**, and resin technologies, with material expertise across **engineering plastics**, composites, and flexible filaments. From rapid concept models to functional end-use parts, we tune build parameters for strength, surface finish, and dimensional accuracy.",
-      "For scanning we use precision **structured-light and LiDAR systems** that capture geometry at tolerance levels useful for **reverse engineering** and inspection. Full assemblies, castings, and components are digitised into **point clouds** and cleaned into **watertight CAD-ready meshes**, giving engineers an accurate digital asset within hours.",
-      "**Reverse engineering** is a core service: legacy parts, broken components, and out-of-production spares are scanned, re-modelled as **parametric CAD**, and re-manufactured — letting clients escape the trap of unobtainable spare parts.",
-      "For academic institutions and universities, we create complete **makerspace and additive-manufacturing laboratories**: printers, scanners, materials, and ventilated post-processing stations, plus structured training that takes students from CAD-to-print workflow through advanced topics like **design-for-additive-manufacturing** and **topology optimisation**.",
-      "Industrially, we support **rapid-prototyping** loops for product teams, small-batch production bridging toward **injection moulding**, **jig-and-fixture** manufacture for assembly lines, and third-party scanning services for **metrology** and heritage documentation.",
-      "Every deployment is backed by **preventive maintenance contracts**, material supply, and skill programmes — so laboratories and production floors alike stay productive from day one.",
+      "We build **practical skills** in **3D printing**, **3D scanning**, and **digital manufacturing** through **structured learning**, **hands-on laboratories**, and **project-based development**. Learners explore the complete workflow from **digital design** and **geometry capture** to **prototyping**, **manufacturing**, and **product development**.",
+
+      "Our curriculum introduces **additive manufacturing technologies**, including **FDM**, **SLA**, and **resin-based printing**, along with **materials**, **print preparation**, **build optimization**, and **post-processing**. Through practical projects, learners gain experience in converting digital designs into functional physical prototypes while understanding the principles of additive manufacturing.",
+
+      "Learners explore **3D scanning** and **digital geometry capture** using **structured-light** and **LiDAR-based** technologies. Practical activities cover **scan preparation**, **point-cloud processing**, **mesh generation**, **dimensional analysis**, and **CAD-ready digital models**, helping learners understand how physical objects can be transformed into accurate digital assets.",
+
+      "The learning experience extends to **reverse engineering** and **product development**, where learners study how existing components can be **captured**, **analysed**, **remodelled**, and **reproduced**. Projects introduce practical concepts such as **parametric CAD**, **design optimization**, **prototyping**, and **design-for-additive-manufacturing**.",
+
+      "Our programs also introduce **advanced digital manufacturing workflows**, including **topology optimization**, **rapid prototyping**, **functional part development**, and **small-batch production**. Learners gain an understanding of how additive technologies support engineering design, research, innovation, and modern manufacturing environments.",
+
+      "For academic institutions, we support complete **3D printing and scanning learning environments** through **curriculum-aligned laboratories**, **makerspaces**, **faculty development**, **technical workshops**, and **hands-on bootcamps**. These programs provide learners with practical exposure to **CAD**, **3D printing**, **scanning**, **reverse engineering**, and **digital manufacturing workflows**.",
+
+      "Our **project-based approach** connects academic learning with industry expectations by combining **digital design**, **3D scanning**, **additive manufacturing**, and **practical product development**. Learners develop the technical knowledge, problem-solving skills, and confidence required for careers in **product design**, **manufacturing**, **prototyping**, **mechanical engineering**, **R&D**, and **digital fabrication**.",
     ],
     images: [
       "/images/services/scanner3d-1.jpg",
@@ -296,15 +321,21 @@ export const PILLARS: Pillar[] = [
     category: "Workforce Empowerment & Academic Excellence",
     icon: SkillDevMark,
     description:
-      "Empowering students, faculty, and industry professionals through **hands-on technical bootcamps**, **CoE lab setups**, **industry-recognized certifications**, and **workforce skill building**.",
+      "Building **industry-ready skills** for **students**, **faculty**, and **professionals** through **hands-on technical training**, **Centers of Excellence**, **certifications**, and **practical workforce development**.",
     longDescription: [
-      "Our Skill Development & Technical Training practice turns deep-tech capability into people capability. We build the **talent pipelines** that quantum labs, AI teams, semiconductor programmes, and smart factories all starve for — trained on the same industrial-grade equipment our engineering divisions deploy.",
-      "For universities we establish **Centers of Excellence (CoE)**: fully equipped on-campus laboratories spanning **IoT testbeds**, **AI/ML GPU clusters**, **FPGA and embedded benches**, **3D printing and scanning workstations**, **drone flight bays**, and **quantum computing simulation** and access stacks — complete with curated lab manuals mapped to accredited curriculum outcomes.",
-      "Our bootcamps are relentlessly **hands-on**. Students don't watch slides; they flash microcontrollers, assemble and rework real boards, **fine-tune language models**, fly and program drones, and run algorithms on **quantum simulators** and cloud QPUs — culminating in **capstone projects** reviewed by practising engineers from our product divisions.",
-      "**Certification tracks** provide portable, **industry-recognised credentials**: structured learning paths with proctored assessments, digital badges verifiable by employers, and progression routes from foundation to specialist levels across each of our ten focus domains.",
-      "**Faculty Development Programmes (FDPs)** multiply the impact — training professors and lecturers on modern toolchains and pedagogy so institutions sustain the capability internally, semester after semester, rather than depending on outside trainers forever.",
-      "For industry we deliver **corporate upskilling** in AI adoption, embedded systems, and quantum readiness, plus **hackathons**, hiring-linked training pipelines, and **internship-to-placement** pathways that convert fresh engineering talent into deployment-ready deep-tech professionals.",
-      "This pillar powers our global academic and industrial training ecosystem — **veteran-designed**, **Homegrown** with Anna University, IIT Madras and partners, and scaled globally as the **talent engine** for all ten deep-tech domains.",
+      "We build **industry-ready talent** through **structured technical training**, **hands-on laboratories**, **project-based learning**, and **workforce skill development**. Our programs help students, faculty, and industry professionals develop **practical capabilities** across emerging technologies while connecting academic learning with real-world engineering applications.",
+
+      "For academic institutions, we support the development of **Centers of Excellence** with practical learning environments covering **IoT**, **AI and Machine Learning**, **FPGA and embedded systems**, **3D printing and scanning**, **drones and autonomous systems**, and **quantum computing**. These environments are supported by **structured laboratory activities**, **project resources**, and **curriculum-aligned learning pathways**.",
+
+      "Our **technical bootcamps** are designed around **hands-on learning** rather than classroom theory alone. Learners work with **development boards**, **embedded systems**, **AI platforms**, **digital design tools**, **manufacturing technologies**, **drones**, and **quantum computing environments** through guided exercises and practical projects. Each learning pathway focuses on **building**, **testing**, **troubleshooting**, and **applying technology** to real-world challenges.",
+
+      "Our **certification programs** provide **structured learning pathways** that help learners validate their **technical knowledge** and **practical skills**. Programs can progress from foundational concepts to advanced specialization across our deep-tech focus areas, giving students and professionals a clear pathway for continuous technical development and career readiness.",
+
+      "**Faculty Development Programmes** help educators strengthen their **technical knowledge**, **laboratory capabilities**, and **modern teaching practices**. Faculty members gain practical exposure to current technologies, development tools, and project-based methodologies, enabling institutions to build sustainable internal capabilities and deliver stronger hands-on learning experiences.",
+
+      "For industry professionals, we provide targeted **upskilling and reskilling programs** in areas such as **AI**, **embedded systems**, **IoT**, **automation**, and **emerging technologies**. **Corporate workshops**, **technical bootcamps**, **hackathons**, and **project-based programs** help organizations strengthen workforce capabilities while connecting engineering talent with evolving technology requirements.",
+
+      "Our **learning ecosystem** connects education, practical experimentation, and industry exposure through projects, technical workshops, internships, faculty development, and career-oriented training. By combining structured education with hands-on technology experience, we help learners develop the knowledge, practical skills, problem-solving ability, and confidence required for modern deep-tech careers.",
     ],
     images: [
       "/images/services/skills-1.jpg",

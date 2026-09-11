@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Global mobile guard: clip stray horizontal overflow (coverflow edge cards,
+   hero glow blobs, absolute badges) without breaking position: sticky. */
+html,
+body {
+  overflow-x: clip;
+}
+
 /*
  * Kanagam Tech - Brand Guidelines (v1.0) Design System
  * 
@@ -261,3 +268,145 @@ body {
   }
 }
 
+
+/* Shining white headline sweep */
+.white-shine {
+  background-image: linear-gradient(
+    100deg,
+    #e6e0d8 0%,
+    #ffffff 28%,
+    #fdf9ef 46%,
+    #ffffff 64%,
+    #e6e0d8 100%
+  );
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: goldShine 3.5s ease-in-out infinite;
+}
+@keyframes goldShine {
+  0% {
+    background-position: -130% 0;
+  }
+  100% {
+    background-position: 230% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .white-shine {
+    animation: none;
+    color: #ffffff;
+  }
+}
+
+/* About page: floating image with gold + plum shadow */
+.about-float {
+  animation: aboutFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+.about-float img {
+  box-shadow:
+    0 26px 60px -18px rgba(44, 12, 42, 0.65),
+    0 14px 44px -12px rgba(122, 42, 99, 0.5),
+    0 0 38px rgba(233, 205, 151, 0.28);
+}
+@keyframes aboutFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-float {
+    animation: none;
+  }
+}
+.acad-row {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+.acad-tile {
+  height: 100%;
+  min-height: 300px;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: width, transform;
+  backface-visibility: hidden;
+}
+.acad-rect {
+  width: calc((100% - 1rem) * 0.68);
+}
+.acad-sq {
+  width: calc((100% - 1rem) * 0.32);
+}
+.acad-row:has(.acad-sq:hover) .acad-rect,
+.acad-row.is-open .acad-rect {
+  width: calc((100% - 1rem) * 0.32);
+}
+.acad-row:has(.acad-sq:hover) .acad-sq,
+.acad-row.is-open .acad-sq {
+  width: calc((100% - 1rem) * 0.68);
+}
+.acad-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 42px rgba(233, 205, 151, 0.22);
+}
+/* Full content only visible in the rectangle (wide) form */
+.acad-extra {
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.acad-rect .acad-extra,
+.acad-sq.is-open .acad-extra,
+.acad-row:has(.acad-sq:hover) .acad-sq .acad-extra {
+  opacity: 1;
+  max-height: 600px;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.acad-sq .acad-extra,
+.acad-row:has(.acad-sq:hover) .acad-rect .acad-extra {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+/* Academia tile rows: rectangle <-> square shape swap on hover */
+@media (max-width: 639px) {
+  .acad-row {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+  .acad-tile {
+    min-width: 0;
+    min-height: 278px;
+  }
+  .acad-rect {
+    width: calc((100% - 0.75rem) * 0.62);
+  }
+  .acad-sq {
+    width: calc((100% - 0.75rem) * 0.38);
+  }
+  .acad-row:has(.acad-sq:hover) .acad-rect,
+  .acad-row.is-open .acad-rect {
+    width: calc((100% - 0.75rem) * 0.38);
+  }
+  .acad-row:has(.acad-sq:hover) .acad-sq,
+  .acad-row.is-open .acad-sq {
+    width: calc((100% - 0.75rem) * 0.62);
+  }
+  .acad-tile {
+    min-width: 0;
+  }
+}

@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import type { CSSProperties, ReactNode } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
+import { Footer } from "@/components/Footer";
 import { ALL_SERVICES, getServiceBySlug } from "@/lib/services";
 import { ArrowLeft, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
 
@@ -219,7 +220,7 @@ function ServiceDetailPage() {
               <div className="kbs-top-icon flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 text-primary shadow-sm hover:border-accent/70 hover:shadow-[0_0_20px_rgba(232,197,118,0.55)]">
                 <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
               </div>
-              <h1 className="font-display text-[clamp(1.7rem,4vw,2.6rem)] leading-tight font-bold tracking-tight text-foreground">
+              <h1 className="font-display white-shine text-[clamp(1.7rem,4vw,2.6rem)] leading-tight font-bold tracking-tight">
                 {svc.title}
               </h1>
             </div>
@@ -242,7 +243,7 @@ function ServiceDetailPage() {
         {/* Expanded Deep-Dive Content — zig-zag text/image layout */}
         {svc.longDescription && svc.longDescription.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-[0.75rem] sm:text-[0.85rem] tracking-[0.25em] text-[#EAD3A0] uppercase font-mono font-bold [text-shadow:0_0_16px_rgba(232,197,118,0.55)]">
+            <h2 className="font-display mt-1 bg-clip-text text-[clamp(1.15rem,3vw,1.6rem)] leading-tight font-extrabold tracking-wide text-[#EAD3A0] uppercase">
               Capability Deep-Dive
             </h2>
             {(() => {
@@ -321,6 +322,8 @@ function ServiceDetailPage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }

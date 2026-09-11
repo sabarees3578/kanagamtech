@@ -7,6 +7,7 @@ import { CoreFocusSection } from "@/components/CoreFocusSection";
 import { AcademiaSection } from "@/components/AcademiaSection";
 import { InquiryFormSection } from "@/components/InquiryFormSection";
 import { BrandGuidelinesSection } from "@/components/BrandGuidelinesSection";
+import { Footer } from "@/components/Footer";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { PILLARS, ACADEMIC_PROGRAMS } from "@/lib/services";
 import {
@@ -23,7 +24,6 @@ import {
 } from "lucide-react";
 
 const BRAND = "Kanagam Tech";
-const FULL_BRAND = "Kanagam Technology Solutions";
 const TAGLINE = "Driving the Next Wave of Technological Evolution";
 
 export const Route = createFileRoute("/")({
@@ -573,7 +573,7 @@ function Index() {
         </div>
 
         {/* Hero Section */}
-        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 pt-2 pb-3 text-center">
+        <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 pt-6 sm:pt-10 pb-4 sm:pb-8 text-center">
           <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,140vw)] -translate-x-1/2 opacity-75" />
 
           <div className="relative mt-4 max-w-4xl">
@@ -582,7 +582,7 @@ function Index() {
               Next-Gen Academic Solution Provider
             </div>
 
-            <h1 className="font-display mt-6 text-[clamp(2rem,4.8vw,3.5rem)] leading-[1.1] font-bold tracking-tight text-foreground">
+            <h1 className="font-display mt-6 text-[clamp(1.85rem,5.2vw,3.5rem)] leading-[1.08] font-bold tracking-tight text-foreground">
               {TAGLINE}
             </h1>
 
@@ -628,7 +628,7 @@ function Index() {
 
         {/* Metrics Ribbon */}
         <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-3 sm:gap-y-4 px-4 sm:px-6 py-4 sm:py-6 md:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 items-stretch gap-2 sm:gap-y-6 sm:gap-x-4 px-3 sm:px-6 py-4 sm:py-6 md:grid-cols-4">
             {METRICS.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-primary">
@@ -647,7 +647,7 @@ function Index() {
           id="about"
           className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28"
         >
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
             <div className="lg:col-span-7">
               <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
                 Driving Deep-Tech Innovation & Scaling Future Enterprises
@@ -760,29 +760,7 @@ function Index() {
         <InquiryFormSection />
 
         {/* Footer */}
-        <footer className="relative z-10 border-t border-border/70 py-12 text-center text-xs text-muted-foreground bg-card/40">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col items-center justify-between gap-4 sm:gap-6 md:flex-row">
-            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-              <KanagamLogo size="lg" />
-            </div>
-
-            <div className="text-[0.65rem] tracking-[0.2em] uppercase font-mono font-medium">
-              © {new Date().getFullYear()} {FULL_BRAND}. All Rights Reserved.
-            </div>
-
-            <div className="flex gap-6 text-[0.65rem] tracking-[0.2em] uppercase font-mono font-medium">
-              <Link to="/about" className="hover:text-primary transition-colors">
-                About
-              </Link>
-              <a href="#focus" className="hover:text-primary transition-colors">
-                Focus Areas
-              </a>
-              <a href="#inquire" className="hover:text-primary transition-colors">
-                Contact
-              </a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </main>
     </>
   );
