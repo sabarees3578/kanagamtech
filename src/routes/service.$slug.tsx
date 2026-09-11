@@ -41,7 +41,7 @@ function imgAlt(svcTitle: string, idx: number): string {
 function Paragraph({ text, className = "" }: { text: string; className?: string }) {
   const parts = text.split("**");
   return (
-    <p className={className}>
+    <p className={`${className} text-justify`}>
       {parts.map((part, i) =>
         i % 2 === 1 ? (
           <strong key={i} className="font-bold text-[#EAD3A0]">

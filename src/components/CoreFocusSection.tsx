@@ -241,7 +241,7 @@ export function CoreFocusSection() {
             Our Key Focus Areas
           </h2>
         </div>
-        <p className="max-w-md text-sm font-normal text-muted-foreground leading-relaxed">
+        <p className="max-w-md text-justify text-sm font-normal text-muted-foreground leading-relaxed">
           Pioneering deep-tech innovations across quantum systems, semiconductors &amp; VLSI,
           embedded &amp; edge AI, drones, additive manufacturing, and workforce skill development.
         </p>
@@ -460,7 +460,7 @@ export function CoreFocusSection() {
                   <h4 className="font-display mt-0.5 text-sm sm:text-base font-bold text-foreground leading-snug">
                     {activePillar.title}
                   </h4>
-                  <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
+                  <p className="mt-1 line-clamp-2 text-justify text-xs text-muted-foreground leading-relaxed">
                     {activePillar.description}
                   </p>
                 </div>
