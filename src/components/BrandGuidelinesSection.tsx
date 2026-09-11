@@ -86,7 +86,7 @@ export const BrandGuidelinesSection: React.FC = () => {
             Kanagam Tech Brand Guidelines
           </h2>
         </div>
-        <p className="max-w-md text-sm font-light text-muted-foreground">
+        <p className="max-w-md text-justify text-sm font-light text-muted-foreground">
           Built upon a refined Plum foundation and warm Gold accent. Governed by clean geometry,
           generous spacing, and purposeful contrast rules.
         </p>
@@ -102,7 +102,7 @@ export const BrandGuidelinesSection: React.FC = () => {
             <h3 className="font-display mt-1 text-xl font-semibold text-foreground">
               The 60 / 30 / 10 Colour Balance Formula
             </h3>
-            <p className="mt-2 text-xs text-muted-foreground font-light">
+            <p className="mt-2 text-justify text-xs text-muted-foreground font-light">
               60% Neutral Base (Warm Ivory/White/Charcoal) + 30% Plum Foundation + 10% Gold (or
               single campaign accent)
             </p>
@@ -146,7 +146,7 @@ export const BrandGuidelinesSection: React.FC = () => {
             </div>
             <div className="p-4">
               <h4 className="font-display font-semibold text-sm text-foreground">{c.role}</h4>
-              <p className="mt-1 text-xs text-muted-foreground">{c.usage}</p>
+              <p className="mt-1 text-justify text-xs text-muted-foreground">{c.usage}</p>
             </div>
           </div>
         ))}
@@ -226,7 +226,7 @@ export const BrandGuidelinesSection: React.FC = () => {
                   <h4 className="font-display mt-2 text-3xl font-extrabold tracking-tight">
                     {p.title}
                   </h4>
-                  <p className="mt-3 text-xs opacity-90 max-w-sm">{p.meta}</p>
+                  <p className="mt-3 text-justify text-xs opacity-90 max-w-sm">{p.meta}</p>
                 </div>
 
                 <div>
@@ -245,7 +245,7 @@ export const BrandGuidelinesSection: React.FC = () => {
               <div className="font-semibold text-foreground font-display text-sm">
                 Typography Hierarchy
               </div>
-              <p className="mt-1">
+              <p className="mt-1 text-justify">
                 Display Headings use <strong>Poppins Bold (44-64pt)</strong> in Plum{" "}
                 <code className="text-primary">#4B1D3F</code> or White. Body copy uses{" "}
                 <strong>Inter Regular (11-16pt)</strong> in Charcoal{" "}
@@ -257,7 +257,7 @@ export const BrandGuidelinesSection: React.FC = () => {
               <div className="font-semibold text-foreground font-display text-sm">
                 Contrast Protection Rule
               </div>
-              <p className="mt-1">
+              <p className="mt-1 text-justify">
                 Gold is reserved for accents, rules, badges, and symbol tiles. Never use small Gold
                 text directly on light backgrounds.
               </p>
@@ -267,7 +267,7 @@ export const BrandGuidelinesSection: React.FC = () => {
               <div className="font-semibold text-foreground font-display text-sm">
                 Logo Protection Zone
               </div>
-              <p className="mt-1">
+              <p className="mt-1 text-justify">
                 Maintain free clear space equal to <strong>1/4 H</strong> (height of gold symbol
                 tile) on all four sides of the logo.
               </p>

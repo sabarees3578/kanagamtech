@@ -38,7 +38,7 @@ export function Footer() {
             <Link to="/" className="inline-flex shrink-0 items-center gap-2">
               <KanagamLogo size="lg" />
             </Link>
-            <p className="max-w-sm text-xs leading-relaxed text-muted-foreground font-normal">
+            <p className="max-w-sm text-justify text-xs leading-relaxed text-muted-foreground font-normal">
               A veteran-led GenQ enterprise engineering deep-tech solutions for industry and global
               academia, quantum, semiconductors, AI, drones, 3D fabrication and skill development.
             </p>

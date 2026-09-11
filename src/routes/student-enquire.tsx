@@ -122,7 +122,7 @@ function StudentEnquirePage() {
           <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-[#EAD3A0]">
             Student Enquire
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white">
+          <p className="mx-auto mt-4 max-w-xl text-justify text-sm leading-relaxed text-white">
             Kick-start your deep-tech career. Tell us what you're looking for — training,
             certifications, internships, or project guidance — and our academic team will get back
             to you.
@@ -218,7 +218,7 @@ function StudentEnquiryForm() {
         <h3 className="font-display mt-4 text-2xl font-bold text-[#EAD3A0]">
           Enquiry Submitted Successfully
         </h3>
-        <p className="mx-auto mt-2 max-w-md text-sm text-white">
+        <p className="mx-auto mt-2 max-w-md text-justify text-sm text-white">
           Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>. Our
           academic team will reach out to you shortly at{" "}
           <span className="font-semibold text-foreground">{formData.email}</span>.

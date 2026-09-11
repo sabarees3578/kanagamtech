@@ -27,7 +27,7 @@ function TileContent({ prog, idx }: { prog: (typeof ACADEMIC_PROGRAMS)[number]; 
       </p>
 
       <div className="acad-extra">
-        <p className="mt-3 text-xs leading-relaxed text-white font-light sm:text-sm">
+        <p className="mt-3 text-justify text-xs leading-relaxed text-white font-light sm:text-sm">
           {prog.description}
         </p>
 
@@ -67,7 +67,7 @@ export function AcademiaSection() {
           <h2 className="font-display mt-4 text-[clamp(1.8rem,4vw,2.8rem)] font-bold tracking-[0.06em] text-foreground">
             Empowering Academia & Next-Gen Talent
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-white font-normal">
+          <p className="mt-4 text-justify text-sm leading-relaxed text-white font-normal">
             Beyond cutting-edge development,{" "}
             <strong className="font-bold text-[#EAD3A0]">Kanagam Technology Pvt Ltd</strong> is
             deeply committed to bridging the gap between{" "}

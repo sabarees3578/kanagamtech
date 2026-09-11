@@ -653,7 +653,7 @@ function Index() {
                 Driving Deep-Tech Innovation & Scaling Future Enterprises
               </h2>
 
-              <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-4 sm:mt-6 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 At{" "}
                 <strong className="text-foreground font-semibold">
                   Kanagam Technology Solutions India Pvt Ltd
@@ -666,7 +666,7 @@ function Index() {
                 connected decision-making to industrial and enterprise environments alike.
               </p>
 
-              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 Founded and led by a team of seasoned industry veterans with decades of proven
                 success in building and scaling tech enterprises,{" "}
                 <strong className="text-foreground font-semibold">Kanagam Tech</strong> stands at
@@ -674,7 +674,7 @@ function Index() {
                 design, quantum computing, drones and robotics, AR/VR, and additive manufacturing.
               </p>
 
-              <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+              <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
                 We engineer state-of-the-art solutions while empowering institutions around the
                 world to build sustainable technological capability — through university labs,
                 Centers of Excellence, research partnerships, and workforce skill-development
@@ -687,7 +687,7 @@ function Index() {
                     <Compass className="h-4 w-4" />
                     Veteran Leadership
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground font-normal">
+                  <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
                     Decades of experience building and scaling enterprise-grade IoT, embedded, and
                     AI-driven technology systems — now extending that expertise across quantum
                     computing, semiconductors, VLSI/FPGA, AR/VR, drones, and 3D fabrication.
@@ -699,7 +699,7 @@ function Index() {
                     <Globe className="h-4 w-4" />
                     Global Integration
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground font-normal">
+                  <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
                     Bridging university research directly into commercial deep-tech applications
                     across quantum computing, semiconductors, embedded systems, AI, AIoT, AR/VR,
                     drones, and 3D fabrication.

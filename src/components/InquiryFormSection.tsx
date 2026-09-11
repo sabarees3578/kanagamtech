@@ -103,7 +103,7 @@ export function InquiryFormSection() {
         <h2 className="font-display mt-4 text-[clamp(1.9rem,4.5vw,2.8rem)] font-bold tracking-tight text-[#EAD3A0]">
           Partner With Us or Start Your Journey
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white font-normal">
+        <p className="mx-auto mt-3 max-w-xl text-justify text-sm leading-relaxed text-white font-normal">
           Toggle between Institutional Partnerships and Student Enquiries to transmit your
           requirements directly to our team.
         </p>
@@ -216,7 +216,7 @@ function PartnerInfoPanel({ name, tagline, overview, tags }: Partner) {
               {tagline}
             </span>
           </div>
-          <p className="mt-1 line-clamp-2 max-w-2xl text-xs text-[#E8D5C3]/90 sm:mt-0.5 sm:text-sm">
+          <p className="mt-1 line-clamp-2 max-w-2xl text-justify text-xs text-[#E8D5C3]/90 sm:mt-0.5 sm:text-sm">
             {overview}
           </p>
         </div>
@@ -311,7 +311,7 @@ function InstitutionalInquiryForm() {
       <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#EAD3A0]">
         Academic &amp; Enterprise Partnership
       </h3>
-      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-white font-normal">
+      <p className="mt-2 text-justify text-xs sm:text-sm leading-relaxed text-white font-normal">
         Share your institution's goals, research vision, or deep-tech requirements. Our team will
         tailor a collaboration roadmap for your organization.
       </p>
@@ -324,7 +324,7 @@ function InstitutionalInquiryForm() {
           <h4 className="font-display mt-3 text-lg font-bold text-[#EAD3A0]">
             Inquiry Submitted Successfully
           </h4>
-          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-white">
+          <p className="mx-auto mt-2 max-w-sm text-justify text-xs leading-relaxed text-white">
             Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>{" "}
             from{" "}
             <span className="font-semibold text-foreground">
@@ -618,7 +618,7 @@ function StudentInquiryForm() {
       <h3 className="font-display mt-3 text-xl sm:text-2xl font-bold tracking-tight text-[#EAD3A0]">
         Student Enquire
       </h3>
-      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-white font-normal">
+      <p className="mt-2 text-justify text-xs sm:text-sm leading-relaxed text-white font-normal">
         Kick-start your deep-tech career. Tell us what you're looking for — bootcamps,
         certifications, internships, or project guidance — and our academic team will reach out.
       </p>
@@ -631,7 +631,7 @@ function StudentInquiryForm() {
           <h4 className="font-display mt-3 text-lg font-bold text-[#EAD3A0]">
             Enquiry Submitted Successfully
           </h4>
-          <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-white">
+          <p className="mx-auto mt-2 max-w-sm text-justify text-xs leading-relaxed text-white">
             Thank you, <span className="font-semibold text-foreground">{formData.fullName}</span>.
             Our academic team will reach out to you shortly at{" "}
             <span className="font-semibold text-foreground">{formData.email}</span>.
