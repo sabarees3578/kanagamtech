@@ -406,7 +406,57 @@ body {
   .acad-row.is-open .acad-sq {
     width: calc((100% - 0.75rem) * 0.62);
   }
-  .acad-tile {
-    min-width: 0;
+.acad-tile {
+  min-width: 0;
+}
+}
+
+/* ============================
+   SMOOTHNESS & MOTION LAYER
+   ============================ */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.25rem;
+  }
+
+  /* Buttery micro-interactions for interactive elements that use transforms/colors */
+  a,
+  button,
+  [role="button"] {
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-smooth);
+  }
+
+  /* Slight lift on clickable cards/pills/buttons for tactile smoothness */
+  a[href*="#"]:not([class*="text-["]):hover,
+  button:not([class*="text-["]):not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* Scroll-reveal entrance system (via IntersectionObserver toggling `.reveal-in`) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px) scale(0.995);
+  transition:
+    opacity 0.85s var(--ease-out-expo),
+    transform 0.85s var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

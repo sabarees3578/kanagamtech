@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
 import { Footer } from "@/components/Footer";
+import { Reveal } from "@/components/Reveal";
 import { ALL_SERVICES, getServiceBySlug } from "@/lib/services";
 import { ArrowLeft, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
 
@@ -208,122 +209,128 @@ function ServiceDetailPage() {
           </div>
         )}
 
-        {/* Title Block */}
-        <div className="mt-4 sm:mt-5 flex flex-col gap-4 sm:gap-6 md:flex-row md:items-start md:justify-between">
-          <div>
-            {svc.group !== "Core Focus" && (
-              <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-                {svc.category}
+        <Reveal delay={60}>
+          {/* Title Block */}
+          <div className="mt-4 sm:mt-5 flex flex-col gap-4 sm:gap-6 md:flex-row md:items-start md:justify-between">
+            <div>
+              {svc.group !== "Core Focus" && (
+                <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                  {svc.category}
+                </span>
+              )}
+              <div className="mt-1.5 sm:mt-2 flex items-center gap-3.5 sm:gap-4">
+                <div className="kbs-top-icon flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 text-primary shadow-sm hover:border-accent/70 hover:shadow-[0_0_20px_rgba(232,197,118,0.55)]">
+                  <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
+                </div>
+                <h1 className="font-display white-shine text-[clamp(1.7rem,4vw,2.6rem)] leading-tight font-bold tracking-tight">
+                  {svc.title}
+                </h1>
+              </div>
+            </div>
+
+            {svc.badge && (
+              <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.6rem] tracking-[0.2em] text-primary uppercase font-mono font-medium">
+                <Sparkles className="h-3 w-3" />
+                {svc.badge}
               </span>
             )}
-            <div className="mt-1.5 sm:mt-2 flex items-center gap-3.5 sm:gap-4">
-              <div className="kbs-top-icon flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 text-primary shadow-sm hover:border-accent/70 hover:shadow-[0_0_20px_rgba(232,197,118,0.55)]">
-                <Icon className="h-5 w-5 sm:h-7 sm:w-7" />
-              </div>
-              <h1 className="font-display white-shine text-[clamp(1.7rem,4vw,2.6rem)] leading-tight font-bold tracking-tight">
-                {svc.title}
-              </h1>
+          </div>
+
+          {/* Description */}
+          <Paragraph
+            className="mt-4 max-w-4xl text-base leading-relaxed text-foreground"
+            text={svc.description}
+          />
+
+          {/* Expanded Deep-Dive Content — zig-zag text/image layout */}
+          {svc.longDescription && svc.longDescription.length > 0 && (
+            <div className="mt-8">
+              <h2 className="font-display mt-1 bg-clip-text text-[clamp(1.15rem,3vw,1.6rem)] leading-tight font-extrabold tracking-wide text-[#EAD3A0] uppercase">
+                Capability Deep-Dive
+              </h2>
+              {(() => {
+                const imgs = svc.images ?? [];
+                const paras = svc.longDescription;
+                const perChunk = Math.max(2, Math.ceil(paras.length / (imgs.length + 1)));
+                const blocks: ReactNode[] = [];
+                let blockIdx = 0;
+                for (let i = 0; i < paras.length; i += perChunk) {
+                  const chunkParas = paras.slice(i, i + perChunk);
+                  const imgIdx = blockIdx;
+                  const hasImg = imgIdx < imgs.length;
+                  const flip = blockIdx % 2 === 1;
+                  blocks.push(
+                    <div
+                      key={`b-${i}`}
+                      className="mt-8 grid items-center gap-6 lg:grid-cols-2 lg:gap-12"
+                    >
+                      <div
+                        className={`${flip ? "lg:order-2" : ""} ${hasImg ? "" : "lg:col-span-2"}`}
+                      >
+                        {chunkParas.map((para, j) => (
+                          <Paragraph
+                            key={j}
+                            text={para}
+                            className={
+                              j === 0 && i === 0
+                                ? "border-l-2 border-primary/20 pl-6 text-base leading-relaxed text-foreground"
+                                : "mt-3 text-base leading-relaxed text-foreground first:mt-0"
+                            }
+                          />
+                        ))}
+                      </div>
+                      {hasImg && (
+                        <figure
+                          className={`kbs-img-figure group overflow-hidden rounded-2xl border border-border bg-card ${
+                            isAibots ? "flex items-center justify-center" : ""
+                          } ${flip ? "lg:order-1" : ""}`}
+                          style={{ animationDelay: `${imgIdx * 0.9}s` }}
+                        >
+                          <span className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-[#E8C576]/0 via-transparent to-[#F6DFAE]/25 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                          <img
+                            src={imgs[imgIdx]}
+                            alt={imgAlt(svc.title, imgIdx)}
+                            loading="lazy"
+                            className={`${
+                              isAibots
+                                ? "block max-h-[26rem] w-auto max-w-full object-contain"
+                                : "aspect-[16/10] w-full object-cover"
+                            } transition-transform duration-500 group-hover:scale-[1.03]`}
+                          />
+                        </figure>
+                      )}
+                    </div>,
+                  );
+                  blockIdx++;
+                }
+                return blocks;
+              })()}
+            </div>
+          )}
+
+          {/* Highlights */}
+          <div className="mt-8 sm:mt-10 rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl backdrop-blur-md">
+            <h2 className="text-[0.75rem] sm:text-[0.85rem] tracking-[0.25em] text-[#EAD3A0] uppercase font-mono font-bold [text-shadow:0_0_16px_rgba(232,197,118,0.55)]">
+              {svc.highlightsTitle}
+            </h2>
+            <div className="mt-4 sm:mt-5 grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2">
+              {svc.highlights.map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background p-4 text-sm font-normal text-foreground"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
           </div>
-
-          {svc.badge && (
-            <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.6rem] tracking-[0.2em] text-primary uppercase font-mono font-medium">
-              <Sparkles className="h-3 w-3" />
-              {svc.badge}
-            </span>
-          )}
-        </div>
-
-        {/* Description */}
-        <Paragraph
-          className="mt-4 max-w-4xl text-base leading-relaxed text-foreground"
-          text={svc.description}
-        />
-
-        {/* Expanded Deep-Dive Content — zig-zag text/image layout */}
-        {svc.longDescription && svc.longDescription.length > 0 && (
-          <div className="mt-8">
-            <h2 className="font-display mt-1 bg-clip-text text-[clamp(1.15rem,3vw,1.6rem)] leading-tight font-extrabold tracking-wide text-[#EAD3A0] uppercase">
-              Capability Deep-Dive
-            </h2>
-            {(() => {
-              const imgs = svc.images ?? [];
-              const paras = svc.longDescription;
-              const perChunk = Math.max(2, Math.ceil(paras.length / (imgs.length + 1)));
-              const blocks: ReactNode[] = [];
-              let blockIdx = 0;
-              for (let i = 0; i < paras.length; i += perChunk) {
-                const chunkParas = paras.slice(i, i + perChunk);
-                const imgIdx = blockIdx;
-                const hasImg = imgIdx < imgs.length;
-                const flip = blockIdx % 2 === 1;
-                blocks.push(
-                  <div
-                    key={`b-${i}`}
-                    className="mt-8 grid items-center gap-6 lg:grid-cols-2 lg:gap-12"
-                  >
-                    <div className={`${flip ? "lg:order-2" : ""} ${hasImg ? "" : "lg:col-span-2"}`}>
-                      {chunkParas.map((para, j) => (
-                        <Paragraph
-                          key={j}
-                          text={para}
-                          className={
-                            j === 0 && i === 0
-                              ? "border-l-2 border-primary/20 pl-6 text-base leading-relaxed text-foreground"
-                              : "mt-3 text-base leading-relaxed text-foreground first:mt-0"
-                          }
-                        />
-                      ))}
-                    </div>
-                    {hasImg && (
-                      <figure
-                        className={`kbs-img-figure group overflow-hidden rounded-2xl border border-border bg-card ${
-                          isAibots ? "flex items-center justify-center" : ""
-                        } ${flip ? "lg:order-1" : ""}`}
-                        style={{ animationDelay: `${imgIdx * 0.9}s` }}
-                      >
-                        <span className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-[#E8C576]/0 via-transparent to-[#F6DFAE]/25 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-                        <img
-                          src={imgs[imgIdx]}
-                          alt={imgAlt(svc.title, imgIdx)}
-                          loading="lazy"
-                          className={`${
-                            isAibots
-                              ? "block max-h-[26rem] w-auto max-w-full object-contain"
-                              : "aspect-[16/10] w-full object-cover"
-                          } transition-transform duration-500 group-hover:scale-[1.03]`}
-                        />
-                      </figure>
-                    )}
-                  </div>,
-                );
-                blockIdx++;
-              }
-              return blocks;
-            })()}
-          </div>
-        )}
-
-        {/* Highlights */}
-        <div className="mt-8 sm:mt-10 rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl backdrop-blur-md">
-          <h2 className="text-[0.75rem] sm:text-[0.85rem] tracking-[0.25em] text-[#EAD3A0] uppercase font-mono font-bold [text-shadow:0_0_16px_rgba(232,197,118,0.55)]">
-            {svc.highlightsTitle}
-          </h2>
-          <div className="mt-4 sm:mt-5 grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2">
-            {svc.highlights.map((item, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-2.5 rounded-xl border border-border/70 bg-background p-4 text-sm font-normal text-foreground"
-              >
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        </Reveal>
       </section>
 
-      <Footer />
+      <Reveal delay={80}>
+        <Footer />
+      </Reveal>
     </main>
   );
 }

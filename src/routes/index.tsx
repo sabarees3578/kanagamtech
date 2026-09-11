@@ -7,6 +7,7 @@ import { CoreFocusSection } from "@/components/CoreFocusSection";
 import { AcademiaSection } from "@/components/AcademiaSection";
 import { InquiryFormSection } from "@/components/InquiryFormSection";
 import { BrandGuidelinesSection } from "@/components/BrandGuidelinesSection";
+import { Reveal } from "@/components/Reveal";
 import { Footer } from "@/components/Footer";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { PILLARS, ACADEMIC_PROGRAMS } from "@/lib/services";
@@ -576,7 +577,7 @@ function Index() {
         <section className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 pt-6 sm:pt-10 pb-4 sm:pb-8 text-center">
           <QuantumAmbient className="pointer-events-none absolute top-[-5%] left-1/2 h-[min(760px,105vw)] w-[min(1100px,140vw)] -translate-x-1/2 opacity-75" />
 
-          <div className="relative mt-4 max-w-4xl">
+          <div className="relative mt-4 max-w-4xl animate-in fade-in duration-700">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.68rem] tracking-[0.25em] text-primary uppercase font-mono font-medium">
               <Zap className="h-3.5 w-3.5" />
               Next-Gen Academic Solution Provider
@@ -627,140 +628,154 @@ function Index() {
         </section>
 
         {/* Metrics Ribbon */}
-        <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 items-stretch gap-2 sm:gap-y-6 sm:gap-x-4 px-3 sm:px-6 py-4 sm:py-6 md:grid-cols-4">
-            {METRICS.map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-primary">
-                  {s.val}
+        <Reveal>
+          <section className="relative z-10 border-y border-border/70 bg-card/50 backdrop-blur-sm">
+            <div className="mx-auto grid max-w-6xl grid-cols-2 items-stretch gap-2 sm:gap-y-6 sm:gap-x-4 px-3 sm:px-6 py-4 sm:py-6 md:grid-cols-4">
+              {METRICS.map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="font-display text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-primary">
+                    {s.val}
+                  </div>
+                  <div className="mt-1 text-[0.7rem] tracking-[0.1em] text-muted-foreground font-mono font-medium">
+                    {s.label}
+                  </div>
                 </div>
-                <div className="mt-1 text-[0.7rem] tracking-[0.1em] text-muted-foreground font-mono font-medium">
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        </Reveal>
 
         {/* About Us Section */}
-        <section
-          id="about"
-          className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28"
-        >
-          <div className="grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <div className="lg:col-span-7">
-              <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
-                Driving Deep-Tech Innovation & Scaling Future Enterprises
-              </h2>
+        <Reveal>
+          <section
+            id="about"
+            className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-14 sm:py-20 md:py-28"
+          >
+            <div className="grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+              <div className="lg:col-span-7">
+                <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3rem)] leading-[1.12] font-bold tracking-tight text-foreground">
+                  Driving Deep-Tech Innovation & Scaling Future Enterprises
+                </h2>
 
-              <p className="mt-4 sm:mt-6 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
-                At{" "}
-                <strong className="text-foreground font-semibold">
-                  Kanagam Technology Solutions India Pvt Ltd
-                </strong>
-                , we build the intelligent infrastructure that powers connected, autonomous systems
-                — engineering robust IoT and IIoT architectures, embedded edge systems, and AI stack
-                solutions that turn raw data into real-time intelligence. From sensors, gateways,
-                and secure firmware to cloud analytics, our expertise spans AIoT, computer vision,
-                and generative AI — bringing intelligent automation, predictive maintenance, and
-                connected decision-making to industrial and enterprise environments alike.
-              </p>
+                <p className="mt-4 sm:mt-6 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+                  At{" "}
+                  <strong className="text-foreground font-semibold">
+                    Kanagam Technology Solutions India Pvt Ltd
+                  </strong>
+                  , we build the intelligent infrastructure that powers connected, autonomous
+                  systems — engineering robust IoT and IIoT architectures, embedded edge systems,
+                  and AI stack solutions that turn raw data into real-time intelligence. From
+                  sensors, gateways, and secure firmware to cloud analytics, our expertise spans
+                  AIoT, computer vision, and generative AI — bringing intelligent automation,
+                  predictive maintenance, and connected decision-making to industrial and enterprise
+                  environments alike.
+                </p>
 
-              <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
-                Founded and led by a team of seasoned industry veterans with decades of proven
-                success in building and scaling tech enterprises,{" "}
-                <strong className="text-foreground font-semibold">Kanagam Tech</strong> stands at
-                the forefront of applied deep-tech innovation — across semiconductors and VLSI/FPGA
-                design, quantum computing, drones and robotics, AR/VR, and additive manufacturing.
-              </p>
+                <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+                  Founded and led by a team of seasoned industry veterans with decades of proven
+                  success in building and scaling tech enterprises,{" "}
+                  <strong className="text-foreground font-semibold">Kanagam Tech</strong> stands at
+                  the forefront of applied deep-tech innovation — across semiconductors and
+                  VLSI/FPGA design, quantum computing, drones and robotics, AR/VR, and additive
+                  manufacturing.
+                </p>
 
-              <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
-                We engineer state-of-the-art solutions while empowering institutions around the
-                world to build sustainable technological capability — through university labs,
-                Centers of Excellence, research partnerships, and workforce skill-development
-                programs that keep talent and industry advancing together.
-              </p>
+                <p className="mt-3 sm:mt-4 text-justify text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+                  We engineer state-of-the-art solutions while empowering institutions around the
+                  world to build sustainable technological capability — through university labs,
+                  Centers of Excellence, research partnerships, and workforce skill-development
+                  programs that keep talent and industry advancing together.
+                </p>
 
-              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
-                  <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
-                    <Compass className="h-4 w-4" />
-                    Veteran Leadership
+                <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
+                    <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
+                      <Compass className="h-4 w-4" />
+                      Veteran Leadership
+                    </div>
+                    <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
+                      Decades of experience building and scaling enterprise-grade IoT, embedded, and
+                      AI-driven technology systems — now extending that expertise across quantum
+                      computing, semiconductors, VLSI/FPGA, AR/VR, drones, and 3D fabrication.
+                    </p>
                   </div>
-                  <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
-                    Decades of experience building and scaling enterprise-grade IoT, embedded, and
-                    AI-driven technology systems — now extending that expertise across quantum
-                    computing, semiconductors, VLSI/FPGA, AR/VR, drones, and 3D fabrication.
-                  </p>
+
+                  <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
+                    <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
+                      <Globe className="h-4 w-4" />
+                      Global Integration
+                    </div>
+                    <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
+                      Bridging university research directly into commercial deep-tech applications
+                      across quantum computing, semiconductors, embedded systems, AI, AIoT, AR/VR,
+                      drones, and 3D fabrication.
+                    </p>
+                  </div>
                 </div>
+              </div>
 
-                <div className="rounded-xl border border-border bg-card p-3 sm:p-4 shadow-sm">
-                  <div className="flex items-center gap-2 text-primary font-bold text-xs font-display">
-                    <Globe className="h-4 w-4" />
-                    Global Integration
+              <div className="lg:col-span-5">
+                <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-card via-card to-background p-5 sm:p-8 shadow-2xl backdrop-blur-xl">
+                  <div className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#D7AB6A] text-[#4B1D3F] shadow-md font-bold">
+                    <Sparkles className="h-5 w-5" />
                   </div>
-                  <p className="mt-2 text-justify text-xs text-muted-foreground font-normal">
-                    Bridging university research directly into commercial deep-tech applications
-                    across quantum computing, semiconductors, embedded systems, AI, AIoT, AR/VR,
-                    drones, and 3D fabrication.
-                  </p>
+
+                  <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
+                    Deep-Tech Leadership
+                  </span>
+
+                  <h3 className="font-display mt-2 text-xl font-bold text-foreground">
+                    The Kanagam Standard
+                  </h3>
+
+                  <ul className="mt-6 space-y-4 text-sm font-normal text-muted-foreground">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                      <span>
+                        <strong>Full-Spectrum Expertise:</strong> Spanning quantum computing,
+                        semiconductors, VLSI/FPGA, and embedded systems under one technical roof.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                      <span>
+                        <strong>End-to-End Solutions:</strong> From PCB design and SMT assembly to
+                        AI, AIoT, drones, and 3D fabrication.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
+                      <span>
+                        <strong>Educational Synergy:</strong> Building future workforce readiness
+                        through dedicated skill development and technical training.
+                      </span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-card via-card to-background p-5 sm:p-8 shadow-2xl backdrop-blur-xl">
-                <div className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#D7AB6A] text-[#4B1D3F] shadow-md font-bold">
-                  <Sparkles className="h-5 w-5" />
-                </div>
-
-                <span className="text-[0.65rem] tracking-[0.25em] text-primary uppercase font-mono font-bold">
-                  Deep-Tech Leadership
-                </span>
-
-                <h3 className="font-display mt-2 text-xl font-bold text-foreground">
-                  The Kanagam Standard
-                </h3>
-
-                <ul className="mt-6 space-y-4 text-sm font-normal text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
-                    <span>
-                      <strong>Full-Spectrum Expertise:</strong> Spanning quantum computing,
-                      semiconductors, VLSI/FPGA, and embedded systems under one technical roof.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
-                    <span>
-                      <strong>End-to-End Solutions:</strong> From PCB design and SMT assembly to AI,
-                      AIoT, drones, and 3D fabrication.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="mt-1.5 h-2 w-2 rounded-full bg-[#D7AB6A] shrink-0" />
-                    <span>
-                      <strong>Educational Synergy:</strong> Building future workforce readiness
-                      through dedicated skill development and technical training.
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Core Focus Pillars Section (10 deep-tech pillars) */}
-        <CoreFocusSection />
+        <Reveal delay={80}>
+          <CoreFocusSection />
+        </Reveal>
 
         {/* Empowering Academia & Next-Gen Talent Section */}
-        <AcademiaSection />
+        <Reveal delay={80}>
+          <AcademiaSection />
+        </Reveal>
 
         {/* Interactive Text Input & Partnership Request Form */}
-        <InquiryFormSection />
+        <Reveal delay={80}>
+          <InquiryFormSection />
+        </Reveal>
 
         {/* Footer */}
-        <Footer />
+        <Reveal delay={80}>
+          <Footer />
+        </Reveal>
       </main>
     </>
   );

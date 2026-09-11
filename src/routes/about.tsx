@@ -2,6 +2,7 @@
 import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
+import { Reveal } from "@/components/Reveal";
 import { ArrowLeft, Eye, Target } from "lucide-react";
 
 export const Route = createFileRoute("/about")({
@@ -81,7 +82,7 @@ function AboutPage() {
 
       {/* Centered page body: content collage â€” fixed to one screen */}
       <section className="relative z-10 mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full flex-col px-4 sm:px-6 py-4 sm:py-6">
-        <div className="my-auto ml-auto mr-0 w-full max-w-3xl text-center">
+        <Reveal delay={60} className="my-auto ml-auto mr-0 w-full max-w-3xl text-center">
           <h1 className="font-display text-[clamp(1.3rem,3.7vh,2.1rem)] leading-tight font-bold tracking-tight text-foreground">
             Kanagam Technology Solutions
           </h1>
@@ -138,7 +139,7 @@ function AboutPage() {
               learners, institutions, professionals, and industry.
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Mission & Vision â€” bottom, opposite side of content */}
         <div className="mb-2 sm:mb-3 mt-auto mx-auto grid w-full max-w-4xl items-stretch gap-5 sm:grid-cols-2 sm:gap-8">

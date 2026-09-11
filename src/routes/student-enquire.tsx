@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { KanagamLogo } from "@/components/KanagamLogo";
 import { ShiningBackground } from "@/components/ShiningBackground";
 import { Footer } from "@/components/Footer";
+import { Reveal } from "@/components/Reveal";
 import {
   Send,
   CheckCircle2,
@@ -114,25 +115,31 @@ function StudentEnquirePage() {
 
       {/* Page Content */}
       <section className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-24">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#EAD3A0]/30 bg-[#EAD3A0]/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-[#EAD3A0] uppercase">
-            <GraduationCap className="h-3.5 w-3.5" />
-            For Students &amp; Fresh Engineers
+        <Reveal delay={40}>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#EAD3A0]/30 bg-[#EAD3A0]/10 px-3.5 py-1 text-[0.65rem] tracking-[0.25em] text-[#EAD3A0] uppercase">
+              <GraduationCap className="h-3.5 w-3.5" />
+              For Students &amp; Fresh Engineers
+            </div>
+            <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-[#EAD3A0]">
+              Student Enquire
+            </h1>
+            <p className="mx-auto mt-4 max-w-xl text-justify text-sm leading-relaxed text-white">
+              Kick-start your deep-tech career. Tell us what you're looking for — training,
+              certifications, internships, or project guidance — and our academic team will get back
+              to you.
+            </p>
           </div>
-          <h1 className="font-display mt-4 text-[clamp(2rem,5vw,3rem)] leading-tight font-bold tracking-tight text-[#EAD3A0]">
-            Student Enquire
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-justify text-sm leading-relaxed text-white">
-            Kick-start your deep-tech career. Tell us what you're looking for — training,
-            certifications, internships, or project guidance — and our academic team will get back
-            to you.
-          </p>
-        </div>
+        </Reveal>
 
-        <StudentEnquiryForm />
+        <Reveal delay={120}>
+          <StudentEnquiryForm />
+        </Reveal>
       </section>
 
-      <Footer />
+      <Reveal delay={160}>
+        <Footer />
+      </Reveal>
     </main>
   );
 }
